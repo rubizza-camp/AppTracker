@@ -3,12 +3,17 @@ require:
   - rubocop-rspec
 Documentation:
   Enabled: false
-Metrics/BlockLength:
-  Exclude:
-    - 'spec/**/*.rb'
+Style/FrozenStringLiteralComment:
+  Enabled: false
 AllCops:
   Exclude:
+    - Gemfile
+    - Rakefile
+    - config.ru
+    - 'test/**/*'
     - 'db/**/*'
     - 'config/**/*'
-    - 'bin/{rails,rake}'
+    - 'bin/**/*'
     - 'vendor/**/*'
+    - 'spec/**/*'
+    - 'node_modules/**/*'

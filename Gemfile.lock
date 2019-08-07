@@ -227,7 +227,7 @@ DEPENDENCIES
   rubocop-rspec
   spring
   spring-watcher-listen (~> 2.0.0)
-  travis
+  travis (>= 1.8.10)
   tzinfo-data
 
 RUBY VERSION
