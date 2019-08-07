@@ -23,21 +23,25 @@ default: &default
 
 development:
   <<: *default
-  database: apptracker-api_development
+  database: <%= ENV["APPTRACKER_PG_DEV_DATABASE_NAME"] %>
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user that initialized the database.
+  username: <%= ENV["APPTRACKER_PG_DEV_USER_NAME"] %>
 
   # The password associated with the postgres role (username).
+  password: <%= ENV["APPTRACKER_PG_DEV_USER_PASSWORD"] %>
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
   # domain sockets, so uncomment these lines.
+  host: <%= ENV["APPTRACKER_PG_DEV_DATABASE_HOST"] %>
 
   # The TCP port the server listens on. Defaults to 5432.
   # If your server runs on a different port number, change accordingly.
+  port: <%= ENV["APPTRACKER_PG_DEV_DATABASE_PORT"] %>
 
   # Schema search path. The server defaults to $user,public
   #schema_search_path: myapp,sharedapp,public
@@ -54,9 +58,6 @@ development:
 test:
   <<: *default
   database: apptracker-api_test
-  host: localhost
-  username: api-admin
-  password: 12345678
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
