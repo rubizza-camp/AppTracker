@@ -1,0 +1,7 @@
+language: ruby
+cache: bundler
+before_script:
+  - rake db:setup
+script:
+  - bundle exec rspec
+  - bundle exec rubocop

@@ -1,0 +1,14 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+Documentation:
+  Enabled: false
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'
+AllCops:
+  Exclude:
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'bin/{rails,rake}'
+    - 'vendor/**/*'
