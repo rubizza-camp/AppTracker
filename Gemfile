@@ -25,7 +25,7 @@ gem 'puma', '~> 3.11'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
-gem 'travis'
+gem 'travis', '>= 1.8.10'
 
 # Check coding style with RuboCop for Rails with RSpec
 gem 'rubocop-rails'
