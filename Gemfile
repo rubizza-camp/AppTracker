@@ -16,7 +16,6 @@ gem 'puma', '~> 3.11'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-gem 'net-http-pipeline', '~> 1.0.1'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
