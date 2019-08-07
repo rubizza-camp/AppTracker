@@ -1,11 +1,19 @@
 language: ruby
+
+rvm:
+  - 2.6.2
+
 cache: bundler
-install: gem install bundler:1.3.0
+
 before_install:
-  - gem uninstall -v '>= 2' -i $(rvm gemdir)@global -ax bundler || true
+  - gem update --system
+  - gem install rubocop -v 0.72.0
+  - gem install rspec -v 3.8.0
+  - gem install bundler -v 2.0.2
+
 before_script:
-  - bundle install
-  - bundle exec rake db:setup
+  - psql -c 'create database travis_ci_test;' -U postgres
+
 script:
-  - bundle exec rubocop
-  - bundle exec rspec
+  - rspec
+  - rubocop
