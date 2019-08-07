@@ -1,0 +1,19 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+Documentation:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+AllCops:
+  Exclude:
+    - Gemfile
+    - Rakefile
+    - config.ru
+    - 'test/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'bin/**/*'
+    - 'vendor/**/*'
+    - 'spec/**/*'
+    - 'node_modules/**/*'
