@@ -1,0 +1,7 @@
+fail_on_violations: false
+
+rubocop:
+  enabled: false
+
+reek:
+  enabled: false
