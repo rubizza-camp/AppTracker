@@ -2,7 +2,8 @@ class ApplicationInfo < ApplicationRecord
   attribute :apple_app_id
   attribute :android_app_id
   attribute :title
-  attribute :url
+  attribute :apple_url
+  attribute :android_url
   attribute :short_description
   attribute :long_description
   attribute :icon_url
