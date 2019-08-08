@@ -21,6 +21,7 @@
 class Application < ApplicationRecord
   has_many :ratings, dependent: :destroy
   has_many :dinamic_infos, dependent: :destroy
-  has_many :keywords, dependent: :destroy
+  has_many :service_table_app_keywords, dependent: :destroy
+  has_many :keywords, through: :service_table_app_keywords
   has_many :similar_apps, dependent: :destroy
 end
