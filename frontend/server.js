@@ -5,7 +5,7 @@ const path = require('path');
 const fs = require('fs');
 const https = require('https');
 
-const privateKey = fs.readFileSync(process.env.APPTRACKER_CERT_PATH+'/apptracker.club-crt.pem', 'utf8');
+const privateKey = fs.readFileSync(process.env.APPTRACKER_CERT_PATH+'/apptracker.club-key.pem', 'utf8');
 const certificate = fs.readFileSync(process.env.APPTRACKER_CERT_PATH+'/apptracker.club-crt.pem', 'utf8');
 const ca = fs.readFileSync(process.env.APPTRACKER_CERT_PATH+'/apptracker.club-chain.pem', 'utf8');
 
