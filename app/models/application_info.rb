@@ -11,5 +11,6 @@ class ApplicationInfo < ApplicationRecord
   attribute :dev_name
   attribute :dev_email
   attribute :dev_website
-  has_many :ratings, :dinamic_infos, :keywords, :similar_apps,  dependent: :destroy
+  has_many :ratings, :dinamic_infos, :keywords,
+  :similar_apps,  dependent: :destroy
 end
