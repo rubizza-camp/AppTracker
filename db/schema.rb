@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_07_101003) do
+ActiveRecord::Schema.define(version: 2019_08_08_084803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,16 @@ ActiveRecord::Schema.define(version: 2019_08_07_101003) do
     t.integer "rank"
     t.string "shop_type"
     t.integer "app_id"
+  end
+
+  create_table "packages", force: :cascade do |t|
+    t.string "package_name"
+    t.string "company_name"
+    t.integer "review_count"
+    t.float "average_rating"
+    t.integer "downloads_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "ratings", force: :cascade do |t|
