@@ -1,4 +1,4 @@
-class Rating
+class Rating < ApplicationRecord
   attribute :rating_1
   attribute :rating_2
   attribute :rating_3

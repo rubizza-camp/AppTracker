@@ -1,4 +1,4 @@
-class DinamicInfo
+class DinamicInfo < ApplicationRecord
   attribute :country
   attribute :date
   attribute :rank

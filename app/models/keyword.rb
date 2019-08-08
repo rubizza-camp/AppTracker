@@ -1,4 +1,4 @@
-class Keyword
+class Keyword < ApplicationRecord
   attribute :keywords
   attribute :rank
   attribute :shop_type
