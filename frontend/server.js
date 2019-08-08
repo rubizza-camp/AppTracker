@@ -13,4 +13,4 @@ app.get('/ping', function (req, res) {
 app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
-app.listen(port ,'18.219.226.232');
+app.listen(port);
