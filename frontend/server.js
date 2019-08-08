@@ -1,7 +1,20 @@
 const express = require('express');
 const favicon = require('express-favicon');
 const path = require('path');
-const port = process.env.PORT || 80;
+
+const fs = require('fs');
+const https = require('https');
+
+const privateKey = fs.readFileSync(process.env.APPTRACKER_CERT_PATH+'/privkey.pem', 'utf8');
+const certificate = fs.readFileSync(process.env.APPTRACKER_CERT_PATH+'/cert.pem', 'utf8');
+const ca = fs.readFileSync(process.env.APPTRACKER_CERT_PATH+'/chain.pem', 'utf8');
+
+const credentials = {
+	key: privateKey,
+	cert: certificate,
+	ca: ca
+};
+
 const app = express();
 app.use(favicon(__dirname + '/build/favicon.ico'));
 // the __dirname is the current directory from where the script is running
@@ -13,4 +26,9 @@ app.get('/ping', function (req, res) {
 app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
-app.listen(port);
+
+const httpsServer = https.createServer(credentials, app);
+
+httpsServer.listen(443, () => {
+	console.log('HTTPS Server running on port 443');
+});
