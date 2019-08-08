@@ -7,77 +7,77 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 package = Package.create(
-  package_name: 'Twitter',
+  name: 'Twitter',
   company_name: 'Rubizza',
   review_count: 777,
   average_rating: 4.9,
   downloads_count: 111
 )
 package = Package.create(
-  package_name: 'Tetris',
+  name: 'Tetris',
   company_name: 'Rubizza',
   review_count: 777,
   average_rating: 4.9,
   downloads_count: 111
 )
 package = Package.create(
-  package_name: 'TabGame',
+  name: 'TabGame',
   company_name: 'Rubizza',
   review_count: 777,
   average_rating: 4.9,
   downloads_count: 111
 )
 package = Package.create(
-  package_name: 'Testings',
+  name: 'Testings',
   company_name: 'Rubizza',
   review_count: 777,
   average_rating: 4.9,
   downloads_count: 111
 )
 package = Package.create(
-  package_name: 'Tabulars',
+  name: 'Tabulars',
   company_name: 'Rubizza',
   review_count: 777,
   average_rating: 4.9,
   downloads_count: 111
 )
 package = Package.create(
-  package_name: 'Tuned',
+  name: 'Tuned',
   company_name: 'Rubizza',
   review_count: 777,
   average_rating: 4.9,
   downloads_count: 111
 )
 package = Package.create(
-  package_name: 'Bootstrap',
+  name: 'Bootstrap',
   company_name: 'Rubizza',
   review_count: 777,
   average_rating: 4.9,
   downloads_count: 111
 )
 package = Package.create(
-  package_name: 'BoomID',
+  name: 'BoomID',
   company_name: 'Rubizza',
   review_count: 777,
   average_rating: 4.9,
   downloads_count: 111
 )
 package = Package.create(
-  package_name: 'Botter',
+  name: 'Botter',
   company_name: 'Rubizza',
   review_count: 777,
   average_rating: 4.9,
   downloads_count: 111
 )
 package = Package.create(
-  package_name: 'Rake',
+  name: 'Rake',
   company_name: 'Rubizza',
   review_count: 777,
   average_rating: 4.9,
   downloads_count: 111
 )
 package = Package.create(
-  package_name: 'Rails',
+  name: 'Rails',
   company_name: 'Rubizza',
   review_count: 777,
   average_rating: 4.9,

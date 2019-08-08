@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   namespace 'api' do
     namespace 'v0' do
-      resources :packages
+      resources :packages, only: :index
     end
   end
 end
