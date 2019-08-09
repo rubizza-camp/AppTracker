@@ -82,7 +82,7 @@ class MyApp extends React.Component {
     if (target.value != "")
     {
       this.searchTimer = setTimeout(()=>{
-        axios.get('http://'+document.domain+':3000/api/v0/packages?name='+target.value)
+        axios.get('https://'+document.domain+':3000/api/v0/packages?name='+target.value)
         .then(response => {
           if (document.getElementById('MainSearchInputField').value != "")
           this.create_search_result_fields(response.data.data);
