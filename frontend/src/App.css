@@ -89,3 +89,16 @@ body
 {
   margin-left: 10px;
 }
+
+.non-selectable
+{
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
+.unhover:hover,:active,:focus
+{
+  text-decoration: none !important;
+  outline: none;
+}
