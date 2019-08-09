@@ -23,7 +23,11 @@ import '@material/react-icon-button/dist/icon-button.css';
 import './App.css';
 
 const newPartElement = (element_data, id) =>
-      <ListItem key = {id} style={{borderRadius: '50px', marginLeft: "5px", paddingLeft: "5px"}}>
+      <ListItem key = {id} style={{borderRadius: '50px', marginLeft: "5px", paddingLeft: "5px"}}
+        onClick = {()=>{
+          window.location.href = element_data.google_play_link;
+        }}
+      >
         <div style= {{
           height: "40px",
           width: "40px",
@@ -31,7 +35,7 @@ const newPartElement = (element_data, id) =>
           backgroundImage: "url('"+element_data.icon_link+"')",
           backgroundSize: "cover",
         }}></div>
-        <ListItemText className = "ml-10" primaryText={element_data.name} />
+        <ListItemText className = "ml-10 unhover" primaryText={element_data.name} />
         <div style= {{
           marginLeft: "auto"
           }}>
@@ -43,17 +47,27 @@ class MyApp extends React.Component {
   
   create_search_result_fields(data)
   {
-    var components = [];
+    if (data.length != 0)
+    {
+      var components = [];
       components.push(<Divider key='divider' style={{ width: "74%", height: 1, marginBottom: "11px", marginLeft: "12%",marginRight: "12%" }} />)
       for (var i = 0; i < data.length; i++) components.push(newPartElement(data[i].attributes, i));
       const newFieldCount = React.createElement(
         List,
-        {id: 'some'},
+        {id: 'some', className: 'non-selectable'},
         components);
       ReactDOM.render(
         newFieldCount,
         document.getElementById('search_field')
       );
+    }
+    else
+    {
+      ReactDOM.render(
+        '',
+        document.getElementById('search_field')
+      );
+    }
   }
 
   search_request = (event) =>
@@ -68,9 +82,10 @@ class MyApp extends React.Component {
     if (target.value != "")
     {
       this.searchTimer = setTimeout(()=>{
-        axios.get('https://'+document.domain+':3000/api/v0/packages?name='+target.value)
+        axios.get('http://'+document.domain+':3000/api/v0/packages?name='+target.value)
         .then(response => {
-            this.create_search_result_fields(response.data.data);
+          if (document.getElementById('MainSearchInputField').value != "")
+          this.create_search_result_fields(response.data.data);
         })
         .catch(error => console.log(error))
       },100);
@@ -109,6 +124,7 @@ class MyApp extends React.Component {
                     </IconToggle>
                   </IconButton>
                   <InputBase
+                  id = 'MainSearchInputField'
                   onChange= {this.search_request}
                   style={{ marginLeft: 8, flex: 1, }}
                   placeholder="Search application"
