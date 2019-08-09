@@ -31,6 +31,8 @@ gem 'travis', '>= 1.8.10'
 gem 'rubocop-rails'
 gem 'rubocop-rspec'
 
+gem 'fast_jsonapi'
+
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
 

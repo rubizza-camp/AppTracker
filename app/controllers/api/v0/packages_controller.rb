@@ -3,7 +3,7 @@ module Api
     class PackagesController < ApplicationController
       def index
         @search = Package.where('name ilike ?', "%#{params[:name]}%")
-        render json: @search
+        render json: PackageSerializer.new(@search)
       end
     end
   end

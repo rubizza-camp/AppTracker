@@ -1,85 +1,88 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
 packages = Package.create(
   name: 'Twitter',
   company_name: 'Rubizza',
   review_count: 418122,
   average_rating: 4.9,
-  downloads_count: 11159081
+  downloads_count: 111,
+  icon_link: 'https://lh3.googleusercontent.com/yQ0oBTVi7VttofA73DSrcf9zrBsnktxxxn6ZaAoSVV8GNFlJKh2Z-A0CT5XgOKWwE_fs=s180-rw'
 )
-package = Package.create(
+packages = Package.create(
   name: 'Tetris',
   company_name: 'Rubizza',
-  review_count: 1519241,
-  average_rating: 4.2,
-  downloads_count: 12912932
+  review_count: 777,
+  average_rating: 4.9,
+  downloads_count: 111,
+  icon_link: 'https://lh3.googleusercontent.com/qxINibwINSPSgcdxAYtRrbgO8NxtQSAI_xHBhOnhGLjz4GZPZujekJ6xKMRsSIukDBIk=s180-rw'
 )
-package = Package.create(
-  name: 'TabGame',
+packages = Package.create(
+  name: 'Guitars',
   company_name: 'Rubizza',
-  review_count: 91827,
-  average_rating: 3.9,
-  downloads_count: 1112412
+  review_count: 777,
+  average_rating: 4.9,
+  downloads_count: 111,
+  icon_link: 'https://lh3.googleusercontent.com/zZS6xBA1lLWJGIRKU2C7xCjPqdbZbV6RAOsiPnIPvsWSTE1kTHthNwgSe2wnp_fEzfU=s180-rw'
 )
-package = Package.create(
+packages = Package.create(
   name: 'Testings',
   company_name: 'Rubizza',
-  review_count: 777341,
-  average_rating: 3.1,
-  downloads_count: 1215211
+  review_count: 777,
+  average_rating: 4.9,
+  downloads_count: 111,
+  icon_link: 'https://lh3.googleusercontent.com/urqBcBgb7bWjlgOlAHBlXqpBebiblQX39YVaOmluD7WpdAYPuZjQH1iiFw2SgfivkjqM=s180-rw'
 )
-package = Package.create(
+packages = Package.create(
   name: 'Tabulars',
   company_name: 'Rubizza',
-  review_count: 91822,
-  average_rating: 3.9,
-  downloads_count: 912874
+  review_count: 777,
+  average_rating: 4.9,
+  downloads_count: 111,
+  icon_link: 'https://lh3.googleusercontent.com/cUaC5SGlqYovI0E6pzhvygaGFZGiWJbwFAxPE4gS1lZWBufaNDb6LZxkDxHMyNna7w=s180-rw'
 )
-package = Package.create(
+packages = Package.create(
   name: 'Tuned',
   company_name: 'Rubizza',
-  review_count: 9127742,
-  average_rating: 3.8,
-  downloads_count: 81727
+  review_count: 777,
+  average_rating: 4.9,
+  downloads_count: 111,
+  icon_link: 'https://lh3.googleusercontent.com/UgGZvnqTt-Ab1Fq6ggL_NF-W3dq2bnlE-VprU6tsVwQvlSyAzQlNuJ1maEZ66kCC93g=s180-rw'
 )
-package = Package.create(
+packages = Package.create(
   name: 'Bootstrap',
   company_name: 'Rubizza',
-  review_count: 9213848,
-  average_rating: 5.0,
-  downloads_count: 666298992
+  review_count: 777,
+  average_rating: 4.9,
+  downloads_count: 111,
+  icon_link: 'https://lh3.googleusercontent.com/eof_QbMfhJxAiqbE2ESWwb1-qJ7Zu6yKbESiUaEs9CfuUA1oxDW0374FVYP6cnZLmw=s180-rw'
 )
-package = Package.create(
+packages = Package.create(
   name: 'BoomID',
   company_name: 'Rubizza',
   review_count: 124919,
   average_rating: 4.9,
-  downloads_count: 91928492
+  downloads_count: 111,
+  icon_link: 'https://lh3.googleusercontent.com/CachTgIoVy7oEtLlgeo8bPcJfaUHRopRYUOH-DYyeiRsQQaqg8gjpp1qGgOs3wiC2IQ=s180-rw'
 )
-package = Package.create(
+packages = Package.create(
   name: 'Botter',
   company_name: 'Rubizza',
-  review_count: 7778,
-  average_rating: 2.8,
-  downloads_count: 111319
+  review_count: 777,
+  average_rating: 4.9,
+  downloads_count: 111,
+  icon_link: 'https://lh3.googleusercontent.com/qOv27QwcDl3YAkInu4OCThDG6IPWi0stZMj_pKwd7a5_OnEFYUckeH3hb6Wes4pep0s=s180-rw'
 )
-package = Package.create(
+packages = Package.create(
   name: 'Rake',
   company_name: 'Rubizza',
-  review_count: 7731247,
-  average_rating: 1.9,
-  downloads_count: 1119182
+  review_count: 777,
+  average_rating: 4.9,
+  downloads_count: 111,
+  icon_link: 'https://lh3.googleusercontent.com/YSlqf3WBgIuNjwOoABhCM6ehJFJ0p5aTe5TAc3gq80SMBdg-8mqwcOUwFgFu4uVU2gQ=s180-rw'
 )
-package = Package.create(
+packages = Package.create(
   name: 'Rails',
   company_name: 'Rubizza',
-  review_count: 9128847,
-  average_rating: 3.9,
-  downloads_count: 91283841
+  review_count: 777,
+  average_rating: 4.9,
+  downloads_count: 111,
+  icon_link: 'https://lh3.googleusercontent.com/IzNApAtAYHq7ISPRBxuIWqQ9YBOi-lvKxDIOehH8OLiTwCy23FHtRKnArDXRqGrNfw=s180-rw'
 )
