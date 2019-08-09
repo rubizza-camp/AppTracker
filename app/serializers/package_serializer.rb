@@ -1,4 +1,4 @@
 class PackageSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :name, :company_name, :review_count, :average_rating, :downloads_count, :icon_link
+  attributes :name, :average_rating, :google_play_link, :icon_link
 end
