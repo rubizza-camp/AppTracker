@@ -4,6 +4,8 @@ const path = require('path');
 
 const fs = require('fs');
 const https = require('https');
+const http = require('http');
+
 
 const privateKey = fs.readFileSync(process.env.APPTRACKER_CERT_PATH+'/apptracker.club-key.pem', 'utf8');
 const certificate = fs.readFileSync(process.env.APPTRACKER_CERT_PATH+'/apptracker.club-crt.pem', 'utf8');
@@ -28,6 +30,10 @@ app.get('/*', function (req, res) {
 });
 
 const httpsServer = https.createServer(credentials, app);
+http.createServer(function (req, res) {
+    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+    res.end();
+}).listen(80);
 
 httpsServer.listen(443, () => {
 	console.log('HTTPS Server running on port 443');
