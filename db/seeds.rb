@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-package = Package.create(
+packages = Package.create(
   name: 'Twitter',
   company_name: 'Rubizza',
   review_count: 418122,
