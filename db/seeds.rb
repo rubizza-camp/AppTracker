@@ -1,90 +1,68 @@
 packages = Package.create([
   {
-    name: 'Twitter',
-    company_name: 'Rubizza',
-    review_count: 777,
-    average_rating: 4.9,
-    downloads_count: 111,
-    icon_link: 'https://lh3.googleusercontent.com/yQ0oBTVi7VttofA73DSrcf9zrBsnktxxxn6ZaAoSVV8GNFlJKh2Z-A0CT5XgOKWwE_fs=s180-rw'
+    name: 'Facebook',
+    average_rating: 4.1,
+    google_play_link: 'https://play.google.com/store/apps/details?id=com.facebook.katana',
+    icon_link: 'https://lh3.googleusercontent.com/ccWDU4A7fX1R24v-vvT480ySh26AYp97g1VrIB_FIdjRcuQB2JP2WdY7h_wVVAeSpg=s180-rw'
   },
   {
-    name: 'Tetris',
-    company_name: 'Rubizza',
-    review_count: 777,
-    average_rating: 4.9,
-    downloads_count: 111,
-    icon_link: 'https://lh3.googleusercontent.com/qxINibwINSPSgcdxAYtRrbgO8NxtQSAI_xHBhOnhGLjz4GZPZujekJ6xKMRsSIukDBIk=s180-rw'
+    name: 'Instagram',
+    average_rating: 4.5,
+    google_play_link: 'https://play.google.com/store/apps/details?id=com.instagram.android',
+    icon_link: 'https://lh3.googleusercontent.com/2sREY-8UpjmaLDCTztldQf6u2RGUtuyf6VT5iyX3z53JS4TdvfQlX-rNChXKgpBYMw=s180-rw' 
   },
   {
-    name: 'Guitars',
-    company_name: 'Rubizza',
-    review_count: 777,
-    average_rating: 4.9,
-    downloads_count: 111,
-    icon_link: 'https://lh3.googleusercontent.com/zZS6xBA1lLWJGIRKU2C7xCjPqdbZbV6RAOsiPnIPvsWSTE1kTHthNwgSe2wnp_fEzfU=s180-rw'
+    name: 'Snapchat',
+    average_rating: 4.1,
+    google_play_link: 'https://play.google.com/store/apps/details?id=com.snapchat.android',
+    icon_link: 'https://lh3.googleusercontent.com/ujz8cInt2YuaGLo2wahih771yXzWbyhNhzrCzm5Y5omDnLRt3v-FTTNMVfgT7FgIEfI=s180-rw'
   },
   {
-    name: 'Testings',
-    company_name: 'Rubizza',
-    review_count: 777,
-    average_rating: 4.9,
-    downloads_count: 111,
-    icon_link: 'https://lh3.googleusercontent.com/urqBcBgb7bWjlgOlAHBlXqpBebiblQX39YVaOmluD7WpdAYPuZjQH1iiFw2SgfivkjqM=s180-rw'
+    name: 'TikTok',
+    average_rating: 4.4,
+    google_play_link: 'https://play.google.com/store/apps/details?id=com.zhiliaoapp.musically',
+    icon_link: 'https://lh3.googleusercontent.com/iBYjvYuNq8BB7EEEHktPG1fpX9NiY7Jcyg1iRtQxO442r9CZ8H-X9cLkTjpbORwWDG9d=s180-rw'
   },
   {
-    name: 'Tabulars',
-    company_name: 'Rubizza',
-    review_count: 777,
-    average_rating: 4.9,
-    downloads_count: 111,
-    icon_link: 'https://lh3.googleusercontent.com/cUaC5SGlqYovI0E6pzhvygaGFZGiWJbwFAxPE4gS1lZWBufaNDb6LZxkDxHMyNna7w=s180-rw'
+    name: 'Viber',
+    average_rating: 4.4,
+    google_play_link: 'https://play.google.com/store/apps/details?id=com.viber.voip',
+    icon_link: 'https://lh3.googleusercontent.com/U6w6exKdvzjRC6ypN68s6nvn8OBlNgDOf5ub9xcqvZPAkXXVW153t9KMeD8yeAVlTxw=s180-rw'
   },
   {
-    name: 'Tuned',
-    company_name: 'Rubizza',
-    review_count: 777,
-    average_rating: 4.9,
-    downloads_count: 111,
-    icon_link: 'https://lh3.googleusercontent.com/UgGZvnqTt-Ab1Fq6ggL_NF-W3dq2bnlE-VprU6tsVwQvlSyAzQlNuJ1maEZ66kCC93g=s180-rw'
+    name: 'WhatsApp Messenger',
+    average_rating: 4.4,
+    google_play_link: 'https://play.google.com/store/apps/details?id=com.whatsapp',
+    icon_link: 'https://lh3.googleusercontent.com/bYtqbOcTYOlgc6gqZ2rwb8lptHuwlNE75zYJu6Bn076-hTmvd96HH-6v7S0YUAAJXoJN=s180-rw'
   },
   {
-    name: 'Bootstrap',
-    company_name: 'Rubizza',
-    review_count: 777,
-    average_rating: 4.9,
-    downloads_count: 111,
-    icon_link: 'https://lh3.googleusercontent.com/eof_QbMfhJxAiqbE2ESWwb1-qJ7Zu6yKbESiUaEs9CfuUA1oxDW0374FVYP6cnZLmw=s180-rw'
+    name: 'Hearthstone',
+    average_rating: 4.4,
+    google_play_link: 'https://play.google.com/store/apps/details?id=com.blizzard.wtcg.hearthstone',
+    icon_link: 'https://lh3.googleusercontent.com/_4HguZs7U1OwAogXG8fjlDu1VPbnppQGG-L8ZaGGxSPDAgwkn-W9sz3gtYNbp6qrmlk=s180-rw'
   },
   {
-    name: 'BoomID',
-    company_name: 'Rubizza',
-    review_count: 777,
-    average_rating: 4.9,
-    downloads_count: 111,
-    icon_link: 'https://lh3.googleusercontent.com/CachTgIoVy7oEtLlgeo8bPcJfaUHRopRYUOH-DYyeiRsQQaqg8gjpp1qGgOs3wiC2IQ=s180-rw'
+    name: 'The Elder Scrolls: Legends',
+    average_rating: 4.5,
+    google_play_link: 'https://play.google.com/store/apps/details?id=com.bethsoft.theelderscrollslegends',
+    icon_link: 'https://lh3.googleusercontent.com/gr36CkKvFuwNhg2jxZnvfRKPTgzFmsaveGJm2LTd2fWgKFc3QYtxwv27Ia8GIuwmlLg=s180-rw'
   },
   {
-    name: 'Botter',
-    company_name: 'Rubizza',
-    review_count: 777,
-    average_rating: 4.9,
-    downloads_count: 111,
-    icon_link: 'https://lh3.googleusercontent.com/qOv27QwcDl3YAkInu4OCThDG6IPWi0stZMj_pKwd7a5_OnEFYUckeH3hb6Wes4pep0s=s180-rw'
+    name: 'Deck Heroes: Legacy',
+    average_rating: 4.7,
+    google_play_link: 'https://play.google.com/store/apps/details?id=com.igg.bzbee.deckheroes',
+    icon_link: 'https://lh3.googleusercontent.com/3C6Pf1vEM3zwhD2Cg7uvNYgq0z8iDCrVr8NhFtOhYJqgCoICNhzDzYkU4hCUfWpkz84l=s180-rw'
   },
   {
-    name: 'Rake',
-    company_name: 'Rubizza',
-    review_count: 777,
-    average_rating: 4.9,
-    downloads_count: 111,
-    icon_link: 'https://lh3.googleusercontent.com/YSlqf3WBgIuNjwOoABhCM6ehJFJ0p5aTe5TAc3gq80SMBdg-8mqwcOUwFgFu4uVU2gQ=s180-rw'
+    name: 'Clash of Clans',
+    average_rating: 4.6,
+    google_play_link: 'https://play.google.com/store/apps/details?id=com.supercell.clashofclans',
+    icon_link: 'https://lh3.googleusercontent.com/akv2Bdp7i5Vv-sl9FuP3_dhWpUO80zULf-Pkh6RFleomEp6pZorHuCNm3FbR9oAMunVK=s180-rw'
   },
   {
-    name: 'Rails',
-    company_name: 'Rubizza',
-    review_count: 777,
-    average_rating: 4.9,
-    downloads_count: 111,
-    icon_link: 'https://lh3.googleusercontent.com/IzNApAtAYHq7ISPRBxuIWqQ9YBOi-lvKxDIOehH8OLiTwCy23FHtRKnArDXRqGrNfw=s180-rw'
+    name: 'Clash Royale',
+    average_rating: 4.5,
+    google_play_link: 'https://play.google.com/store/apps/details?id=com.supercell.clashroyale',
+    icon_link: 'https://lh3.googleusercontent.com/K-MNjDiO2WwRNwJqPZu8Wd5eOmFEjLYkEEgjZlv35hTiua_VylRPb04Lig3YZXLERvI=s180-rw'
   }
 ])
