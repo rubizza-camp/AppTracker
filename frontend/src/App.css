@@ -43,7 +43,6 @@ body
   height: 98vh;
 
   display: flex;
-  align-items: center;
   justify-content: center;
 
   --mdc-theme-primary: rgb(73, 42, 63);
@@ -73,17 +72,6 @@ body
   border-radius: 12px;
 }
 
-.mdc-card-div
-{
-  max-height: 60vh;
-  padding: 2px 10px 10px 10px;
-  overflow-y: scroll;
-
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 .mdc-textfiled-fullwidth
 {
   width: 100%;
@@ -95,4 +83,9 @@ body
 .mdc-card-div-invisible
 {
   display: none !important;
+}
+
+.ml-10
+{
+  margin-left: 10px;
 }
