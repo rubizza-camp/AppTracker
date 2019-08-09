@@ -45,7 +45,7 @@ class MyApp extends React.Component {
   {
     var components = [];
       components.push(<Divider key='divider' style={{ width: "74%", height: 1, marginBottom: "11px", marginLeft: "12%",marginRight: "12%" }} />)
-      for (var i = 0; i < data.length; i++) components.push(newPartElement(data[i], i));
+      for (var i = 0; i < data.length; i++) components.push(newPartElement(data[i].attributes, i));
       const newFieldCount = React.createElement(
         List,
         {id: 'some'},
@@ -70,7 +70,7 @@ class MyApp extends React.Component {
       this.searchTimer = setTimeout(()=>{
         axios.get('http://localhost:3000/api/v0/packages?name='+target.value)
         .then(response => {
-            this.create_search_result_fields(response.data)
+            this.create_search_result_fields(response.data.data);
         })
         .catch(error => console.log(error))
       },100);
