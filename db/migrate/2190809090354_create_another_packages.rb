@@ -1,6 +1,5 @@
 class CreateAnotherPackages < ActiveRecord::Migration[5.2]
   def change
-    drop_table :another_packages
     create_table :packages do |t|
       t.string :name
       t.string :company_name
