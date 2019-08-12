@@ -3,15 +3,12 @@
 # Table name: keywords
 #
 #  id        :bigint           not null, primary key
-#  keywords  :string
-#  rank      :integer
+#  keyword   :string
 #  shop_type :string
-#  app_id    :integer
 #
 
 class Keyword < ApplicationRecord
-  belongs_to :application
-  has_many :service_table_app_keywords, dependent: :destroy
+  has_many :app_keywords, dependent: :destroy
   has_many :applications,
-           through: :service_table_app_keywords, dependent: :destroy
+           through: :app_keywords
 end

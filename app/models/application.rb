@@ -16,12 +16,12 @@
 #  dev_name          :string
 #  dev_email         :string
 #  dev_website       :string
+#  similar_apps      :json
 #
 
 class Application < ApplicationRecord
   has_many :ratings, dependent: :destroy
   has_many :dinamic_infos, dependent: :destroy
-  has_many :service_table_app_keywords, dependent: :destroy
-  has_many :keywords, through: :service_table_app_keywords, dependent: :destroy
-  has_many :similar_apps, dependent: :destroy
+  has_many :app_keywords, dependent: :destroy
+  has_many :keywords, through: :app_keywords
 end

@@ -12,7 +12,7 @@
 #  average_rating :integer
 #  shop_type      :string
 #  date           :date
-#  app_id         :integer
+#  application_id :bigint
 #
 
 class Rating < ApplicationRecord
