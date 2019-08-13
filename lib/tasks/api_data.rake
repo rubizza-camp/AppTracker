@@ -1,9 +1,4 @@
-namespace :db do
-  desc 'Add new token to database'
-  task add_token: :environment do
-    ARGV.each { |arg| task arg.to_sym }
-    ApiToken.create(token: ARGV.last)
-require './lib/services/api_data'
+require './lib/services/target_apps'
 
 namespace :db do
   namespace :app do
