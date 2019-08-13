@@ -23,17 +23,17 @@ class AppDynamicLoader
 
   def load_ranks
     RestClient.get("https://api.apptweak.com/android/applications/#{id}/rankings.json?country=#{country}&
-                    start_date=#{start_date}&end_date=#{end_date}", {'X-Apptweak-Key': ENV['TOKEN']})
+                    start_date=#{start_date}&end_date=#{end_date}", {'X-Apptweak-Key': Services::ApiTokenManager.token_with_credits()})
   end
 
   def load_power
     RestClient.get("https://api.apptweak.com/android/applications/#{id}/power.json?country=#{country}&
-                    start_date=#{start_date}&end_date=#{end_date}", {'X-Apptweak-Key': ENV['TOKEN']})
+                    start_date=#{start_date}&end_date=#{end_date}", {'X-Apptweak-Key': Services::ApiTokenManager.token_with_credits()})
   end
 
   def load_downloads
     RestClient.get("https://api.apptweak.com/android/applications/#{id}/downloads.json?
-                    start_date=#{start_date}&end_date=#{end_date}", {'X-Apptweak-Key': ENV['TOKEN']})
+                    start_date=#{start_date}&end_date=#{end_date}", {'X-Apptweak-Key': Services::ApiTokenManager.token_with_credits()})
   end
 end
 

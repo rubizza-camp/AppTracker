@@ -1,9 +1,9 @@
+require_relative 'api_token_manager' 
 class Services
   class ApiData
     class << self
 
       def update_app(name)
-        p name
       end
 
       def update_app_all

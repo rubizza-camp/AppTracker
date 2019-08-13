@@ -1,4 +1,4 @@
-require './lib/services/target_apps'
+require './lib/services/api_data'
 
 namespace :db do
   namespace :app do
