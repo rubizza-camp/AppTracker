@@ -1,4 +1,4 @@
-class Service
+class Services
   class ApiTokenManager
     class << self
       def token_with_credits(minimal_credits)

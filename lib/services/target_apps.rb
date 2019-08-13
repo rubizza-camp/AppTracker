@@ -1,4 +1,4 @@
-class Service
+class Services
   class TargetApps
     class << self
       def add(name)
