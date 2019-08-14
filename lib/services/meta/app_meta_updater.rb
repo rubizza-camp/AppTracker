@@ -9,7 +9,7 @@ class AppMetaUpdater
 
   private
 
-  def insert_meta_into_db(meta)
+  def insert_meta_into_db(meta) # rubocop:disable Metrics/AbcSize
     Create.Application(apple_app_id: meta[:apple_app_id], android_app_id: meta[:android_app_id],
                        title: meta[:title], url: meta[:url], short_description: meta[:s_desc],
                        long_description: meta[:l_desc], icon_url: meta[:icon_url],

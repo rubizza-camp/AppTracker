@@ -1,7 +1,7 @@
 class AppMetaParser
   def parse_meta(ids, response)
     meta(ids, response)
-  end  
+  end
 
   def self.parse_meta(ids, response)
     new.parse_meta(ids, response)
@@ -9,7 +9,7 @@ class AppMetaParser
 
   private
 
-  def meta(ids, response)
+  def meta(ids, response) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     android_app_id = ids[:playmarket_app_id]
     apple_app_id = ids[:appstore_app_id]
     android_url = "https://play.google.com/store/apps/details?id=#{android_app_id}"
@@ -23,8 +23,8 @@ class AppMetaParser
     dev_name = JSON.parse(response)['content']['developer']['name']
     dev_email = JSON.parse(response)['content']['developer']['email']
     dev_website = JSON.parse(response)['content']['developer']['website']
-    {android_app_id: android_app_id, apple_app_id: apple_app_id, title: title, icon_url: icon_url,
-    s_desc: s_desc, l_desc: l_desc, content_rating: content_rating, price: price, android_url: android_url,
-    apple_url: apple_url, dev_name: dev_name, dev_email: dev_email, dev_website: dev_website}
+    { android_app_id: android_app_id, apple_app_id: apple_app_id, title: title, icon_url: icon_url,
+      s_desc: s_desc, l_desc: l_desc, content_rating: content_rating, price: price, android_url: android_url,
+      apple_url: apple_url, dev_name: dev_name, dev_email: dev_email, dev_website: dev_website }
   end
 end
