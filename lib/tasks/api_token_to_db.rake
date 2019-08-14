@@ -3,7 +3,7 @@ namespace :db do
   task add_token: :environment do
     ARGV.each { |arg| task arg.to_sym }
     ARGV.drop(1).each do |arg|
-      ApiToken.create(token: arg)
+      ApiToken.create(value: arg)
     end
   end
 end
