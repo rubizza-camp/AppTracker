@@ -10,18 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_14_095625) do
-
+ActiveRecord::Schema.define(version: 2019_08_14_122603) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "api_tokens", force: :cascade do |t|
+    t.string "value"
+    t.integer "credits", default: 100
+  end
 
   create_table "apps", force: :cascade do |t|
     t.integer "apple_app_id"
     t.string "android_app_id"
     t.string "title"
     t.string "apple_url"
-    t.string "andriod_url"
+    t.string "android_url"
     t.string "short_description"
     t.string "long_description"
     t.string "icon_url"
@@ -33,7 +37,7 @@ ActiveRecord::Schema.define(version: 2019_08_14_095625) do
   end
 
   create_table "apps_keywords", force: :cascade do |t|
-    t.integer "priotity"
+    t.integer "priority"
     t.bigint "app_id"
     t.bigint "keyword_id"
     t.index ["app_id"], name: "index_apps_keywords_on_app_id"
@@ -59,13 +63,9 @@ ActiveRecord::Schema.define(version: 2019_08_14_095625) do
 
   create_table "packages", force: :cascade do |t|
     t.string "name"
-    t.string "company_name"
-    t.integer "review_count"
     t.float "average_rating"
-    t.integer "downloads_count"
+    t.string "google_play_link"
     t.string "icon_link"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "ratings", force: :cascade do |t|
@@ -93,6 +93,12 @@ ActiveRecord::Schema.define(version: 2019_08_14_095625) do
     t.bigint "app_id"
     t.index ["app_id"], name: "index_subs_on_app_id"
     t.index ["user_id"], name: "index_subs_on_user_id"
+  end
+
+  create_table "target_apps", force: :cascade do |t|
+    t.string "application_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
