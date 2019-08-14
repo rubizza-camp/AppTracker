@@ -12,9 +12,13 @@
 
 ActiveRecord::Schema.define(version: 2019_08_14_095625) do
 
-
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "api_tokens", force: :cascade do |t|
+    t.string "value"
+    t.integer "credits", default: 100
+  end
 
   create_table "apps", force: :cascade do |t|
     t.integer "apple_app_id"
@@ -30,7 +34,6 @@ ActiveRecord::Schema.define(version: 2019_08_14_095625) do
     t.string "dev_name"
     t.string "dev_email"
     t.string "dev_website"
-    t.json "similar_apps"
   end
 
   create_table "apps_keywords", force: :cascade do |t|
@@ -92,6 +95,12 @@ ActiveRecord::Schema.define(version: 2019_08_14_095625) do
     t.index ["user_id"], name: "index_subs_on_user_id"
   end
 
+  create_table "target_apps", force: :cascade do |t|
+    t.string "application_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "login"
@@ -99,7 +108,6 @@ ActiveRecord::Schema.define(version: 2019_08_14_095625) do
     t.string "password"
     t.string "role"
     t.string "image"
-    t.json "subscriptions"
   end
 
   add_foreign_key "apps_keywords", "apps"
