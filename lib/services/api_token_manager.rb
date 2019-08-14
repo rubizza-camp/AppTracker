@@ -6,7 +6,7 @@ class Services
         return nil if available_token.nil?
 
         available_token.update(credits: (available_token.credits - minimal_credits))
-        available_token.token
+        available_token.value
       end
     end
   end
