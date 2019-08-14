@@ -25,10 +25,10 @@ class AppDynamicUpdater
   end
 
   def ids_load
-    ids = Array.new
+    ids = []
     Application.all.each do |app|
-      ids['HERE MUST BE ID'] = {apple_app_id: app[:apple_app_id],
-                android_app_id: app[:android_app_id]}
+      ids['HERE MUST BE ID'] = { apple_app_id: app[:apple_app_id],
+                                 android_app_id: app[:android_app_id] }
     end
     ids
   end

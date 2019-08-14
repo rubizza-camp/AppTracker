@@ -10,7 +10,7 @@ class AppDynamicParser
   private
 
   def return_parsed
-    {ranks: parse_ranks, power: parse_power, downloads: parse_downloads}
+    { ranks: parse_ranks, power: parse_power, downloads: parse_downloads }
   end
 
   def parse_ranks
