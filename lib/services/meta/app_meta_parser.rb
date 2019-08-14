@@ -1,15 +1,21 @@
 class AppMetaParser
-  def parse_meta(ids, response)
-    meta(ids, response)
+  attr_reader :ids, :response
+  def initialize(ids, response)
+    @ids = ids
+    @response = response
+  end
+  
+  def parse_meta
+    meta
   end
 
   def self.parse_meta(ids, response)
-    new.parse_meta(ids, response)
+    new(ids, response).parse_meta
   end
 
   private
 
-  def meta(ids, response) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+  def meta # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     android_app_id = ids[:playmarket_app_id]
     apple_app_id = ids[:appstore_app_id]
     android_url = "https://play.google.com/store/apps/details?id=#{android_app_id}"

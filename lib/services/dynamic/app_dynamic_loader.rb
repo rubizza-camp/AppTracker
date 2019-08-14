@@ -8,10 +8,10 @@ class AppDynamicLoader
   end
 
   def self.dynamic_load(id, country, start_date, end_date)
-    dynamic_load.new.dynamic_load(id, country, start_date, end_date)
+    new.dynamic_load
   end
 
-  def dynamic_load(_id, _country, _start_date, _end_date)
+  def dynamic_load
     load_dynamic
   end
 

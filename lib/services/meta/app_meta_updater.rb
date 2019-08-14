@@ -1,15 +1,20 @@
 class AppMetaUpdater
-  def update_meta(meta)
-    insert_meta_into_db(meta)
+  attr_reader :meta
+  def initialize(meta)
+    @meta = meta
+  end
+
+  def update_meta
+    insert_meta_into_db
   end
 
   def self.update_meta(meta)
-    new.update_meta(meta)
+    new(meta).update_meta
   end
 
   private
 
-  def insert_meta_into_db(meta) # rubocop:disable Metrics/AbcSize
+  def insert_meta_into_db # rubocop:disable Metrics/AbcSize
     Create.Application(apple_app_id: meta[:apple_app_id], android_app_id: meta[:android_app_id],
                        title: meta[:title], url: meta[:url], short_description: meta[:s_desc],
                        long_description: meta[:l_desc], icon_url: meta[:icon_url],
