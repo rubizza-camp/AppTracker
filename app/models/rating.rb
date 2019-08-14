@@ -12,9 +12,9 @@
 #  average_rating :integer
 #  shop_type      :string
 #  date           :date
-#  application_id :bigint
+#  app_id         :bigint
 #
 
 class Rating < ApplicationRecord
-  belongs_to :application
+  belongs_to :app
 end

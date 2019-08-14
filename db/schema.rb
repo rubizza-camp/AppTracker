@@ -10,20 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_12_101311) do
+ActiveRecord::Schema.define(version: 2019_08_14_095625) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "app_keywords", force: :cascade do |t|
-    t.integer "priotity"
-    t.bigint "application_id"
-    t.bigint "keyword_id"
-    t.index ["application_id"], name: "index_app_keywords_on_application_id"
-    t.index ["keyword_id"], name: "index_app_keywords_on_keyword_id"
-  end
-
-  create_table "applications", force: :cascade do |t|
+  create_table "apps", force: :cascade do |t|
     t.integer "apple_app_id"
     t.string "android_app_id"
     t.string "title"
@@ -37,7 +29,14 @@ ActiveRecord::Schema.define(version: 2019_08_12_101311) do
     t.string "dev_name"
     t.string "dev_email"
     t.string "dev_website"
-    t.json "similar_apps"
+  end
+
+  create_table "apps_keywords", force: :cascade do |t|
+    t.integer "priotity"
+    t.bigint "app_id"
+    t.bigint "keyword_id"
+    t.index ["app_id"], name: "index_apps_keywords_on_app_id"
+    t.index ["keyword_id"], name: "index_apps_keywords_on_keyword_id"
   end
 
   create_table "dynamic_infos", force: :cascade do |t|
@@ -48,12 +47,12 @@ ActiveRecord::Schema.define(version: 2019_08_12_101311) do
     t.integer "downloads"
     t.string "shop_type"
     t.string "device"
-    t.bigint "application_id"
-    t.index ["application_id"], name: "index_dynamic_infos_on_application_id"
+    t.bigint "app_id"
+    t.index ["app_id"], name: "index_dynamic_infos_on_app_id"
   end
 
   create_table "keywords", force: :cascade do |t|
-    t.string "keyword"
+    t.string "value"
     t.string "shop_type"
   end
 
@@ -67,8 +66,21 @@ ActiveRecord::Schema.define(version: 2019_08_12_101311) do
     t.integer "average_rating"
     t.string "shop_type"
     t.date "date"
-    t.bigint "application_id"
-    t.index ["application_id"], name: "index_ratings_on_application_id"
+    t.bigint "app_id"
+    t.index ["app_id"], name: "index_ratings_on_app_id"
+  end
+
+  create_table "similar_apps", force: :cascade do |t|
+    t.integer "similar_app_id"
+    t.bigint "app_id"
+    t.index ["app_id"], name: "index_similar_apps_on_app_id"
+  end
+
+  create_table "subs", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "app_id"
+    t.index ["app_id"], name: "index_subs_on_app_id"
+    t.index ["user_id"], name: "index_subs_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -78,11 +90,13 @@ ActiveRecord::Schema.define(version: 2019_08_12_101311) do
     t.string "password"
     t.string "role"
     t.string "image"
-    t.json "subscriptions"
   end
 
-  add_foreign_key "app_keywords", "applications"
-  add_foreign_key "app_keywords", "keywords"
-  add_foreign_key "dynamic_infos", "applications"
-  add_foreign_key "ratings", "applications"
+  add_foreign_key "apps_keywords", "apps"
+  add_foreign_key "apps_keywords", "keywords"
+  add_foreign_key "dynamic_infos", "apps"
+  add_foreign_key "ratings", "apps"
+  add_foreign_key "similar_apps", "apps"
+  add_foreign_key "subs", "apps"
+  add_foreign_key "subs", "users"
 end

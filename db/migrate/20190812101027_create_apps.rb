@@ -1,6 +1,6 @@
-class CreateApplications < ActiveRecord::Migration[5.2]
+class CreateApps < ActiveRecord::Migration[5.2]
   def change
-    create_table :applications do |t|
+    create_table :apps do |t|
       t.integer :apple_app_id
       t.string :android_app_id
       t.string :title
@@ -14,7 +14,6 @@ class CreateApplications < ActiveRecord::Migration[5.2]
       t.string :dev_name
       t.string :dev_email
       t.string :dev_website
-      t.json :similar_apps
     end
   end
 end

@@ -11,7 +11,7 @@ class CreateRatings < ActiveRecord::Migration[5.2]
       t.integer :average_rating
       t.string :shop_type
       t.date :date
-      t.belongs_to :application, foreign_key: true
+      t.belongs_to :app, foreign_key: true
     end
   end
 end

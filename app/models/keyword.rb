@@ -3,12 +3,12 @@
 # Table name: keywords
 #
 #  id        :bigint           not null, primary key
-#  keyword   :string
+#  value     :string
 #  shop_type :string
 #
 
 class Keyword < ApplicationRecord
-  has_many :app_keywords, dependent: :destroy
-  has_many :applications,
-           through: :app_keywords
+  has_many :apps_keywords, dependent: :destroy
+  has_many :apps,
+           through: :apps_keywords
 end

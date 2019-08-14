@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: applications
+# Table name: apps
 #
 #  id                :bigint           not null, primary key
 #  apple_app_id      :integer
@@ -16,12 +16,14 @@
 #  dev_name          :string
 #  dev_email         :string
 #  dev_website       :string
-#  similar_apps      :json
 #
 
-class Application < ApplicationRecord
+class App < ApplicationRecord
   has_many :ratings, dependent: :destroy
   has_many :dinamic_infos, dependent: :destroy
-  has_many :app_keywords, dependent: :destroy
-  has_many :keywords, through: :app_keywords
+  has_many :apps_keywords, dependent: :destroy
+  has_many :keywords, through: :apps_keywords
+  has_many :similar_apps, dependent: :destroy
+  has_many :subs, dependent: :destroy
+  has_many :users, through: :subs
 end

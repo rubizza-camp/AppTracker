@@ -7,7 +7,6 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string :password
       t.string :role
       t.string :image
-      t.json :subscriptions
     end
   end
 end

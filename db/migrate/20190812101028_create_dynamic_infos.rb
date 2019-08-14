@@ -9,7 +9,7 @@ class CreateDynamicInfos < ActiveRecord::Migration[5.2]
       t.integer :downloads
       t.string :shop_type
       t.string :device
-      t.belongs_to :application, foreign_key: true
+      t.belongs_to :app, foreign_key: true
     end
   end
 end
