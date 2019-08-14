@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_14_095625) do
+ActiveRecord::Schema.define(version: 2019_08_14_124129) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "api_app_last_catch_dates", force: :cascade do |t|
+    t.datetime "date"
+    t.integer "app_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "api_tokens", force: :cascade do |t|
     t.string "value"
@@ -25,7 +32,7 @@ ActiveRecord::Schema.define(version: 2019_08_14_095625) do
     t.string "android_app_id"
     t.string "title"
     t.string "apple_url"
-    t.string "andriod_url"
+    t.string "android_url"
     t.string "short_description"
     t.string "long_description"
     t.string "icon_url"
@@ -37,7 +44,7 @@ ActiveRecord::Schema.define(version: 2019_08_14_095625) do
   end
 
   create_table "apps_keywords", force: :cascade do |t|
-    t.integer "priotity"
+    t.integer "priority"
     t.bigint "app_id"
     t.bigint "keyword_id"
     t.index ["app_id"], name: "index_apps_keywords_on_app_id"
@@ -97,6 +104,12 @@ ActiveRecord::Schema.define(version: 2019_08_14_095625) do
 
   create_table "target_apps", force: :cascade do |t|
     t.string "application_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "target_countries", force: :cascade do |t|
+    t.string "country_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
