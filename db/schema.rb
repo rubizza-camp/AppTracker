@@ -10,16 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_09_090354) do
+ActiveRecord::Schema.define(version: 2019_08_14_122603) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "applications", force: :cascade do |t|
+  create_table "api_tokens", force: :cascade do |t|
+    t.string "value"
+    t.integer "credits", default: 100
+  end
+
+  create_table "apps", force: :cascade do |t|
     t.integer "apple_app_id"
     t.string "android_app_id"
     t.string "title"
-    t.string "url"
+    t.string "apple_url"
+    t.string "android_url"
     t.string "short_description"
     t.string "long_description"
     t.string "icon_url"
@@ -30,7 +36,15 @@ ActiveRecord::Schema.define(version: 2019_08_09_090354) do
     t.string "dev_website"
   end
 
-  create_table "dinamic_infos", force: :cascade do |t|
+  create_table "apps_keywords", force: :cascade do |t|
+    t.integer "priority"
+    t.bigint "app_id"
+    t.bigint "keyword_id"
+    t.index ["app_id"], name: "index_apps_keywords_on_app_id"
+    t.index ["keyword_id"], name: "index_apps_keywords_on_keyword_id"
+  end
+
+  create_table "dynamic_infos", force: :cascade do |t|
     t.string "country"
     t.date "date"
     t.integer "rank"
@@ -38,25 +52,20 @@ ActiveRecord::Schema.define(version: 2019_08_09_090354) do
     t.integer "downloads"
     t.string "shop_type"
     t.string "device"
-    t.integer "app_id"
+    t.bigint "app_id"
+    t.index ["app_id"], name: "index_dynamic_infos_on_app_id"
   end
 
   create_table "keywords", force: :cascade do |t|
-    t.string "keywords"
-    t.integer "rank"
+    t.string "value"
     t.string "shop_type"
-    t.integer "app_id"
   end
 
   create_table "packages", force: :cascade do |t|
     t.string "name"
-    t.string "company_name"
-    t.integer "review_count"
     t.float "average_rating"
-    t.integer "downloads_count"
+    t.string "google_play_link"
     t.string "icon_link"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "ratings", force: :cascade do |t|
@@ -69,13 +78,27 @@ ActiveRecord::Schema.define(version: 2019_08_09_090354) do
     t.integer "average_rating"
     t.string "shop_type"
     t.date "date"
-    t.integer "app_id"
+    t.bigint "app_id"
+    t.index ["app_id"], name: "index_ratings_on_app_id"
   end
 
   create_table "similar_apps", force: :cascade do |t|
-    t.integer "apple_app_id"
-    t.string "android_app_id"
-    t.integer "app_id"
+    t.integer "similar_app_id"
+    t.bigint "app_id"
+    t.index ["app_id"], name: "index_similar_apps_on_app_id"
+  end
+
+  create_table "subs", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "app_id"
+    t.index ["app_id"], name: "index_subs_on_app_id"
+    t.index ["user_id"], name: "index_subs_on_user_id"
+  end
+
+  create_table "target_apps", force: :cascade do |t|
+    t.string "application_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -87,4 +110,11 @@ ActiveRecord::Schema.define(version: 2019_08_09_090354) do
     t.string "image"
   end
 
+  add_foreign_key "apps_keywords", "apps"
+  add_foreign_key "apps_keywords", "keywords"
+  add_foreign_key "dynamic_infos", "apps"
+  add_foreign_key "ratings", "apps"
+  add_foreign_key "similar_apps", "apps"
+  add_foreign_key "subs", "apps"
+  add_foreign_key "subs", "users"
 end
