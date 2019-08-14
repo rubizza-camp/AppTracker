@@ -248,7 +248,7 @@ DEPENDENCIES
   puma (~> 4.1)
   rack-cors
   rails (~> 5.2.3)
-  rest-client
+  rest-client (>= 2.0.2)
   rspec-rails
   rubocop-rails
   rubocop-rspec
