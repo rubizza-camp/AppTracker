@@ -1,6 +1,6 @@
-class CreateDinamicInfo < ActiveRecord::Migration[5.2]
+class CreateDynamicInfos < ActiveRecord::Migration[5.2]
   def change
-    create_table :dinamic_infos do |t|
+    create_table :dynamic_infos do |t|
       t.timestamp
       t.string :country
       t.date :date
@@ -9,7 +9,7 @@ class CreateDinamicInfo < ActiveRecord::Migration[5.2]
       t.integer :downloads
       t.string :shop_type
       t.string :device
-      t.integer :app_id
+      t.belongs_to :app, foreign_key: true
     end
   end
 end
