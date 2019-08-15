@@ -1,9 +1,9 @@
-class AppUpdater < AppMothership
+class AppUpdater
   def self.update(name)
-    new.update_one(name)
+    new.update(name)
   end
 
-  def update_one(name)
+  def update(name)
     update_one_app(name)
   end
 
@@ -18,6 +18,7 @@ class AppUpdater < AppMothership
   private
 
   def update_one_app(name)
+    # AppMetaUpdater.update_meta(name)
     AppDynamicUpdater.update(name)
     AppRatingsUpdater.update(name)
     Services::ApiDateManager.update(App.where(title: name).first.id)

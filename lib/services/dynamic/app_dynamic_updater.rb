@@ -1,4 +1,4 @@
-class AppDynamicUpdater < AppMothership
+class AppDynamicUpdater
   def self.update(name)
     new.update(name)
   end
@@ -31,7 +31,7 @@ class AppDynamicUpdater < AppMothership
       i = 0
       begin
         DynamicInfo.create(country: country, date: start_date.to_s, rank: dynamic_info[:ranks][i], power: dynamic_info[:power][i],
-                           downloads: dynamic_info[:downloads][i], shop_type: 'android', app_id: app_id)
+                           downloads: dynamic_info[:downloads][i], shop_type: 'android', app_id: App.find_by_title(name).id)
         start_date = start_date + 1
         i = i + 1
       end while start_date != end_date
@@ -50,7 +50,7 @@ class AppDynamicUpdater < AppMothership
       i = 0
       begin
       DynamicInfo.create(country: country, date: start_date.to_s, rank: dynamic_info[:ranks][i], power: dynamic_info[:power][i],
-                         downloads: dynamic_info[:downloads][i], shop_type: 'apple', device: 'iPhone', app_id: app_id)
+                         downloads: dynamic_info[:downloads][i], shop_type: 'apple', device: 'iPhone', app_id: App.find_by_title(name).id)
         start_date = start_date + 1
         i = i + 1
       end while start_date != end_date
@@ -67,7 +67,7 @@ class AppDynamicUpdater < AppMothership
         i = 0
         begin  
           DynamicInfo.create(country: country, date: start_date.to_s, rank: dynamic_info[ranks][i], power: dynamic_info[:power][i],
-                             downloads: dynamic_info[:downloads][i], shop_type: 'apple', device: 'iPhone', app_id: app.id)
+                             downloads: dynamic_info[:downloads][i], shop_type: 'apple', device: 'iPhone', app_id: App.find_by_title(name).id)
           start_date = start_date + 1
           i = i + 1
         end while start_date != end_date
@@ -85,7 +85,7 @@ class AppDynamicUpdater < AppMothership
         i = 0
         begin
           DynamicInfo.create(country: country, date: start_date.to_s, rank: dynamic_info[:ranks][i], power: dynamic_info[:power][i],
-                             downloads: dynamic_info[:downloads][i], shop_type: 'android', app_id: app.id)
+                             downloads: dynamic_info[:downloads][i], shop_type: 'android', app_id: App.find_by_title(name).id)
           start_date = start_date + 1
           i = i + 1
         end while start_date != end_date

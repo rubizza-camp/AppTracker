@@ -1,4 +1,4 @@
-class AppRatingsParser < AppMothership
+class AppRatingsParser
   attr_reader :response
   def initialize(response)
     @response = response
@@ -23,6 +23,6 @@ class AppRatingsParser < AppMothership
   end
 
   def parse_date_period
-    Date.parse(JSON.parse(response[:ranks])['content']['start_date'])
+    Date.parse(JSON.parse(response)['content']['start_date'])
   end
 end

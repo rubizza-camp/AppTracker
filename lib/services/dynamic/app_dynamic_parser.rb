@@ -1,6 +1,6 @@
-class AppDynamicParser < AppMothership
+class AppDynamicParser
   attr_reader :response
-  def initialize
+  def initialize(response)
     @response = response
   end
 
@@ -39,11 +39,11 @@ class AppDynamicParser < AppMothership
   end
 
   def parse_power
-    JSON.parse(response[:power])['content'][country].first['power']
+    JSON.parse(response[:power])['content'][response[:country]].first['power']
   end
 
   def parse_downloads
-    JSON.parse(response[:downloads])['content'][country].first['downloads']
+    JSON.parse(response[:downloads])['content'][response[:country]].first['downloads']
   end
 
   def parse_date_period
