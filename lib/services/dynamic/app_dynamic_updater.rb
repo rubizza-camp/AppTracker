@@ -23,9 +23,11 @@ class AppDynamicUpdater
 
   def update_all_apps
     Application.all.each do |app|
-      dynamic_info = AppDynamicLoader(app_id)
-      DynamicInfo.create(country: , date: , rank: , power: ,
+      TargetCountry.pluck(:country_name).each do |country|
+      dynamic_info = AppDynamicLoader(app_id, country, )
+      DynamicInfo.create(country: country, date: , rank: dynamic_info, power: ,
                          downloads: , shop_type: , device: , app_id: )
+      end
     end
   end
 end
