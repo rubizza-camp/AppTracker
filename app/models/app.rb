@@ -20,7 +20,7 @@
 
 class App < ApplicationRecord
   has_many :ratings, dependent: :destroy
-  has_many :dinamic_infos, dependent: :destroy
+  has_many :dynamic_infos, dependent: :destroy
   has_many :apps_keywords, dependent: :destroy
   has_many :keywords, through: :apps_keywords
   has_many :similar_apps, dependent: :destroy
