@@ -20,6 +20,11 @@ class Services
           api_date.update(date: (DateTime.now))
         end
       end
+
+      def update(app_id)
+        last_date = ApiAppLastCatchDate.where(app_id: app_id).order(:date).last
+        last_date.update(date: (DateTime.now))
+      end
     end
   end
 end
