@@ -1,0 +1,2 @@
+class TargetCountry < ApplicationRecord
+end
