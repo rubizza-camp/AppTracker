@@ -1,2 +1,2 @@
-class AppRatingsLoader
+class AppRatingsLoader < AppMothership
 end

@@ -1,4 +1,4 @@
-class AppDynamicUpdater
+class AppDynamicUpdater < AppMothership
   def self.update(name)
     new.update(name)
   end

@@ -1,2 +1,2 @@
-class AppRatingsParser
+class AppRatingsParser < AppMothership
 end

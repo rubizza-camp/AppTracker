@@ -1,4 +1,4 @@
-class AppDynamicParser
+class AppDynamicParser < AppMothership
   attr_reader :response
   def initialize
     @response = response

@@ -1,4 +1,4 @@
-class AppDynamicLoader
+class AppDynamicLoader < AppMothership
   attr_reader :id, :country, :start_date
   def initialize(id, country, start_date)
     @id = id

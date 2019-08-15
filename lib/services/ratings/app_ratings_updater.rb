@@ -1,3 +1,3 @@
-class AppRatingsUpdater
-  
+class AppRatingsUpdater < AppMothership
+
 end

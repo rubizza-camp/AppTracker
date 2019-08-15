@@ -1,4 +1,4 @@
-class AppIdLoader
+class AppIdLoader < AppMothership
   attr_reader :app_name
   def initialize(app_name)
     @app_name = app_name
