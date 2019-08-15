@@ -1,17 +1,17 @@
 class AppDynamicLoader
   attr_reader :id, :country, :start_date
-  def initialize
+  def initialize(id, country, start_date)
     @id = id
     @country = country
     @start_date = start_date
   end
 
   def self.dynamic_load_by_android(id, country, start_date)
-    new.dynamic_load_by_android
+    new(id, country, start_date).dynamic_load_by_android
   end
 
   def self.dynamic_load_by_apple(id, country, start_date)
-    new.dynamic_load_by_apple
+    new(id, country, start_date).dynamic_load_by_apple
   end
 
   def dynamic_load_by_android
@@ -25,11 +25,13 @@ class AppDynamicLoader
   private
 
   def load_dynamic_by_android
-    { ranks: load_ranks_by_android, power: load_power_by_android, downloads: load_downloads_by_android }
+    AppDynamicParser.dynamic_parse_by_andriod { ranks: load_ranks_by_android, power: load_power_by_android,
+                                                downloads: load_downloads_by_android }
   end
 
   def load_dynamic_by_apple
-    { ranks: load_ranks_by_apple, power: load_power_by_apple, downloads: load_downloads_by_apple }
+    AppDynamicParser.dynamic_parse_by_apple { ranks: load_ranks_by_apple, power: load_power_by_apple,
+                                              downloads: load_downloads_by_apple }
   end
 
   def load_ranks_by_android
