@@ -15,6 +15,13 @@ ActiveRecord::Schema.define(version: 2019_08_14_122603) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "api_app_last_catch_dates", force: :cascade do |t|
+    t.datetime "date"
+    t.integer "app_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "api_tokens", force: :cascade do |t|
     t.string "value"
     t.integer "credits", default: 100

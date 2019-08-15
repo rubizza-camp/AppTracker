@@ -1,0 +1,2 @@
+class ApiAppLastCatchDate < ApplicationRecord
+end

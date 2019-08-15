@@ -3,7 +3,7 @@
 # Table name: apps_keywords
 #
 #  id         :bigint           not null, primary key
-#  priotity   :integer
+#  priority   :integer
 #  app_id     :bigint
 #  keyword_id :bigint
 #
