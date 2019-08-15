@@ -10,30 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_14_064811) do
+ActiveRecord::Schema.define(version: 2019_08_14_124129) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "api_app_last_catch_dates", force: :cascade do |t|
+    t.datetime "date"
+    t.integer "app_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "api_tokens", force: :cascade do |t|
     t.string "value"
     t.integer "credits", default: 100
   end
 
-  create_table "app_keywords", force: :cascade do |t|
-    t.integer "priotity"
-    t.bigint "application_id"
-    t.bigint "keyword_id"
-    t.index ["application_id"], name: "index_app_keywords_on_application_id"
-    t.index ["keyword_id"], name: "index_app_keywords_on_keyword_id"
-  end
-
-  create_table "applications", force: :cascade do |t|
+  create_table "apps", force: :cascade do |t|
     t.integer "apple_app_id"
     t.string "android_app_id"
     t.string "title"
     t.string "apple_url"
-    t.string "andriod_url"
+    t.string "android_url"
     t.string "short_description"
     t.string "long_description"
     t.string "icon_url"
@@ -42,7 +41,14 @@ ActiveRecord::Schema.define(version: 2019_08_14_064811) do
     t.string "dev_name"
     t.string "dev_email"
     t.string "dev_website"
-    t.json "similar_apps"
+  end
+
+  create_table "apps_keywords", force: :cascade do |t|
+    t.integer "priority"
+    t.bigint "app_id"
+    t.bigint "keyword_id"
+    t.index ["app_id"], name: "index_apps_keywords_on_app_id"
+    t.index ["keyword_id"], name: "index_apps_keywords_on_keyword_id"
   end
 
   create_table "dynamic_infos", force: :cascade do |t|
@@ -53,12 +59,12 @@ ActiveRecord::Schema.define(version: 2019_08_14_064811) do
     t.integer "downloads"
     t.string "shop_type"
     t.string "device"
-    t.bigint "application_id"
-    t.index ["application_id"], name: "index_dynamic_infos_on_application_id"
+    t.bigint "app_id"
+    t.index ["app_id"], name: "index_dynamic_infos_on_app_id"
   end
 
   create_table "keywords", force: :cascade do |t|
-    t.string "keyword"
+    t.string "value"
     t.string "shop_type"
   end
 
@@ -79,12 +85,31 @@ ActiveRecord::Schema.define(version: 2019_08_14_064811) do
     t.integer "average_rating"
     t.string "shop_type"
     t.date "date"
-    t.bigint "application_id"
-    t.index ["application_id"], name: "index_ratings_on_application_id"
+    t.bigint "app_id"
+    t.index ["app_id"], name: "index_ratings_on_app_id"
+  end
+
+  create_table "similar_apps", force: :cascade do |t|
+    t.integer "similar_app_id"
+    t.bigint "app_id"
+    t.index ["app_id"], name: "index_similar_apps_on_app_id"
+  end
+
+  create_table "subs", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "app_id"
+    t.index ["app_id"], name: "index_subs_on_app_id"
+    t.index ["user_id"], name: "index_subs_on_user_id"
   end
 
   create_table "target_apps", force: :cascade do |t|
     t.string "application_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "target_countries", force: :cascade do |t|
+    t.string "country_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -96,11 +121,13 @@ ActiveRecord::Schema.define(version: 2019_08_14_064811) do
     t.string "password"
     t.string "role"
     t.string "image"
-    t.json "subscriptions"
   end
 
-  add_foreign_key "app_keywords", "applications"
-  add_foreign_key "app_keywords", "keywords"
-  add_foreign_key "dynamic_infos", "applications"
-  add_foreign_key "ratings", "applications"
+  add_foreign_key "apps_keywords", "apps"
+  add_foreign_key "apps_keywords", "keywords"
+  add_foreign_key "dynamic_infos", "apps"
+  add_foreign_key "ratings", "apps"
+  add_foreign_key "similar_apps", "apps"
+  add_foreign_key "subs", "apps"
+  add_foreign_key "subs", "users"
 end
