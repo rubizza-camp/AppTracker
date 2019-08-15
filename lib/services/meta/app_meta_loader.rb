@@ -16,6 +16,6 @@ class AppMetaLoader
 
   def load_meta
     RestClient.get("https://api.apptweak.com/android/applications/#{ids[:playmarket_app_id]}/metadata.json",
-                   'X-Apptweak-Key': Services::ApiTokenManager.token_with_credits(1))
+                   'X-Apptweak-Key': Services::ApiTokenManager.token_with_credits(20))
   end
 end
