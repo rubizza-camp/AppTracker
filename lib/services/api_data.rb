@@ -3,11 +3,11 @@ class Services
   class ApiData
     class << self
       def update_app(name)
-        AppDynamicUpdater.update(name)
+        AppUpdater.update(name)
       end
 
       def update_app_all
-        AppDynamicUpdater.update_all
+        AppUpdater.update_all
       end
     end
   end

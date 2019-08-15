@@ -1,2 +1,3 @@
 class AppRatingsLoader < AppMothership
+  
 end
