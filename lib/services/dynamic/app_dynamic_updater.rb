@@ -20,11 +20,11 @@ class AppDynamicUpdater < AppMothership
   private
 
   def update_one_by_android(name)
-    app_id = App.where(title: name).first.android_app_id
+    app_id = App.find_by_title(name).android_app_id
     TargetCountry.pluck(:country_name).each do |country|
-      if App.where(title: name)
+      if App.find_by_title(name)
         dynamic_info = AppDynamicLoader.dynamic_load_by_android(app_id, country,
-                                                                Services::ApiDateManager.last_date(app_id))
+                                                                Services::ApiDateManager.last_date(App.find_by_title(name).id))
       end
       start_date = dynamic_info[:date_period][:start_date]
       end_date =  dynamic_info[:date_period][:end_date]
@@ -39,11 +39,11 @@ class AppDynamicUpdater < AppMothership
   end
 
   def update_one_by_apple(name)
-    app_id = App.where(title: name).first.apple_app_id
+    app_id = App.find_by_title(name).apple_app_id
     TargetCountry.pluck(:country_name).each do |country|
-      if App.where(title: name)
+      if App.find_by_title(name)
         dynamic_info = AppDynamicLoader.dynamic_load_by_apple(app_id, country,
-                                                              Services::ApiDateManager.last_date(app_id))
+                                                              Services::ApiDateManager.last_date(App.find_by_title(name).id))
       end
       start_date = dynamic_info[:date_period][:start_date]
       end_date =  dynamic_info[:date_period][:end_date]
@@ -61,7 +61,7 @@ class AppDynamicUpdater < AppMothership
     App.all.each do |app|
       TargetCountry.pluck(:country_name).each do |country|
         dynamic_info = AppDynamicLoader.dynamic_load_by_apple(app.apple_app_id, country,
-                                                              Services::ApiDateManager.last_date(app.id))
+                                                              Services::ApiDateManager.last_date(App.find_by_title(name).id))
         start_date = dynamic_info[:date_period][:start_date]
         end_date =  dynamic_info[:date_period][:end_date]
         i = 0
@@ -79,7 +79,7 @@ class AppDynamicUpdater < AppMothership
     App.all.each do |app|
       TargetCountry.pluck(:country_name).each do |country|
         dynamic_info = AppDynamicLoader.dynamic_load_by_android(app.android_app_id, country,
-                                                                Services::ApiDateManager.last_date(app.id))
+                                                                Services::ApiDateManager.last_date(App.find_by_title(name).id))
         start_date = dynamic_info[:date_period][:start_date]
         end_date =  dynamic_info[:date_period][:end_date]
         i = 0

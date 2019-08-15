@@ -23,7 +23,6 @@ class AppRatingsParser < AppMothership
   end
 
   def parse_date_period
-    { start_date: Date.parse(JSON.parse(response[:ranks])['content']['start_date']),
-      end_date: Date.parse(JSON.parse(response[:ranks])['content']['end_date']) }
+    Date.parse(JSON.parse(response[:ranks])['content']['start_date'])
   end
 end
