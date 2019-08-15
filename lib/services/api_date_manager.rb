@@ -6,10 +6,10 @@ class Services
         unless last_date.nil?
           last_date_time = last_date.date
           last_date.update(date: (DateTime.now))
-          last_date_time.to_date.to_s
+          last_date_time.to_date
         else
           ApiAppLastCatchDate.create(:date => DateTime.now, :app_id => app_id)
-          (DateTime.now - 1.month).to_date.to_s
+          (DateTime.now - 1.month).to_date
         end
       end
     end
