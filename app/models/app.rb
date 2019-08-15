@@ -7,7 +7,7 @@
 #  android_app_id    :string
 #  title             :string
 #  apple_url         :string
-#  andriod_url       :string
+#  android_url       :string
 #  short_description :string
 #  long_description  :string
 #  icon_url          :string
