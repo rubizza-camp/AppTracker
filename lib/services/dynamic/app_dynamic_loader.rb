@@ -15,21 +15,21 @@ class AppDynamicLoader < AppMothership
   end
 
   def dynamic_load_by_android
-    load_dynamic_by_android
+    dynamic_by_android_response
   end
 
   def dynamic_load_by_apple
-    load_dynamic_by_apple
+    dynamic_by_apple_response
   end
 
   private
 
-  def load_dynamic_by_android
+  def dynamic_by_android_response
     AppDynamicParser.dynamic_parse_by_andriod { ranks: load_ranks_by_android, power: load_power_by_android,
                                                 downloads: load_downloads_by_android }
   end
 
-  def load_dynamic_by_apple
+  def dynamic_by_apple_response
     AppDynamicParser.dynamic_parse_by_apple { ranks: load_ranks_by_apple, power: load_power_by_apple,
                                               downloads: load_downloads_by_apple }
   end
