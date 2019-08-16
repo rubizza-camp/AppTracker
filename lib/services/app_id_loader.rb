@@ -4,12 +4,8 @@ class AppIdLoader
     @app_name = app_name
   end
 
-  def app_id
-    app_id_load
-  end
-
   def self.app_id(app_name)
-    new(app_name).app_id
+    new(app_name).app_id_load
   end
 
   private

@@ -1,17 +1,9 @@
 class AppUpdater
   def self.update(name)
-    new.update(name)
-  end
-
-  def update(name)
-    update_one_app(name)
+    new.update_one_app(name)
   end
 
   def self.update_all
-    new.update_all
-  end
-
-  def update_all
     new.update_all_apps
   end
 
@@ -25,8 +17,8 @@ class AppUpdater
   end
 
   def update_all_apps
-    AppDynamicUpdater.update_all
     AppRatingsUpdater.update_all
+    AppDynamicUpdater.update_all
     Services::ApiDateManager.update_all
   end
 end

@@ -1,0 +1,16 @@
+=> [32m#<App:0x00005601a2543630[0m
+ id: [1;34m2[0m,
+ apple_app_id: [1;34m333903271[0m,
+ android_app_id: [31m[1;31m"[0m[31mcom.twitter.android[1;31m"[0m[31m[0m,
+ title: [31m[1;31m"[0m[31mtwitter[1;31m"[0m[31m[0m,
+ apple_url: [31m[1;31m"[0m[31mhttps://apps.apple.com/app/id333903271[1;31m"[0m[31m[0m,
+ android_url: [31m[1;31m"[0m[31mhttps://play.google.com/store/apps/details?id=com.twitter.android[1;31m"[0m[31m[0m,
+ short_description: [31m[1;31m"[0m[31mWhat’s happening?[1;31m"[0m[31m[0m,
+ long_description:
+  [31m[1;31m"[0m[31mFrom breaking news and entertainment to sports, politics, and everyday interests, when it happens in the world, it happens on Twitter first. See all sides of the story. Join the conversation. Watch live streaming events. Twitter is what’s happening in the world and what people are talking about right now. More highlights: - Watch premium and exclusive live streams directly from your mobile device. No account required.- Go Live with a tap or sit back and watch events unfold from around the world. Timeline- Discover what your favorite sports, news, politics, and entertainment thought leaders are talking about- Experience dynamic media — like photos, videos, and GIFs- Retweet, share, like, or reply to Tweets in your timeline- Write a Tweet to let the world know what’s happening with you Explore- See what topics and hashtags are trending now - Discover Moments, curated stories showcasing the very best of today’s biggest events- Get caught up on news headlines and videos- Relive the latest sports highlights- Be in the know about pop culture and entertainment- See what fun stories are going viral Notifications- Find out who started following you- Discover which of your Tweets were liked or Retweeted- Respond to replies or be alerted to Tweets you were mentioned in Messages- Chat privately with friends and followers- Share Tweets and other media- Create a group conversation with anyone who follows you Profile- Customize your profile with a photo, description, location, and background photo- Look back at your Tweets, Retweets, replies, media, and likes Connect- Get suggestions on influential people to follow- Sync your contacts to find friends currently on Twitter or invite more[1;31m"[0m[31m[0m,
+ icon_url: [31m[1;31m"[0m[31mhttps://lh3.googleusercontent.com/x3XxTcEYG6hYRZwnWAUfMavRfNNBl8OZweUgZDf2jUJ3qjg2p91Y8MudeXumaQLily0[1;31m"[0m[31m[0m,
+ content_rating: [31m[1;31m"[0m[31mMature 17+[1;31m"[0m[31m[0m,
+ price: [31m[1;31m"[0m[31m[1;31m"[0m[31m[0m,
+ dev_name: [31m[1;31m"[0m[31mTwitter, Inc.[1;31m"[0m[31m[0m,
+ dev_email: [31m[1;31m"[0m[31mgoogle-play-emails@twitter.com[1;31m"[0m[31m[0m,
+ dev_website: [31m[1;31m"[0m[31mhttps://support.twitter.com/articles/20169915[1;31m"[0m[31m[0m[32m>[0m

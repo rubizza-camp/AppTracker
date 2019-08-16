@@ -4,12 +4,8 @@ class AppMetaUpdater
     @name = name
   end
 
-  def update_meta
-    insert_meta_into_db
-  end
-
   def self.update_meta(name)
-    new(name).update_meta
+    new(name).insert_meta_into_db
   end
 
   private

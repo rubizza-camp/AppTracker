@@ -3,13 +3,9 @@ class AppMetaLoader
   def initialize(ids)
     @ids = ids
   end
-  
-  def meta
-    load_meta
-  end
 
   def self.meta(ids)
-    new(ids).meta
+    new(ids).load_meta
   end
 
   private

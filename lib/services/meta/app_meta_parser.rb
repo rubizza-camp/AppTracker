@@ -4,13 +4,9 @@ class AppMetaParser
     @ids = ids
     @response = response
   end
-  
-  def parse_meta
-    meta
-  end
 
   def self.parse_meta(ids, response)
-    new(ids, response).parse_meta
+    new(ids, response).meta
   end
 
   private

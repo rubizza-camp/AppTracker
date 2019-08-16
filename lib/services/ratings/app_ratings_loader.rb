@@ -2,7 +2,7 @@ class AppRatingsLoader
   attr_reader :id, :start_date
   def initialize(id, start_date)
     @id = id
-    @start_date = start_date
+    @start_date = start_date.to_s
   end
 
   def self.load_by_android(id, start_date)

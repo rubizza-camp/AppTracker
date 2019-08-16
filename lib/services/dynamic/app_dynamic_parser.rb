@@ -5,19 +5,11 @@ class AppDynamicParser
   end
 
   def self.dynamic_parse_by_andriod(response)
-    new(response).dynamic_parse_by_andriod
-  end
-
-  def dynamic_parse_by_andriod
-    return_parsed_by_android
+    new(response).return_parsed_by_android
   end
 
   def self.dynamic_parse_by_apple(response)
-    new(response).dynamic_parse_by_apple
-  end
-
-  def dynamic_parse_by_apple
-    return_parsed_by_apple
+    new(response).return_parsed_by_apple
   end
 
   private

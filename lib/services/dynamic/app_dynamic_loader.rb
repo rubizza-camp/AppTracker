@@ -7,19 +7,11 @@ class AppDynamicLoader
   end
 
   def self.dynamic_load_by_android(id, country, start_date)
-    new(id, country, start_date).dynamic_load_by_android
+    new(id, country, start_date).dynamic_by_android_response
   end
 
   def self.dynamic_load_by_apple(id, country, start_date)
-    new(id, country, start_date).dynamic_load_by_apple
-  end
-
-  def dynamic_load_by_android
-    dynamic_by_android_response
-  end
-
-  def dynamic_load_by_apple
-    dynamic_by_apple_response
+    new(id, country, start_date).dynamic_by_apple_response
   end
 
   private

@@ -47,13 +47,13 @@ class AppRatingsUpdater
 
   def update_all_by_android
     App.all.each do |app|
-      response = AppRatingsLoader.load_by_android(app.id, Services::ApiDateManager.last_date(App.find_by_title(name).id))
+      response = AppRatingsLoader.load_by_android(app.android_app_id, Services::ApiDateManager.last_date(app.id))
       ratings = response[:ratings]
       date_period = response[:date_period]
       ratings.each do |rating|  
         Rating.create(rating_1: rating['1'], rating_2: rating['2'], rating_3: rating['3'], rating_4: rating['4'],
                       rating_5: rating['5'], total_rating: rating['total'], average_rating: rating['avg'],
-                      shop_type: 'android', date: date_period.to_s, app_id: App.find_by_title(name).id)
+                      shop_type: 'android', date: date_period.to_s, app_id: app.id)
         date_period = date_period + 1
       end
     end
@@ -61,13 +61,13 @@ class AppRatingsUpdater
 
   def update_all_by_apple
     App.all.each do |app|
-      response = AppRatingsLoader.load_by_apple(app.id, Services::ApiDateManager.last_date(App.find_by_title(name).id))
+      response = AppRatingsLoader.load_by_apple(app.apple_app_id, Services::ApiDateManager.last_date(app.id))
       ratings = response[:ratings]
       date_period = response[:date_period]
       ratings.each do |rating|
         Rating.create(rating_1: rating['1'], rating_2: rating['2'], rating_3: rating['3'], rating_4: rating['4'],
                       rating_5: rating['5'], total_rating: rating['total'], average_rating: rating['avg'],
-                      shop_type: 'apple', date: date_period.to_s, app_id: App.find_by_title(name).id)
+                      shop_type: 'apple', date: date_period.to_s, app_id: app.id)
         date_period = date_period + 1
       end
     end
