@@ -20,6 +20,7 @@ class AppDynamicUpdater
   private
 
   def update_one_by_android(name)
+    require 'pry'; binding.pry
     app_id = App.find_by_title(name).android_app_id
     TargetCountry.pluck(:country_name).each do |country|
       if App.find_by_title(name)

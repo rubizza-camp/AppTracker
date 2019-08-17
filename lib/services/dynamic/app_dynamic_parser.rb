@@ -43,7 +43,11 @@ class AppDynamicParser
   end
 
   def parse_downloads
-    JSON.parse(response[:downloads])['content'][response[:country]].first['downloads']
+    if response[:downloads]['content'][response[:country]]
+      JSON.parse(response[:downloads])['content'][response[:country]].first['downloads']
+    else
+      ''
+    end
   end
 
   def parse_date_period

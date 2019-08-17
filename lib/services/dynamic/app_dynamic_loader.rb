@@ -36,12 +36,12 @@ class AppDynamicLoader
 
   def load_ranks_by_android
     RestClient.get("https://api.apptweak.com/android/applications/#{id}/rankings.json?country=#{country}&start_date=#{start_date}&end_date=#{(Date.today-1).to_s}",
-                   'X-Apptweak-Key': Services::ApiTokenManager.token_with_credits(20))
+                   'X-Apptweak-Key': Services::ApiTokenManager.token_with_credits(2))
   end
 
   def load_power_by_android
     RestClient.get("https://api.apptweak.com/android/applications/#{id}/power.json?country=#{country}&start_date=#{start_date}&end_date=#{(Date.today-1).to_s}",
-                   'X-Apptweak-Key': Services::ApiTokenManager.token_with_credits(20))
+                   'X-Apptweak-Key': Services::ApiTokenManager.token_with_credits(3))
   end
 
   def load_downloads_by_android
@@ -51,12 +51,12 @@ class AppDynamicLoader
 
   def load_ranks_by_apple
     RestClient.get("https://api.apptweak.com/ios/applications/#{id}/rankings.json?country=#{country}&device=iphone&start_date=#{start_date}&end_date=#{(Date.today-1).to_s}",
-                   'X-Apptweak-Key': Services::ApiTokenManager.token_with_credits(20))
+                   'X-Apptweak-Key': Services::ApiTokenManager.token_with_credits(2))
   end
 
   def load_power_by_apple
     RestClient.get("https://api.apptweak.com/ios/applications/#{id}/power.json?country=#{country}&device=iphone&start_date=#{start_date}&end_date=#{(Date.today-1).to_s}",
-                   'X-Apptweak-Key': Services::ApiTokenManager.token_with_credits(20))
+                   'X-Apptweak-Key': Services::ApiTokenManager.token_with_credits(3))
   end
 
   def load_downloads_by_apple
