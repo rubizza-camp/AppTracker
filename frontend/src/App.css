@@ -1,41 +1,7 @@
-::-webkit-scrollbar {width: 6px;}
-::-webkit-scrollbar-track {background: rgba(1, 1, 1, 0); }
-::-webkit-scrollbar-thumb {background: rgba(1, 1, 1, 0.158); }
-::-webkit-scrollbar-thumb:hover {background: rgba(1, 1, 1, 0.425); }
-
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+::-webkit-scrollbar {width: 6px; height: 6px;}
+::-webkit-scrollbar-track {background: rgba(1, 1, 1, 0);}
+::-webkit-scrollbar-thumb {background: rgba(1, 1, 1, 0.158); border-radius: 4px;}
+::-webkit-scrollbar-thumb:hover {background: rgba(1, 1, 1, 0.425);}
 
 body
 {
@@ -44,6 +10,7 @@ body
 
   display: flex;
   justify-content: center;
+  align-items: center;
 
   --mdc-theme-primary: rgb(73, 42, 63);
 }
@@ -57,7 +24,6 @@ body
 {
   box-shadow: 1px 5px 13px 1px rgba(0, 0, 0, 0.13)!important;
 }
-
 
 .flext-center
 {
@@ -100,5 +66,49 @@ body
 .unhover:hover,:active,:focus
 {
   text-decoration: none !important;
-  outline: none;
+  outline: none !important;
+}
+
+.br-50
+{
+  border-radius: 50px !important;
+}
+
+.no-shadow
+{
+  box-shadow: none !important;
+}
+
+.covei-1
+{
+  margin-left: -2px !important;
+  margin-top: -2px !important;
+
+  padding: 2px !important;
+}
+
+#scene
+{
+  width: 100% !important;
+  height: 100% !important;
+
+  left: 0px !important;
+  top: 0px !important;
+}
+
+.mdc-select
+{
+  width: 100% !important;
+}
+
+.fit-card
+{
+  overflow-x: hidden !important;
+  border-radius: 10px !important;
+  width: fit-content !important;
+  min-width: 350px !important;
+  max-width: unset !important;
+  max-height: unset !important;
+  height: max-content !important;
+  padding: 25px !important;
 }
