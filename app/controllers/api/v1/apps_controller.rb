@@ -9,7 +9,7 @@ module Api
       def show
         app = App.find_by title: params[:title]
         options = {}
-        options[:include] = [:ratings, :dynamic_infos]
+        options[:include] = %i[ratings dynamic_infos]
         render json: AppSerializer.new([app], options)
       end
     end
