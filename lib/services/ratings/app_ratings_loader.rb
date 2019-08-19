@@ -33,11 +33,11 @@ class AppRatingsLoader
 
   def load_ratings_by_android
     RestClient.get("https://api.apptweak.com/android/applications/#{id}/ratings.json?start_date=#{start_date}&end_date=#{(Date.today-1).to_s}",
-                   'X-Apptweak-Key': Services::ApiTokenManager.token_with_credits(20))
+                   'X-Apptweak-Key': Services::ApiTokenManager.token_with_credits(3))
   end
 
   def load_ratings_by_apple
     RestClient.get("https://api.apptweak.com/ios/applications/#{id}/ratings.json?start_date=#{start_date}&end_date=#{(Date.today-1).to_s}",
-                   'X-Apptweak-Key': Services::ApiTokenManager.token_with_credits(20))
+                   'X-Apptweak-Key': Services::ApiTokenManager.token_with_credits(3))
   end
 end
