@@ -4,8 +4,7 @@ class AppDynamicUpdater
   end
 
   def update(name)
-    update_one_by_android(name)
-    update_one_by_apple(name)
+    response_load(name)
   end
 
   def self.update_all
@@ -13,84 +12,36 @@ class AppDynamicUpdater
   end
 
   def update_all
-    update_all_apps_by_apple
-    update_all_apps_by_android
+    response_load_all
   end
 
   private
 
-  def update_one_by_android(name)
-    require 'pry'; binding.pry
-    app_id = App.find_by_title(name).android_app_id
+  def response_load(name)
+    cur_app = App.find_by(title: name)
+    update_call(cur_app) if cur_app
+  end
+
+  def response_load_all
+    App.find_each do |cur_app|
+      update_call(cur_app)
+    end
+  end
+
+  def update_call(cur_app)
     TargetCountry.pluck(:country_name).each do |country|
-      if App.find_by_title(name)
-        dynamic_info = AppDynamicLoader.dynamic_load_by_android(app_id, country,
-                                                                Services::ApiDateManager.last_date(App.find_by_title(name).id))
-      end
-      start_date = dynamic_info[:date_period][:start_date]
-      end_date =  dynamic_info[:date_period][:end_date]
-      i = 0
-      begin
-        DynamicInfo.create(country: country, date: start_date.to_s, rank: dynamic_info[:ranks][i], power: dynamic_info[:power][i],
-                           downloads: dynamic_info[:downloads][i], shop_type: 'android', app_id: App.find_by_title(name).id)
-        start_date = start_date + 1
-        i = i + 1
-      end while start_date != end_date
+      dynamic_info = AppDynamicLoader.dynamic_load(cur_app, country, Services::ApiDateManager.last_date(cur_app.id))
+      update_dynamic(dynamic_info[:by_android], cur_app, country)
+      update_dynamic(dynamic_info[:by_apple], cur_app, country)
     end
   end
 
-  def update_one_by_apple(name)
-    app_id = App.find_by_title(name).apple_app_id
-    TargetCountry.pluck(:country_name).each do |country|
-      if App.find_by_title(name)
-        dynamic_info = AppDynamicLoader.dynamic_load_by_apple(app_id, country,
-                                                              Services::ApiDateManager.last_date(App.find_by_title(name).id))
-      end
-      start_date = dynamic_info[:date_period][:start_date]
-      end_date =  dynamic_info[:date_period][:end_date]
-      i = 0
-      begin
-      DynamicInfo.create(country: country, date: start_date.to_s, rank: dynamic_info[:ranks][i], power: dynamic_info[:power][i],
-                         downloads: dynamic_info[:downloads][i], shop_type: 'apple', device: 'iPhone', app_id: App.find_by_title(name).id)
-        start_date = start_date + 1
-        i = i + 1
-      end while start_date != end_date
-    end
-  end
-
-  def update_all_apps_by_apple
-    App.all.each do |app|
-      TargetCountry.pluck(:country_name).each do |country|
-        dynamic_info = AppDynamicLoader.dynamic_load_by_apple(app.apple_app_id, country,
-                                                              Services::ApiDateManager.last_date(App.find_by_title(name).id))
-        start_date = dynamic_info[:date_period][:start_date]
-        end_date =  dynamic_info[:date_period][:end_date]
-        i = 0
-        begin  
-          DynamicInfo.create(country: country, date: start_date.to_s, rank: dynamic_info[ranks][i], power: dynamic_info[:power][i],
-                             downloads: dynamic_info[:downloads][i], shop_type: 'apple', device: 'iPhone', app_id: App.find_by_title(name).id)
-          start_date = start_date + 1
-          i = i + 1
-        end while start_date != end_date
-      end
-    end
-  end
-
-  def update_all_apps_by_android
-    App.all.each do |app|
-      TargetCountry.pluck(:country_name).each do |country|
-        dynamic_info = AppDynamicLoader.dynamic_load_by_android(app.android_app_id, country,
-                                                                Services::ApiDateManager.last_date(App.find_by_title(name).id))
-        start_date = dynamic_info[:date_period][:start_date]
-        end_date =  dynamic_info[:date_period][:end_date]
-        i = 0
-        begin
-          DynamicInfo.create(country: country, date: start_date.to_s, rank: dynamic_info[:ranks][i], power: dynamic_info[:power][i],
-                             downloads: dynamic_info[:downloads][i], shop_type: 'android', app_id: App.find_by_title(name).id)
-          start_date = start_date + 1
-          i = i + 1
-        end while start_date != end_date
-      end
+  def update_dynamic(dynamic_info, cur_app, country)
+    date_period = response[:date_period]
+    (date_period[:start_date]..date_period[:end_date]).each_with_index do |cur_date, index|
+      DynamicInfo.create(country: country, date: cur_date.to_s, rank: dynamic_info[:ranks][index],
+                         power: dynamic_info[:power][index], downloads: dynamic_info[:downloads][index],
+                         shop_type: dynamic_info[:shop_type], device: dynamic_info[:device] app_id: cur_app.id)
     end
   end
 end

@@ -4,8 +4,7 @@ class AppRatingsUpdater
   end
 
   def update(name)
-    update_by_android(name)    
-    update_by_apple(name)
+    response_load(name)
   end
 
   def self.update_all
@@ -13,63 +12,35 @@ class AppRatingsUpdater
   end
 
   def update_all
-    update_all_by_android
-    update_all_by_apple
+    response_load_all
   end
 
   private
 
-  def update_by_android(name)
-    app_id = App.find_by_title(name).android_app_id
-    response = AppRatingsLoader.load_by_android(app_id, Services::ApiDateManager.last_date(App.find_by_title(name).id))
-    ratings = response[:ratings]
+  def response_load(name)
+    update_call(cur_app) if cur_app = App.find_by(title: name)
+  end
+
+  def response_load_all
+    App.find_each do |cur_app|
+      update_call(cur_app)
+    end
+  end
+
+  def update_call(cur_app)
+    response = AppRatingsLoader.load(cur_app, Services::ApiDateManager.last_date(cur_app.id))
+    update_rating(response[:by_android], cur_app)
+    update_rating(response[:by_apple], cur_app)
+  end
+
+  def update_rating(response, cur_app)
     date_period = response[:date_period]
-    ratings.each do |rating|
-      Rating.create(rating_1: rating['1'], rating_2: rating['2'], rating_3: rating['3'], rating_4: rating['4'],
-                    rating_5: rating['5'], total_rating: rating['total'], average_rating: rating['avg'],
-                    shop_type: 'android', date: date_period.to_s, app_id: App.find_by_title(name).id)
-      date_period = date_period + 1
-    end
-  end
-
-  def update_by_apple(name)
-    app_id = App.find_by_title(name).apple_app_id
-    response = AppRatingsLoader.load_by_apple(app_id, Services::ApiDateManager.last_date(App.find_by_title(name).id))
-    ratings = response[:ratings]
-    date_period = response[:date_period]
-    ratings.each do |rating|
-      Rating.create(rating_1: rating['1'], rating_2: rating['2'], rating_3: rating['3'], rating_4: rating['4'],
-                    rating_5: rating['5'], total_rating: rating['total'], average_rating: rating['avg'],
-                    shop_type: 'apple', date: date_period.to_s, app_id: App.find_by_title(name).id)
-      date_period = date_period + 1
-    end
-  end
-
-  def update_all_by_android
-    App.all.each do |app|
-      response = AppRatingsLoader.load_by_android(app.id, Services::ApiDateManager.last_date(App.find_by_title(name).id))
-      ratings = response[:ratings]
-      date_period = response[:date_period]
-      ratings.each do |rating|  
-        Rating.create(rating_1: rating['1'], rating_2: rating['2'], rating_3: rating['3'], rating_4: rating['4'],
-                      rating_5: rating['5'], total_rating: rating['total'], average_rating: rating['avg'],
-                      shop_type: 'android', date: date_period.to_s, app_id: App.find_by_title(name).id)
-        date_period = date_period + 1
-      end
-    end
-  end
-
-  def update_all_by_apple
-    App.all.each do |app|
-      response = AppRatingsLoader.load_by_apple(app.id, Services::ApiDateManager.last_date(App.find_by_title(name).id))
-      ratings = response[:ratings]
-      date_period = response[:date_period]
-      ratings.each do |rating|
-        Rating.create(rating_1: rating['1'], rating_2: rating['2'], rating_3: rating['3'], rating_4: rating['4'],
-                      rating_5: rating['5'], total_rating: rating['total'], average_rating: rating['avg'],
-                      shop_type: 'apple', date: date_period.to_s, app_id: App.find_by_title(name).id)
-        date_period = date_period + 1
-      end
+    (date_period[:start_date]..date_period[:end_date]).each_with_insex do |cur_date, index|
+      Rating.create(rating_1: response[:ratings][index]['1'], rating_2: response[:ratings][index]['2'],
+                    rating_3: response[:ratings][index]['3'], rating_4: response[:ratings][index]['4'],
+                    rating_5: response[:ratings][index]['5'], total_rating: response[:ratings][index]['total'],
+                    average_rating: response[:ratings][index]['avg'], shop_type: response[:shop_type],
+                    date: cur_date.to_s, app_id: cur_app.id)
     end
   end
 end

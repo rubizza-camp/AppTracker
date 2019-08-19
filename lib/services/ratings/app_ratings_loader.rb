@@ -1,43 +1,30 @@
 class AppRatingsLoader
-  attr_reader :id, :start_date
-  def initialize(id, start_date)
-    @id = id
+  attr_reader :cur_app, :start_date
+  RATINGS_COST = 3
+  def initialize(cur_app:, start_date:)
+    @cur_app = cur_app
     @start_date = start_date
   end
 
-  def self.load_by_android(id, start_date)
-    new(id, start_date).load_by_android
-  end
-  
-  def self.load_by_apple(id, start_date)
-    new(id, start_date).load_by_apple
+  def self.load(cur_app, start_date)
+    new(cur_app, start_date).load
   end
 
-  def load_by_android
-    ratings_by_android_response
-  end
-
-  def load_by_apple
-    ratings_by_apple_response
+  def load
+    ratings_response
   end
 
   private
 
-  def ratings_by_android_response
-    AppRatingsParser.parse(load_ratings_by_android)
+  def ratings_response
+    by_apple = AppRatingsParser.parse(load_ratings('ios', cur_app.android_app_id))
+    by_android = AppRatingsParser.parse(load_ratings('android', cur_app.apple_app_id))
+    { by_android: by_android, by_apple: by_apple }
   end
 
-  def ratings_by_apple_response
-    AppRatingsParser.parse(load_ratings_by_apple)
-  end
-
-  def load_ratings_by_android
-    RestClient.get("https://api.apptweak.com/android/applications/#{id}/ratings.json?start_date=#{start_date}&end_date=#{(Date.today-1).to_s}",
-                   'X-Apptweak-Key': Services::ApiTokenManager.token_with_credits(3))
-  end
-
-  def load_ratings_by_apple
-    RestClient.get("https://api.apptweak.com/ios/applications/#{id}/ratings.json?start_date=#{start_date}&end_date=#{(Date.today-1).to_s}",
-                   'X-Apptweak-Key': Services::ApiTokenManager.token_with_credits(3))
+  def load_ratings(shop_type, id)
+    RestClient.get("https://api.apptweak.com/#{shop_type}/applications/#{id}/ratings.json?start_date"+
+                   "=#{start_date}&end_date=#{(Date.today-1).to_s}",
+                   'X-Apptweak-Key': Services::ApiTokenManager.token_with_credits(RATINGS_COST))
   end
 end

@@ -1,57 +1,50 @@
 class AppDynamicParser
-  attr_reader :response
-  def initialize(response)
-    @response = response
+  attr_reader :parsed_response
+  def initialize(response:)
+    @parsed_response = JSON.parse(response)
   end
 
-  def self.dynamic_parse_by_andriod(response)
-    new(response).dynamic_parse_by_andriod
+  def self.dynamic_parse(response)
+    new(response).dynamic_parse
   end
 
-  def dynamic_parse_by_andriod
-    return_parsed_by_android
-  end
-
-  def self.dynamic_parse_by_apple(response)
-    new(response).dynamic_parse_by_apple
-  end
-
-  def dynamic_parse_by_apple
-    return_parsed_by_apple
+  def dynamic_parse
+    return_parsed
   end
 
   private
 
-  def return_parsed_by_apple
-    { ranks: parse_ranks_by_apple, power: parse_power, downloads: parse_downloads, date_period: parse_date_period }
+  def return_parsed
+    { by_apple: { ranks: parse_ranks_by_apple, shop_type: 'apple', device: 'iPhone' }.merge(parse_infos),
+      by_android: { ranks: parse_ranks_by_android, shop_type: 'android', device: '' }.merge(parse_infos) }
   end
 
-  def return_parsed_by_android
-    { ranks: parse_ranks_by_android, power: parse_power, downloads: parse_downloads, date_period: parse_date_period }
+  def parse_infos
+    { power: parse_power, downloads: parse_downloads, date_period: parse_date_period }
   end
 
   def parse_ranks_by_apple
-    JSON.parse(response[:ranks])['content']['ranks']['0']
+    parsed_response[:ranks]['content']['ranks']['0']
   end
 
   def parse_ranks_by_android
-    JSON.parse(response[:ranks])['content']['ranks']['ALL']
+    parsed_response[:ranks]['content']['ranks']['ALL']
   end
 
   def parse_power
-    JSON.parse(response[:power])['content'][response[:country]].first['power']
+    parsed_response[:power]['content'][response[:country]].first['power']
   end
 
   def parse_downloads
-    if response[:downloads]['content'][response[:country]]
-      JSON.parse(response[:downloads])['content'][response[:country]].first['downloads']
+    if parsed_response[:downloads]['content'][response[:country]]
+      parsed_response[:downloads]['content'][response[:country]].first['downloads']
     else
       ''
     end
   end
 
   def parse_date_period
-    { start_date: Date.parse(JSON.parse(response[:ranks])['content']['start_date']),
-      end_date: Date.parse(JSON.parse(response[:ranks])['content']['end_date']) }
+    { start_date: Date.parse(parsed_response[:ranks]['content']['start_date']),
+      end_date: Date.parse(parsed_response[:ranks]['content']['end_date']) }
   end
 end
