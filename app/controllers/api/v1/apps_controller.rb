@@ -3,14 +3,16 @@ module Api
     class AppsController < ApplicationController
       def index
         apps = App.where('title like :prefix', prefix: "#{params[:title]}%")
-        render json: AppSerializer.new(apps, fields: { app: [:search_data] })
+        render json: AppIndexSerializer.new(apps)
       end
 
       def show
         app = App.find_by title: params[:title]
-        options = {}
-        options[:include] = %i[ratings dynamic_infos]
-        render json: AppSerializer.new([app], options)
+        render json: {
+          app: AppSerializer.new(app),
+          dynamic_info: DynamicInfoSerializer.new(app.dynamic_infos),
+          ratings: RatingSerializer.new(app.ratings)
+        }
       end
     end
   end
