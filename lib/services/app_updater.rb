@@ -12,16 +12,16 @@ class AppUpdater
   end
 
   def update_all
-    new.update_all_apps
+    update_all_apps
   end
 
   private
 
   def update_one_app(name)
-    # AppMetaUpdater.update_meta(name)
-    AppDynamicUpdater.update(name)
+    AppMetaUpdater.update_meta(name)
+    AppDynamicUpdater.update(name)   
     AppRatingsUpdater.update(name)
-    Services::ApiDateManager.update(App.where(title: name).first.id)
+    Services::ApiDateManager.update(App.find_by(title: name).id)
   end
 
   def update_all_apps

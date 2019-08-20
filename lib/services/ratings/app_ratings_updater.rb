@@ -18,7 +18,7 @@ class AppRatingsUpdater
   private
 
   def response_load(name)
-    update_call(cur_app) if cur_app = App.find_by(title: name)
+    update_call(App.find_by(title: name))
   end
 
   def response_load_all
@@ -28,18 +28,20 @@ class AppRatingsUpdater
   end
 
   def update_call(cur_app)
-    response = AppRatingsLoader.load(cur_app, Services::ApiDateManager.last_date(cur_app.id))
-    update_rating(response[:by_android], cur_app)
-    update_rating(response[:by_apple], cur_app)
+    return if cur_app.nil?
+    start_date = Services::ApiDateManager.last_date(cur_app.id)
+    response_android = AppRatingsLoader.call('android', cur_app.android_app_id, start_date)
+    response_apple = AppRatingsLoader.call('ios', cur_app.apple_app_id, start_date)
+    update_rating(response_android, cur_app, start_date, 'andriod')
+    update_rating(response_apple, cur_app, start_date, 'ios')
   end
 
-  def update_rating(response, cur_app)
-    date_period = response[:date_period]
-    (date_period[:start_date]..date_period[:end_date]).each_with_insex do |cur_date, index|
-      Rating.create(rating_1: response[:ratings][index]['1'], rating_2: response[:ratings][index]['2'],
-                    rating_3: response[:ratings][index]['3'], rating_4: response[:ratings][index]['4'],
-                    rating_5: response[:ratings][index]['5'], total_rating: response[:ratings][index]['total'],
-                    average_rating: response[:ratings][index]['avg'], shop_type: response[:shop_type],
+  def update_rating(response, cur_app, start_date, shop_type)
+    (start_date..(Date.today-1)).each_with_index do |cur_date, index|
+      Rating.create(rating_1: response[index]['1'], rating_2: response[index]['2'],
+                    rating_3: response[index]['3'], rating_4: response[index]['4'],
+                    rating_5: response[index]['5'], total_rating: response[index]['total'],
+                    average_rating: response[index]['avg'], shop_type: shop_type,
                     date: cur_date.to_s, app_id: cur_app.id)
     end
   end
