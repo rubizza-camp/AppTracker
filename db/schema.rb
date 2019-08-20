@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_14_124129) do
+ActiveRecord::Schema.define(version: 2019_08_20_115051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "TestUser", id: :bigint, default: nil, force: :cascade do |t|
+    t.string "mail", array: true
+    t.string "login", array: true
+    t.string "password", array: true
+  end
 
   create_table "api_app_last_catch_dates", force: :cascade do |t|
     t.datetime "date"
@@ -82,7 +88,7 @@ ActiveRecord::Schema.define(version: 2019_08_14_124129) do
     t.integer "rating_4"
     t.integer "rating_5"
     t.integer "total_rating"
-    t.integer "average_rating"
+    t.float "average_rating"
     t.string "shop_type"
     t.date "date"
     t.bigint "app_id"
