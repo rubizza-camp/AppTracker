@@ -7,15 +7,13 @@ module Api
       end
 
       def show
+        options = {}
+        options[:include] = %i[ratings dynamic_infos]
         app = App.find_by title: params[:title]
         if app.nil?
           render json: {}
         else
-          render json: {
-            app: AppSerializer.new(app),
-            dynamic_info: DynamicInfoSerializer.new(app.dynamic_infos),
-            ratings: RatingSerializer.new(app.ratings)
-          }
+          render json: AppSerializer.new(app, options)
         end
       end
     end
