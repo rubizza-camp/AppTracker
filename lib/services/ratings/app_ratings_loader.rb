@@ -1,6 +1,6 @@
 class AppRatingsLoader
   attr_reader :shop_type, :id, :start_date
-  RATINGS_COST = 3
+  RATINGS_COST = 5
   def initialize(shop_type, id, start_date)
     @shop_type = shop_type
     @id = id

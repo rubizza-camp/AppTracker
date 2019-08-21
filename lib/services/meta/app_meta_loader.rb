@@ -1,6 +1,6 @@
 class AppMetaLoader
   attr_reader :ids
-  META_COST = 1
+  META_COST = 5
   def initialize(ids)
     @ids = ids
   end

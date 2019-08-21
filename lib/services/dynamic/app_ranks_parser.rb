@@ -22,10 +22,15 @@ class AppRanksParser
   private
 
   def parse_ranks_by_apple
-    JSON.parse(response)['content']['ranks']['0']
+    return '' if (parsed_response = JSON.parse(response)).nil?
+    parsed_response['content']['ranks']['0']
   end
 
   def parse_ranks_by_android
-    JSON.parse(response)['content']['ranks']['ALL']
+    if parsed_response = JSON.parse(response) 
+      parsed_response['content']['ranks']['ALL']
+    else
+      ''
+    end
   end
 end

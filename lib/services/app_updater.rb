@@ -18,10 +18,10 @@ class AppUpdater
   private
 
   def update_one_app(name)
-    AppMetaUpdater.update_meta(name)
-    AppDynamicUpdater.update(name)   
-    AppRatingsUpdater.update(name)
-    Services::ApiDateManager.update(App.find_by(title: name).id)
+    title = AppMetaUpdater.update_meta(name)
+    AppDynamicUpdater.update(title)   
+    AppRatingsUpdater.update(title)
+    Services::ApiDateManager.update(App.find_by(title: title).id)
   end
 
   def update_all_apps

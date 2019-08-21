@@ -3,7 +3,7 @@ class Services
     class << self
       def last_date(app_id)
         last_date = ApiAppLastCatchDate.where(app_id: app_id).order(:date).last
-        unless last_date.nil?
+        if last_date
           if last_date.date.nil?
             (DateTime.now - 1.month).to_date
           else

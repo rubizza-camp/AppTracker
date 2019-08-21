@@ -1,5 +1,5 @@
 class AppRanksLoader
-  RANKS_COST = 2
+  RANKS_COST = 5
   attr_reader :country, :shop_type, :id, :start_date, :device
   def initialize(country, shop_type, id, start_date, device)
     @country = country  

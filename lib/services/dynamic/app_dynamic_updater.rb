@@ -29,7 +29,9 @@ class AppDynamicUpdater
   end
 
   def update_call(cur_app)
+    return if cur_app.nil?
     start_date = Services::ApiDateManager.last_date(cur_app.id)
+    return if start_date > (Date.today-1)
     downloads_android = AppDownloadsLoader.call('android', cur_app.android_app_id, start_date)
     downloads_apple = AppDownloadsLoader.call('ios', cur_app.apple_app_id, start_date, '&device=iphone')
     TargetCountry.pluck(:country_name).each do |country|

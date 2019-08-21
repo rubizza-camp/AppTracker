@@ -30,9 +30,10 @@ class AppRatingsUpdater
   def update_call(cur_app)
     return if cur_app.nil?
     start_date = Services::ApiDateManager.last_date(cur_app.id)
+    return if start_date > (Date.today-1)
     response_android = AppRatingsLoader.call('android', cur_app.android_app_id, start_date)
     response_apple = AppRatingsLoader.call('ios', cur_app.apple_app_id, start_date)
-    update_rating(response_android, cur_app, start_date, 'andriod')
+    update_rating(response_android, cur_app, start_date, 'android')
     update_rating(response_apple, cur_app, start_date, 'ios')
   end
 
