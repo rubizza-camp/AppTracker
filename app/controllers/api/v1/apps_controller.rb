@@ -8,11 +8,15 @@ module Api
 
       def show
         app = App.find_by title: params[:title]
-        render json: {
-          app: AppSerializer.new(app),
-          dynamic_info: DynamicInfoSerializer.new(app.dynamic_infos),
-          ratings: RatingSerializer.new(app.ratings)
-        }
+        if app.nil?
+          render json: {}
+        else
+          render json: {
+            app: AppSerializer.new(app),
+            dynamic_info: DynamicInfoSerializer.new(app.dynamic_infos),
+            ratings: RatingSerializer.new(app.ratings)
+          }
+        end
       end
     end
   end
