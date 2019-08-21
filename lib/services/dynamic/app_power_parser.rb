@@ -16,7 +16,7 @@ class AppPowerParser
   private
 
   def parse_power
-    if parsed_response = JSON.parse(response)['content'][country]
+    if parsed_response == JSON.parse(response)['content'][country]
       parsed_response.first['power']
     else
       ''

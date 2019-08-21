@@ -21,6 +21,7 @@ class AppMetaUpdater
 
   def insert_data(data)
     return data[:title].downcase if App.find_by(title: data[:title].downcase)
+
     App.create(apple_app_id: data[:apple_app_id], android_app_id: data[:android_app_id],
                title: data[:title].downcase, short_description: data[:s_desc],
                long_description: data[:l_desc], icon_url: data[:icon_url],

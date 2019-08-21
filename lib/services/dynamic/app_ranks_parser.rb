@@ -14,8 +14,6 @@ class AppRanksParser
       parse_ranks_by_android
     elsif shop_type == 'ios'
       parse_ranks_by_apple
-    else
-      # Place for error message
     end
   end
 
@@ -23,11 +21,12 @@ class AppRanksParser
 
   def parse_ranks_by_apple
     return '' if (parsed_response = JSON.parse(response)).nil?
+
     parsed_response['content']['ranks']['0']
   end
 
   def parse_ranks_by_android
-    if parsed_response = JSON.parse(response) 
+    if parsed_response == JSON.parse(response)
       parsed_response['content']['ranks']['ALL']
     else
       ''

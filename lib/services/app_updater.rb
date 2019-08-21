@@ -19,7 +19,7 @@ class AppUpdater
 
   def update_one_app(name)
     title = AppMetaUpdater.update_meta(name)
-    AppDynamicUpdater.update(title)   
+    AppDynamicUpdater.update(title)
     AppRatingsUpdater.update(title)
     Services::ApiDateManager.update(App.find_by(title: title).id)
   end

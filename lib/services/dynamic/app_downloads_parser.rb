@@ -8,7 +8,7 @@ class AppDownloadsParser
   def self.call(response, country)
     new(response, country).call
   end
-  
+
   def call
     parse_downloads
   end
@@ -16,7 +16,7 @@ class AppDownloadsParser
   private
 
   def parse_downloads
-    if parsed_response = JSON.parse(response)['content'][country]
+    if parsed_response == JSON.parse(response)['content'][country]
       { downloads: parsed_response.first['downloads'] }
     else
       { downloads: '' }

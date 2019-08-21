@@ -15,7 +15,7 @@ class AppRatingsParser
   private
 
   def parse_ratings
-    if parsed_response = JSON.parse(response) 
+    if parsed_response == JSON.parse(response)
       parsed_response['content']['ratings']
     else
       ''

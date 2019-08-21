@@ -22,8 +22,8 @@ class AppRatingsLoader
   end
 
   def load_ratings
-    RestClient.get("https://api.apptweak.com/#{shop_type}/applications/#{id}/ratings.json?start_date"+
-                   "=#{start_date}&end_date=#{(Date.today-1)}",
+    RestClient.get("https://api.apptweak.com/#{shop_type}/applications/#{id}/ratings.json?start_date" \
+                   "=#{start_date}&end_date=#{(Time.zone.today - 1)}",
                    'X-Apptweak-Key': Services::ApiTokenManager.token_with_credits(RATINGS_COST))
   end
 end

@@ -2,7 +2,7 @@ class AppRanksLoader
   RANKS_COST = 5
   attr_reader :country, :shop_type, :id, :start_date, :device
   def initialize(country, shop_type, id, start_date, device)
-    @country = country  
+    @country = country
     @shop_type = shop_type
     @id = id
     @start_date = start_date
@@ -24,8 +24,8 @@ class AppRanksLoader
   end
 
   def load_info
-    RestClient.get("https://api.apptweak.com/#{shop_type}/applications/#{id}/rankings.json?country"+
-                   "=#{country}#{device}&start_date=#{start_date}&end_date=#{(Date.today-1)}",
-                    'X-Apptweak-Key': Services::ApiTokenManager.token_with_credits(RANKS_COST))
+    RestClient.get("https://api.apptweak.com/#{shop_type}/applications/#{id}/rankings.json?country" \
+                   "=#{country}#{device}&start_date=#{start_date}&end_date=#{(Time.zone.today - 1)}",
+                   'X-Apptweak-Key': Services::ApiTokenManager.token_with_credits(RANKS_COST))
   end
 end
