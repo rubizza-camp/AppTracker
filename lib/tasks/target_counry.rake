@@ -3,7 +3,7 @@ namespace :country_manager do
   task add: :environment do
     ARGV.each { |arg| task arg.to_sym }
     ARGV.drop(1).each do |arg|
-        TargetCountry.create(country_name: arg)
+      TargetCountry.create(country_name: arg)
     end
   end
 

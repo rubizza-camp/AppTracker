@@ -40,39 +40,55 @@ class AppMetaParser
 
   def title_response
     return '' unless response['content']['title']
+
     response['content']['title']
   end
 
   def icon_url_response
     return '' unless response['content']['icon']
+
     response['content']['icon']
   end
 
   def s_desc_response
+    return '' unless response['content']['short_description']
+
     response['content']['short_description']
   end
 
   def l_desc_response
+    return '' unless Nokogiri::HTML(response['content']['description']).text
+
     Nokogiri::HTML(response['content']['description']).text
   end
 
   def content_rating_response
+    return '' unless response['content']['content_rating']
+
     response['content']['content_rating']
   end
 
   def price_response
+    return '' unless response['content']['price']
+
     response['content']['price']
   end
 
   def dev_name_response
+    return '' unless response['content']['developer']['name']
+
     response['content']['developer']['name']
   end
 
   def dev_email_response
+    return '' unless response['content']['developer']['email']
+
     response['content']['developer']['email']
   end
 
   def dev_website_response
+    return '' unless response['content']['developer']['website']
+
     response['content']['developer']['website']
   end
 end
