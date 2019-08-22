@@ -39,10 +39,12 @@ class AppMetaParser
   end
 
   def title_response
+    return '' unless response['content']['title']
     response['content']['title']
   end
 
   def icon_url_response
+    return '' unless response['content']['icon']
     response['content']['icon']
   end
 
