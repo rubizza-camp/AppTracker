@@ -1,10 +1,10 @@
+// jshint esversion:9
 import React from 'react';
 import ReactSVG from 'react-svg'
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import MinSearchEl from './min_search_element/min_search_element.js';
 import VerticalTabs from './tabs_and_plots.js';
-
 import './main_app_field.css';
 
 const useStyles = makeStyles(theme => ({

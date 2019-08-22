@@ -1,3 +1,4 @@
+// jshint esversion:9
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
@@ -7,9 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Icon from '@material-ui/core/Icon';
-
 import SwipeableViews from 'react-swipeable-views';
-
 import CommentsPlotTab from './tabpanel_plot_elements/comments_tab.js';
 import DownloadsPlotTab from './tabpanel_plot_elements/downloads_tab.js';
 import RankPositionsPlotTab from './tabpanel_plot_elements/rank_positions_tab.js';

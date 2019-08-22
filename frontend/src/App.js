@@ -1,8 +1,6 @@
+// jshint esversion:9
 import React from 'react';
-
 import './App.css';
-
-
 import SearchEl from './main_search_element/search_element.js';
 
 class MyApp extends React.Component {
