@@ -38,7 +38,7 @@ gem 'rack-cors'
 
 group :test do
   gem 'database_cleaner'
-  gem 'faker'
+  gem 'shoulda-matchers'
 end
 
 group :development, :test do
