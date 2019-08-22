@@ -88,7 +88,6 @@ class AppMetaParser
 
   def dev_website_response
     return '' unless response['content']['developer']['website']
-
     response['content']['developer']['website']
   end
 end
