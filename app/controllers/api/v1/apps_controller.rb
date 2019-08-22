@@ -2,7 +2,7 @@ module Api
   module V1
     class AppsController < ApplicationController
       def index
-        apps = App.where('title like :prefix', prefix: "#{params[:title].downcase}%")
+        apps = App.where('title ilike :prefix', prefix: "#{params[:title]}%")
         render json: AppIndexSerializer.new(apps)
       end
 
