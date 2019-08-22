@@ -15,10 +15,16 @@ RSpec.describe Api::V1::AppsController, type: :controller do
   end
 
   describe "GET show" do
-    it "returns app data in json" do
+    it "returns app hash with 16 keys" do
       get :show, params: { title: 'test_app' }
       parsed_body = JSON.parse(response.body)
       expect(parsed_body.keys.size).to eq(16)
+    end
+
+    it "returns app hash" do
+      get :show, params: { title: 'test_app' }
+      parsed_body = JSON.parse(response.body)
+      expect(parsed_body['title']).to eq('test_app')
     end
   end
 end
