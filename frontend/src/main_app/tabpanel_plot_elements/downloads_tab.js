@@ -7,38 +7,42 @@ import Rating from '@material-ui/lab/Rating';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
 
+// window.applicationData = response.data.data.attributes;
+// window.dynamicInfos = dynamicInfos;
+// window.ratings = ratings;
+
 function loadBarChartDownloadsCountData(shop_type)
 {
   var xN = [];
   var yN = [];
 
   // Date
-  for (var i = 0; i < window.globalAppData.dynamic_infos.length; i++)
+  for (var i = 0; i < window.dynamicInfos.length; i++)
   {
-    if (window.globalAppData.dynamic_infos[i].country == "ru")
-    if (window.globalAppData.dynamic_infos[i].shop_type == shop_type)
-    xN.push(window.globalAppData.dynamic_infos[i].date);
+    if (window.dynamicInfos[i].Country == "ru")
+    if (window.dynamicInfos[i].ShopType == shop_type)
+    xN.push(window.dynamicInfos[i].Date);
   }
 
   // Downloads
   // ru
   var index = 0;
   yN.push([]);
-  for(var i = 0; i < window.globalAppData.dynamic_infos.length; i++)
+  for(var i = 0; i < window.dynamicInfos.length; i++)
   {
-    if (window.globalAppData.dynamic_infos[i].country == "ru")
-    if (window.globalAppData.dynamic_infos[i].shop_type == shop_type)
-    yN[index].push(window.globalAppData.dynamic_infos[i].downloads)
+    if (window.dynamicInfos[i].Country == "ru")
+    if (window.dynamicInfos[i].ShopType == shop_type)
+    yN[index].push(window.dynamicInfos[i].Downloads)
   }
   index++
 
   // us
   yN.push([]);
-  for(var i = 0; i < window.globalAppData.dynamic_infos.length; i++)
+  for(var i = 0; i < window.dynamicInfos.length; i++)
   {
-    if (window.globalAppData.dynamic_infos[i].country == "us")
-    if (window.globalAppData.dynamic_infos[i].shop_type == shop_type)
-    yN[index].push(window.globalAppData.dynamic_infos[i].downloads)
+    if (window.dynamicInfos[i].Country == "us")
+    if (window.dynamicInfos[i].ShopType == shop_type)
+    yN[index].push(window.dynamicInfos[i].Downloads)
   }
   index++
 
@@ -153,7 +157,7 @@ export default function DownloadsPlotTab() {
     <>
       <Grid container>
         <Grid item xs={12} sm={12}>
-          <div class="plot-cove-comments-title" >
+          <div className="plot-cove-comments-title" >
             <div style={{fontSize:"0.9rem", fontWeight:400, alignSelf:"self-start"}}>
                 Google Play
             </div>
@@ -163,16 +167,16 @@ export default function DownloadsPlotTab() {
                   width: 30,
                   height: 30,
                   borderRadius: 25,
-                  backgroundImage:'url("'+window.globalAppData.icon_url+'") ',
+                  backgroundImage:'url("'+window.applicationData.IconUrl+'") ',
                   backgroundSize: "cover",
                 }} >
               </div>
               <div style={{fontSize:"1.5rem", fontWeight:300}}>
-                  {window.globalAppData.title}
+                  {window.applicationData.Title}
               </div>
             </div>
             
-            <IconButton className="covei-badge-button" href={window.globalAppData.android_url}>
+            <IconButton className="covei-badge-button" href={window.applicationData.AndroidUrl}>
               <Icon style={
               {
                 width: "100px",
@@ -194,12 +198,12 @@ export default function DownloadsPlotTab() {
       
       <Grid container>
         <Grid item xs={12} sm={12}>
-          <div class="plot-cove-comments-title" >
+          <div className="plot-cove-comments-title" >
             <div style={{fontSize:"0.9rem", fontWeight:400, alignSelf:"self-start"}}>
                 App Store
             </div>
             
-            <IconButton className="covei-badge-button" href={window.globalAppData.apple_url}>
+            <IconButton className="covei-badge-button" href={window.applicationData.AppleUrl}>
               <Icon style={
               {
                 width: "97px",

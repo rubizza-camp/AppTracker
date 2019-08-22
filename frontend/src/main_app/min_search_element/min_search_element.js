@@ -23,11 +23,21 @@ function startLoadAppInfo(name)
     .then(response =>
     {
       window.globalAppData = response.data;
-      
+      var dynamicInfos = [];
+      var ratings = [];
+      for (var i = 0; i < window.globalAppData.included.length; i++)
+      {
+        if (window.globalAppData.included[i].type == "DynamicInfo")
+          dynamicInfos.push(window.globalAppData.included[i].attributes)
+        if (window.globalAppData.included[i].type == "Rating")
+          ratings.push(window.globalAppData.included[i].attributes)
+      }
+      window.applicationData = response.data.data.attributes;
+      window.dynamicInfos = dynamicInfos;
+      window.ratings = ratings;
       ReactDOM.unmountComponentAtNode(document.getElementById('root'));
       ReactDOM.render(React.createElement(MainAppField),document.getElementById("root"));
       document.getElementById("root").setAttribute("style","margin-top: 20px; display: flex; justify-content: center;")
-      console.log(window.globalAppData);
     })
 };
 
@@ -35,7 +45,7 @@ const newPartElement = (element_data, id) =>
   <ListItem button key = {id} style={{borderRadius: '50px', marginLeft: "5px", paddingLeft: "9px", width: 'auto', minWidth:320}}
     onClick = {()=>{
         setTimeout(()=>{
-          startLoadAppInfo(element_data.title);
+          startLoadAppInfo(element_data.attributes.title);
         },100);
     }}
   >
@@ -43,10 +53,10 @@ const newPartElement = (element_data, id) =>
       height: "40px",
       width: "40px",
       borderRadius: "100%",
-      backgroundImage: "url('"+element_data.icon_url+"')",
+      backgroundImage: "url('"+element_data.attributes.icon_url+"')",
       backgroundSize: "cover",
     }}></div>
-    <ListItemText className = "ml-10 unhover" primary={element_data.title} />
+    <ListItemText className = "ml-10 unhover" primary={element_data.attributes.title} />
     <div style= {{
       marginLeft: "auto"
       }}>
@@ -97,7 +107,7 @@ class MinSearchEl extends React.Component
         axios.get('https://'+'apptracker.club'+':3000/api/v1/apps?title='+target.value)
         .then(response => {
           if (document.getElementById('MinSearchInputField').value != "")
-          this.create_search_result_fields(response.data);
+          this.create_search_result_fields(response.data.data);
         })
         .catch(error => console.log(error))
       },100);

@@ -25,9 +25,29 @@ function startLoadAppInfo(name)
     .then(response =>
     {
       window.globalAppData = response.data;
+      var dynamicInfos = [];
+      var ratings = [];
+      for (var i = 0; i < window.globalAppData.included.length; i++)
+      {
+        if (window.globalAppData.included[i].type == "DynamicInfo")
+          dynamicInfos.push(window.globalAppData.included[i].attributes)
+        if (window.globalAppData.included[i].type == "Rating")
+          ratings.push(window.globalAppData.included[i].attributes)
+      }
+      window.applicationData = response.data.data.attributes;
+      window.dynamicInfos = dynamicInfos;
+      window.ratings = ratings.sort(function(a,b) {
+        if (a.Date > b.Date) {
+          return -1;
+        }
+        if (a.Date < b.Date) {
+          return 1;
+        }
+        return 0;
+      });
+      
       ReactDOM.render(React.createElement(MainAppField),document.getElementById("root"));
-      document.getElementById("root").setAttribute("style","margin-top: 20px; display: flex; justify-content: center;")
-      console.log(window.globalAppData);
+      document.getElementById("root").setAttribute("style","margin-top: 20px; display: flex; justify-content: center;");
     })
 };
 
@@ -42,7 +62,7 @@ const newPartElement = (element_data, id) =>
         document.getElementById('MainSearchEl').classList.add('hide_transition');
         setTimeout(()=>{
           //Начинаем выгрузку данных
-          startLoadAppInfo(element_data.title);
+          startLoadAppInfo(element_data.attributes.title);
         },100);
       }
     }}
@@ -51,10 +71,10 @@ const newPartElement = (element_data, id) =>
       height: "40px",
       width: "40px",
       borderRadius: "100%",
-      backgroundImage: "url('"+element_data.icon_url+"')",
+      backgroundImage: "url('"+element_data.attributes.icon_url+"')",
       backgroundSize: "cover",
     }}></div>
-    <ListItemText className = "ml-10 unhover" primary={element_data.title} />
+    <ListItemText className = "ml-10 unhover" primary={element_data.attributes.title} />
     <div style= {{
       marginLeft: "auto"
       }}>
@@ -105,7 +125,7 @@ class SearchEl extends React.Component
         axios.get('https://'+'apptracker.club'+':3000/api/v1/apps?title='+target.value)
         .then(response => {
           if (document.getElementById('MainSearchInputField').value != "")
-          this.create_search_result_fields(response.data);
+          this.create_search_result_fields(response.data.data);
         })
         .catch(error => console.log(error))
       },100);
