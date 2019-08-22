@@ -1,67 +1,93 @@
 import React from 'react';
 import ReactSVG from 'react-svg'
-import { Container, Col, Row } from 'react-bootstrap';
-import './main_app_field.css';
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 import MinSearchEl from './min_search_element/min_search_element.js';
-import AppTitlerEl from './app_titler_element/app_titler_element.js';
-import Float3D1 from './floats/3d_float.js';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import VerticalTabs from './tabs_and_plots.js';
 
-class MainAppField extends React.Component
-{
-  increment()
-  {
-    if (window.mainAppFieldKey == undefined)
-    {
-      window.mainAppFieldKey = 1;
-    }
-    else
-    {
-      window.mainAppFieldKey++;
-    }
-    return window.mainAppFieldKey
+import './main_app_field.css';
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  control: {
+    padding: theme.spacing(2),
+  },
+}));
+
+export default function MainAppField() {
+  const [spacing, setSpacing] = React.useState(2);
+  const classes = useStyles();
+
+  function handleChange(event, value) {
+    setSpacing(Number(value));
   }
-  render()
-  {
-    return (
-      <div key={this.increment()} id='MainAppField' className='d-flex justify-content-center align-items-center' style={{width: '100vw', maxWidth: '900px'}}>
-        <Container className='m-0 p-0'>
-          <Row className='m-0 pl-2 pr-2'>
-            <Col sm={4} className='m-0 p-0 d-flex justify-content-center'>
-              <ReactSVG style= {{minWidth: "250px", width:"50%", padding:"15px"}} src="Icons/AppTrackerTitleColored.svg" />
-            </Col>
-            <Col sm={8} className='m-0 p-0 d-flex align-items-center'>
-                <MinSearchEl>
-                </MinSearchEl>
-            </Col>
-          </Row>
-          <Row className='m-0 p-0'>
-            <Col sm={4} className='m-0 p-0'>
-              <Row className='m-0 p-2'>
-                <div className='card-covei' style = {{ height: 'auto'}}>
-                  <AppTitlerEl>
-                  </AppTitlerEl>
-                </div>
-              </Row>
-              <Row className='m-0 p-2'>
-                <div id='float3Dsettings' className='card-covei' style = {{ height: '60vh'}}>
-                  <div className='d-flex justify-content-center align-items-center' style = {{width: '100%', height: '100%'}}>
-                    <CircularProgress  disableShrink/>
-                  </div>
-                </div>
-              </Row>
-            </Col>
-            <Col sm={8} className='m-0 p-2'>
-              <div className='card-covei' style = {{ height: '100%', minHeight: 400}}>
-                <Float3D1>
-                </Float3D1>
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </div>
-    );
-  }
+
+  return (
+    <Grid container className={classes.root} spacing={2} style={{width: "90vw", maxWidth: "900px"}}>
+      <Grid item xs={12}>
+        <Grid container justify="center" spacing={spacing}>
+          <Grid item xs={12} sm={4} className="flext-center">
+            <ReactSVG style= {{width:"80%", maxWidth: "250px", minWidth: "180px "}} src="Icons/AppTrackerTitleColored.svg" />
+          </Grid>
+          <Grid item xs={12} sm={8} className="flext-center">
+            <MinSearchEl>
+            </MinSearchEl>
+          </Grid>
+          <VerticalTabs></VerticalTabs>
+        </Grid>
+      </Grid>
+    </Grid>
+  );
 }
 
-export default MainAppField;
+// class MainAppField extends React.Component
+// {
+//   increment()
+//   {
+//     if (window.mainAppFieldKey == undefined)
+//     {
+//       window.mainAppFieldKey = 1;
+//     }
+//     else
+//     {
+//       window.mainAppFieldKey++;
+//     }
+//     return window.mainAppFieldKey
+//   }
+//   render()
+//   {
+//     return (
+//       <div key={this.increment()} id='MainAppField' className='d-flex justify-content-center align-items-center' style={{width: '100vw', maxWidth: '900px'}}>
+//         <Grid container>
+//           <Grid item xs={4} justifyContent="center">
+//             
+//           </Grid>
+//           <Grid item xs={8} alignItems="center" justifyContent="center" className="diplayFlex">
+//               
+//           </Grid>
+//           {/* <Grid item xs={12}>
+//             <div className='card-covei' style = {{ height: 'auto'}}>
+//               qwe
+//             </div>
+//           </Grid>
+//           <Grid item xs={12}>
+//             <div id='float3Dsettings' className='card-covei' style = {{ height: '60vh'}}>
+//               <div className='d-flex justify-content-center align-items-center' style = {{width: '100%', height: '100%'}}>
+//                 <CircularProgress  disableShrink/>
+//               </div>
+//             </div>
+//           </Grid>
+//           <Grid item xs={8} >
+//             <div className='card-covei' style = {{ height: '100%', minHeight: 400}}>
+//               wert
+//             </div>
+//           </Grid> */}
+//         </Grid>
+//       </div>
+//     );
+//   }
+// }
+
+// export default MainAppField;

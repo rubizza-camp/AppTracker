@@ -1,17 +1,15 @@
-::-webkit-scrollbar {width: 6px; height: 6px;}
+::-webkit-scrollbar {width: 4px; height: 4px;}
 ::-webkit-scrollbar-track {background: rgba(1, 1, 1, 0);}
-::-webkit-scrollbar-thumb {background: rgba(1, 1, 1, 0.158); border-radius: 4px;}
+::-webkit-scrollbar-thumb {background: rgba(134, 15, 15, 0.397);}
 ::-webkit-scrollbar-thumb:hover {background: rgba(1, 1, 1, 0.425);}
+
+.diplayFlex
+{
+  display: flex;
+}
 
 body
 {
-  width: 100vw;
-  height: 98vh;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
   --mdc-theme-primary: rgb(73, 42, 63);
 }
 
@@ -111,4 +109,44 @@ body
   max-height: unset !important;
   height: max-content !important;
   padding: 25px !important;
+}
+
+.search-field-min
+{
+  border-radius: 13px;
+  background-color: rgba(250, 250, 250, 0.986);
+}
+
+.plot-covei
+{
+  height: 100% !important;
+  overflow: hidden;
+}
+
+.plot-covei .MuiBox-root
+{
+  padding: 0px;
+}
+
+.plot-cove-comments-rating-title
+{
+  transform: scale(0.75);
+  margin-top: 3%;
+  position: fixed;
+  right: -2%;
+}
+
+.plot-cove-comments-title
+{
+  padding: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.covei-badge-button
+{
+  border-radius: 6px !important;
+  padding: 0px !important;
 }

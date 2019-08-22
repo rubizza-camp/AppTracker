@@ -3,23 +3,17 @@ import axios from 'axios';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
-import IconButton, {IconToggle} from '@material/react-icon-button';
-import MaterialIcon from '@material/react-material-icon';
 import ReactDOM from 'react-dom'
 import Rating from '@material-ui/lab/Rating';
 
 import MainAppField from '../../main_app/main_app_field.js';
 
-import '@material/react-list/dist/list.css';
+import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
 
-import List, {ListItem, ListItemText} from '@material/react-list';
-
-import "@material/icon-button/dist/mdc.icon-button.css";
-
-import '@material/react-layout-grid/dist/layout-grid.css';
-
-import '@material/react-material-icon/dist/material-icon.css';
-import '@material/react-icon-button/dist/icon-button.css';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 
 import './min_search_element.css';
 
@@ -32,13 +26,13 @@ function startLoadAppInfo(name)
       
       ReactDOM.unmountComponentAtNode(document.getElementById('root'));
       ReactDOM.render(React.createElement(MainAppField),document.getElementById("root"));
-      document.getElementById("root").setAttribute("style","align-self: center;")
+      document.getElementById("root").setAttribute("style","margin-top: 20px; display: flex; justify-content: center;")
       console.log(window.globalAppData);
     })
 };
 
 const newPartElement = (element_data, id) =>
-  <ListItem key = {id} style={{borderRadius: '50px', marginLeft: "5px", paddingLeft: "5px"}}
+  <ListItem button key = {id} style={{borderRadius: '50px', marginLeft: "5px", paddingLeft: "9px", width: 'auto', minWidth:320}}
     onClick = {()=>{
         setTimeout(()=>{
           startLoadAppInfo(element_data.title);
@@ -52,7 +46,7 @@ const newPartElement = (element_data, id) =>
       backgroundImage: "url('"+element_data.icon_url+"')",
       backgroundSize: "cover",
     }}></div>
-    <ListItemText className = "ml-10 unhover" primaryText={element_data.title} />
+    <ListItemText className = "ml-10 unhover" primary={element_data.title} />
     <div style= {{
       marginLeft: "auto"
       }}>
@@ -126,7 +120,9 @@ class MinSearchEl extends React.Component
           display: 'flex',
           alignItems: 'center',
           }}>
-            <button style={{color:"#9900FF"}} className="mdc-icon-button material-icons-outlined">search</button>
+            <IconButton style={{color:"#9900FF"}} className="material-icons-outlined">
+              search
+            </IconButton>
             <InputBase
             autoComplete = 'off'
             id = 'MinSearchInputField'
@@ -138,7 +134,7 @@ class MinSearchEl extends React.Component
             
         </Paper>
         
-        <div id="min_search_field" style={{maxHeight: "30vh", overflowY: "scroll"}}>
+        <div id="min_search_field" style={{maxHeight: "30vh", overflowY: "scroll", position: "fixed", zIndex: "10"}} className="search-field-min">
         </div>
       </div>
     );

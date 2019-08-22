@@ -1,27 +1,21 @@
 import React from 'react';
 import axios from 'axios';
-import {Cell, Grid, Row} from '@material/react-layout-grid';
+import ReactSVG from 'react-svg'
+import ReactDOM from 'react-dom'
+
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
-import IconButton, {IconToggle} from '@material/react-icon-button';
-import MaterialIcon from '@material/react-material-icon';
-import ReactSVG from 'react-svg'
-import ReactDOM from 'react-dom'
 import Rating from '@material-ui/lab/Rating';
 
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+
+import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
+
 import MainAppField from '../main_app/main_app_field.js';
-
-import '@material/react-list/dist/list.css';
-
-import List, {ListItem, ListItemText} from '@material/react-list';
-
-import "@material/icon-button/dist/mdc.icon-button.css";
-
-import '@material/react-layout-grid/dist/layout-grid.css';
-
-import '@material/react-material-icon/dist/material-icon.css';
-import '@material/react-icon-button/dist/icon-button.css';
 
 import './search_element.css';
 
@@ -32,14 +26,14 @@ function startLoadAppInfo(name)
     {
       window.globalAppData = response.data;
       ReactDOM.render(React.createElement(MainAppField),document.getElementById("root"));
-      document.getElementById("root").setAttribute("style","align-self: center;")
+      document.getElementById("root").setAttribute("style","margin-top: 20px; display: flex; justify-content: center;")
       console.log(window.globalAppData);
     })
 };
 
 const newPartElement = (element_data, id) =>
 
-  <ListItem key = {id} style={{borderRadius: '50px', marginLeft: "5px", paddingLeft: "5px"}}
+  <ListItem button key = {id} style={{borderRadius: '50px', marginLeft: "5px", paddingLeft: "9px", width: 'auto'}}
     onClick = {()=>{
       // window.location.href = element_data.google_play_link;
       if (!document.getElementById('MainSearchEl').classList.contains('hide_transition'))
@@ -60,7 +54,7 @@ const newPartElement = (element_data, id) =>
       backgroundImage: "url('"+element_data.icon_url+"')",
       backgroundSize: "cover",
     }}></div>
-    <ListItemText className = "ml-10 unhover" primaryText={element_data.title} />
+    <ListItemText className = "ml-10 unhover" primary={element_data.title} />
     <div style= {{
       marginLeft: "auto"
       }}>
@@ -129,21 +123,18 @@ class SearchEl extends React.Component
   {
     return (
       // <MainAppField></MainAppField>
-      <Grid style= {{width: '98vw', maxWidth: '600px', marginTop: '32vh'}}>
-        <Row>
-          <Cell className='flext-center' columns={12}>
-            <ReactSVG style= {{minWidth: "250px", width:"50%", padding:"15px"}} src="Icons/AppTrackerTitleColored.svg" />
-          </Cell>
-        </Row>
-        <Row>
-          <Cell columns={12}>
+      <Grid container style= {{width: '98vw', maxWidth: '600px', marginTop: '32vh'}}>
+        <Grid item xs={12} className='flext-center'>
+          <ReactSVG style= {{minWidth: "250px", width:"50%", padding:"15px"}} src="Icons/AppTrackerTitleColored.svg" />
+        </Grid>
+        <Grid item xs={12}>
             <div style= {{padding: '4px 4px', borderRadius: '28px', overflow: 'hidden',}}
                 className = "mdc-elevation--z5">
               <Paper style= {{borderRadius: 'none !important', boxShadow: 'none',
                 display: 'flex',
                 alignItems: 'center',
                 }}>
-                <IconButton style={{color:"#EB7659"}} className="material-icons-outlined">
+                  <IconButton style={{color:"#EB7659"}} className="material-icons-outlined">
                     more_vert
                   </IconButton>
                   <InputBase
@@ -163,15 +154,12 @@ class SearchEl extends React.Component
                 </IconButton>
               </Paper>
               
-              <div id="search_field" style={{maxHeight: "30vh", overflowY: "scroll"}}>
+              <div id="search_field" style={{maxHeight: "30vh", overflowY: "scroll", overflowX: "hidden"}}>
               </div>
             </div>
-          </Cell>
-        </Row>
-        <Row>
-          <Cell columns={12}>
-          </Cell>
-        </Row>
+        </Grid>
+        <Grid item xs={12}>
+        </Grid>
       </Grid>
     );
   }
