@@ -2,13 +2,17 @@ module Api
   module V1
     class AppsController < ApplicationController
       def index
-        search = App.where('title ilike ?', "%#{params[:title]}%")
-        render json: search.to_json(only: %i[title apple_url android_url icon_url])
+        apps = App.where('title like :prefix', prefix: "#{params[:title]}%")
+        render json: AppIndexSerializer.new(apps)
       end
 
       def show
         app = App.find_by title: params[:title]
-        render json: app.to_json(include: %i[ratings dynamic_infos])
+        if app.nil?
+          render json: {}
+        else
+          render json: AppSerializer.new(app, include: %i[ratings dynamic_infos])
+        end
       end
     end
   end
