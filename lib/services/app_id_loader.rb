@@ -1,5 +1,6 @@
 class AppIdLoader
   attr_reader :app_name
+  ID_COST = 5
   def initialize(app_name)
     @app_name = app_name
   end
@@ -17,11 +18,11 @@ class AppIdLoader
   def app_id_load
     playmarket_app_id = JSON.parse(
       RestClient.get("https://api.apptweak.com/android/searches.json?term=#{app_name}",
-                     'X-Apptweak-Key': Services::ApiTokenManager.token_with_credits)
+                     'X-Apptweak-Key': Services::ApiTokenManager.token_with_credits(ID_COST))
     )['content'].first['id']
     appstore_app_id = JSON.parse(
       RestClient.get("https://api.apptweak.com/ios/searches.json?term=#{app_name}",
-                     'X-Apptweak-Key': Services::ApiTokenManager.token_with_credits)
+                     'X-Apptweak-Key': Services::ApiTokenManager.token_with_credits(ID_COST))
     )['content'].first['id']
     { playmarket_app_id: playmarket_app_id, appstore_app_id: appstore_app_id }
   end

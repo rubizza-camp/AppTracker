@@ -1,30 +1,94 @@
 class AppMetaParser
-  def parse_meta(ids, response)
-    meta(ids, response)
+  attr_reader :ids, :response
+  def initialize(ids, response)
+    @ids = ids
+    @response = response
+  end
+
+  def parse_meta
+    meta
   end
 
   def self.parse_meta(ids, response)
-    new.parse_meta(ids, response)
+    new(ids, response).parse_meta
   end
 
   private
 
-  def meta(ids, response) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-    android_app_id = ids[:playmarket_app_id]
-    apple_app_id = ids[:appstore_app_id]
-    android_url = "https://play.google.com/store/apps/details?id=#{android_app_id}"
-    apple_url = "https://apps.apple.com/app/id#{apple_app_id}"
-    title = JSON.parse(response)['content']['title']
-    icon_url = JSON.parse(response)['content']['icon']
-    s_desc = JSON.parse(response)['content']['short_description']
-    l_desc = Nokogiri::HTML(JSON.parse(response)['content']['description']).text
-    content_rating = JSON.parse(response)['content']['content_rating']
-    price = JSON.parse(response)['content']['price']
-    dev_name = JSON.parse(response)['content']['developer']['name']
-    dev_email = JSON.parse(response)['content']['developer']['email']
-    dev_website = JSON.parse(response)['content']['developer']['website']
-    { android_app_id: android_app_id, apple_app_id: apple_app_id, title: title, icon_url: icon_url,
-      s_desc: s_desc, l_desc: l_desc, content_rating: content_rating, price: price, android_url: android_url,
-      apple_url: apple_url, dev_name: dev_name, dev_email: dev_email, dev_website: dev_website }
+  def meta
+    android_url = "https://play.google.com/store/apps/details?id=#{ids[:playmarket_app_id]}"
+    apple_url = "https://apps.apple.com/app/id#{ids[:appstore_app_id]}"
+    @response = JSON.parse(response)
+    data_repsonse(android_url, apple_url)
+  end
+
+  def data_repsonse(android_url, apple_url)
+    { android_app_id: android_app_id_response, apple_app_id: apple_app_id_response, title: title_response,
+      icon_url: icon_url_response, s_desc: s_desc_response, l_desc: l_desc_response,
+      content_rating: content_rating_response, price: price_response, android_url: android_url,
+      apple_url: apple_url, dev_name: dev_name_response, dev_email: dev_email_response,
+      dev_website: dev_website_response }
+  end
+
+  def android_app_id_response
+    ids[:playmarket_app_id]
+  end
+
+  def apple_app_id_response
+    ids[:appstore_app_id]
+  end
+
+  def title_response
+    return '' unless response['content']['title']
+
+    response['content']['title']
+  end
+
+  def icon_url_response
+    return '' unless response['content']['icon']
+
+    response['content']['icon']
+  end
+
+  def s_desc_response
+    return '' unless response['content']['short_description']
+
+    response['content']['short_description']
+  end
+
+  def l_desc_response
+    return '' unless Nokogiri::HTML(response['content']['description']).text
+
+    Nokogiri::HTML(response['content']['description']).text
+  end
+
+  def content_rating_response
+    return '' unless response['content']['content_rating']
+
+    response['content']['content_rating']
+  end
+
+  def price_response
+    return '' unless response['content']['price']
+
+    response['content']['price']
+  end
+
+  def dev_name_response
+    return '' unless response['content']['developer']['name']
+
+    response['content']['developer']['name']
+  end
+
+  def dev_email_response
+    return '' unless response['content']['developer']['email']
+
+    response['content']['developer']['email']
+  end
+
+  def dev_website_response
+    return '' unless response['content']['developer']['website']
+
+    response['content']['developer']['website']
   end
 end
