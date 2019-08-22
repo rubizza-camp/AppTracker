@@ -92,75 +92,6 @@ function loadBarChartStarsCountData(shop_type)
   }
 }
 
-const newPlotElement = (width, height, data, color, rating_stars_count) =>
-<>
-  <Plot
-    config = { {displayModeBar : false} }
-    style = {{marginBottom: -10}}
-    key = '2'
-    data={[
-      {
-        x: data.x,
-        y: data.y,
-        mode: 'lines',
-        name: '1 stars',
-        line: {
-          shape: 'spline',
-          width: 2,
-          color: color,
-        },
-        type: 'scatter'
-      },
-    ]}
-    layout=
-    {
-      {
-        showlegend: false,
-        margin: {
-          l: 0,
-          r: 0,
-          b: 0,
-          t: 0,
-          pad: 0
-        },
-        width: width,
-        height: height,
-        font: {
-          family: 'Roboto, monospace',
-          size: 13,
-          color: '#7f7f7f'
-        },
-        xaxis: {
-          showline: true,
-          showgrid: false,
-          showticklabels: true,
-          linecolor: 'rgb(255,255,255)',
-          linewidth: 3,
-          autotick: true,
-          ticks: 'inside',
-          tickcolor: 'rgb(55,55,55)',
-          tickwidth: 1,
-          ticklen: 0,
-          tickfont: {
-            family: 'Roboto',
-            size: 14,
-            color: 'rgb(82, 82, 82)'
-          }
-        },
-        yaxis: {
-          showgrid: false,
-          zeroline: false,
-          showline: false,
-          showticklabels: false
-        },
-      }
-    }
-  />
-  <div className='plot-cove-comments-rating-title'>
-    <Rating style={{color: color}} value={rating_stars_count} readOnly />
-  </div>
-</>;
-
 const newPlotElementWithBotAxis = (width, height, data, color, rating_stars_count) =>
 <>
   <Plot
@@ -185,11 +116,11 @@ const newPlotElementWithBotAxis = (width, height, data, color, rating_stars_coun
       {
         showlegend: false,
         margin: {
-          l: 0,
-          r: 0,
+          l: 20,
+          r: 20,
           b: 50,
           t: 0,
-          pad: 50
+          pad: 0
         },
         width: width,
         height: height,
@@ -205,10 +136,10 @@ const newPlotElementWithBotAxis = (width, height, data, color, rating_stars_coun
           linecolor: 'rgb(255,255,255)',
           linewidth: 3,
           autotick: true,
-          ticks: 'outside',
+          ticks: 'inside',
           tickcolor: 'rgb(55,55,55)',
-          tickwidth: 2,
-          ticklen: 5,
+          tickwidth: 1,
+          ticklen: 3,
           tickfont: {
             family: 'Roboto',
             size: 14,
@@ -297,11 +228,11 @@ const newBarChartElementWithBotAxis = (width, height, data) =>
       {
         showlegend: false,
         margin: {
-          l: 0,
+          l: 50,
           r: 0,
-          b: 32,
+          b: 50,
           t: 0,
-          pad: 32
+          pad: 0
         },
         width: width,
         height: height,
@@ -312,7 +243,7 @@ const newBarChartElementWithBotAxis = (width, height, data) =>
         },
         xaxis: {
           showline: true,
-          showgrid: false,
+          showgrid: true,
           showticklabels: true,
           linecolor: 'rgb(255,255,255)',
           linewidth: 3,
@@ -320,7 +251,7 @@ const newBarChartElementWithBotAxis = (width, height, data) =>
           ticks: 'inside',
           tickcolor: 'rgb(55,55,55)',
           tickwidth: 1,
-          ticklen: 0,
+          ticklen: 3,
           tickfont: {
             family: 'Roboto',
             size: 14,
@@ -328,29 +259,15 @@ const newBarChartElementWithBotAxis = (width, height, data) =>
           }
         },
         yaxis: {
-          showgrid: false,
+          showgrid: true,
           zeroline: false,
           showline: false,
-          showticklabels: false
+          showticklabels: true
         },
       }
     }
   />
 </>;
-
-function add_plot_with_latency(id,shop_type,data_type,color,rating_stars_count)
-{
-  setTimeout(()=>{
-    var width = document.getElementById(id).offsetWidth ;
-    var height = document.getElementById(id).offsetHeight ;
-
-    // Рендерим основное
-    ReactDOM.render(
-      newPlotElement(width,height,loadPlotStarsCountData(shop_type,data_type),color,rating_stars_count),
-      document.getElementById(id)
-    );
-  },1);
-}
 
 function add_plot_with_latency_botAxis(id,shop_type,data_type,color,rating_stars_count)
 {

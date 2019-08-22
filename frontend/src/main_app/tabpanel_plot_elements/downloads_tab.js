@@ -83,11 +83,11 @@ const newDownloadBarChartElement = (width, height, data) =>
       {
         showlegend: false,
         margin: {
-          l: 0,
-          r: 0,
-          b: 32,
+          l: 40,
+          r: 35,
+          b: 50,
           t: 0,
-          pad: 32
+          pad: 0
         },
         width: width,
         height: height,
@@ -98,7 +98,7 @@ const newDownloadBarChartElement = (width, height, data) =>
         },
         xaxis: {
           showline: true,
-          showgrid: false,
+          showgrid: true,
           showticklabels: true,
           linecolor: 'rgb(255,255,255)',
           linewidth: 3,
@@ -106,7 +106,7 @@ const newDownloadBarChartElement = (width, height, data) =>
           ticks: 'inside',
           tickcolor: 'rgb(55,55,55)',
           tickwidth: 1,
-          ticklen: 0,
+          ticklen: 3,
           tickfont: {
             family: 'Roboto',
             size: 14,
@@ -114,14 +114,24 @@ const newDownloadBarChartElement = (width, height, data) =>
           }
         },
         yaxis: {
-          showgrid: false,
+          showgrid: true,
           zeroline: false,
           showline: false,
-          showticklabels: false
+          showticklabels: true
         },
       }
     }
   />
+  <div className='plot-cove-downloads-countries-container'>
+    <div className='plot-cove-downloads-countries-item'>
+      <div className='circle' style={{backgroundColor : "#173F5F"}}></div>
+      <div className='text'>United States</div>
+    </div>
+    <div className='plot-cove-downloads-countries-item'>
+      <div className='circle' style={{backgroundColor : "#FFB40D"}}></div>
+      <div className='text'>Russia</div>
+    </div>
+  </div>
 </>;
 
 function add_DownloadBarChart_with_latency(id,shop_type)

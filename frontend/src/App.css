@@ -131,9 +131,9 @@ body
 .plot-cove-comments-rating-title
 {
   transform: scale(0.75);
-  margin-top: 3%;
+  margin-top: 0%;
   position: fixed;
-  right: -2%;
+  right: 0.5%;
 }
 
 .plot-cove-comments-title
@@ -149,4 +149,40 @@ body
 {
   border-radius: 6px !important;
   padding: 0px !important;
+}
+
+.plot-cove-downloads-countries-container
+{
+  margin-top: -22%;
+  position: fixed;
+  right: -25.5%;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+
+  background-color: rgba(255, 255, 255, 0.78);
+  border-radius: 6px;
+}
+
+.plot-cove-downloads-countries-item
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.plot-cove-downloads-countries-item .circle
+{
+  margin: 5px;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+}
+
+.plot-cove-downloads-countries-item .text
+{
+  font-weight: 300;
+  padding-right: 6px;
 }
