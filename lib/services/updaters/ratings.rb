@@ -1,4 +1,4 @@
-class AppRatingsUpdater
+class Services::Updaters::Ratings < Services::Updaters::Base
   attr_accessor :ind
   def self.update(name)
     new.update(name)
@@ -48,6 +48,12 @@ class AppRatingsUpdater
                     rating_5: rating_5_response(response), total_rating: rating_total_response(response),
                     average_rating: rating_avg_response(response), shop_type: shop_type,
                     date: cur_date.to_s, app_id: cur_app.id)
+    end
+  end
+
+  def rating_response
+    %w(1 2 3 4 5 avg total).each do |type|
+      define_method("rating_#{type}") { response[index][type] || ''}
     end
   end
 

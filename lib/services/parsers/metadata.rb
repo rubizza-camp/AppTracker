@@ -1,24 +1,10 @@
-class AppMetaParser
-  attr_reader :ids, :response
-  def initialize(ids, response)
-    @ids = ids
-    @response = response
-  end
-
-  def parse_meta
-    meta
-  end
-
-  def self.parse_meta(ids, response)
-    new(ids, response).parse_meta
-  end
+class Services::Parsers::Metadata < Services::Parsers::Base
 
   private
 
   def meta
     android_url = "https://play.google.com/store/apps/details?id=#{ids[:playmarket_app_id]}"
     apple_url = "https://apps.apple.com/app/id#{ids[:appstore_app_id]}"
-    @response = JSON.parse(response)
     data_repsonse(android_url, apple_url)
   end
 

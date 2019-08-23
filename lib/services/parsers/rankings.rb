@@ -1,4 +1,4 @@
-class AppRanksParser
+class Services::Parsers::Rankings < Services::Parsers::Base
   attr_reader :response, :shop_type
   def initialize(response, shop_type)
     @response = response
@@ -26,8 +26,8 @@ class AppRanksParser
   end
 
   def parse_ranks_by_android
-    if parsed_response == JSON.parse(response)
-      parsed_response['content']['ranks']['ALL']
+    if parsed_response = JSON.parse(response)
+      JSON.parse(parsed_response).dig('content', 'ranks', 'ALL')
     else
       ''
     end

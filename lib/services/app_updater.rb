@@ -25,8 +25,10 @@ class AppUpdater
   end
 
   def update_all_apps
-    AppDynamicUpdater.update_all
-    AppRatingsUpdater.update_all
-    Services::ApiDateManager.update_all
+    App.find_each do |cur_app|
+      AppDynamicUpdater.update
+      AppRatingsUpdater.update
+      Services::ApiDateManager.update
+    end
   end
 end

@@ -1,5 +1,4 @@
-class AppMetaUpdater
-  attr_reader :name
+class Services::Updaters::Metadata < Services::Updaters::Base  attr_reader :name
   def initialize(name)
     @name = name
   end

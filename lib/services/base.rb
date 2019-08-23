@@ -14,4 +14,8 @@ class Services::Base
   def call(*params, &block)
     perform(*params, &block)
   end
+
+  def logger
+    Rails.logger
+  end
 end

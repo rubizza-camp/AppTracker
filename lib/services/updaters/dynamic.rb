@@ -1,4 +1,4 @@
-class AppDynamicUpdater
+class Services::Updaters::Dynamic < Services::Updaters::Base
   attr_reader :downloads_android, :downloads_apple, :dynamic_info_android, :dynamic_info_apple
   def self.update(name)
     new.update(name)
