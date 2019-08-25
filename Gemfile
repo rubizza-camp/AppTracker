@@ -39,6 +39,7 @@ gem 'rack-cors'
 group :test do
   gem 'database_cleaner'
   gem 'shoulda-matchers'
+  gem 'webmock', '~> 3.6', '>= 3.6.2'
 end
 
 group :development, :test do
@@ -46,6 +47,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry'
   gem 'rspec-rails'
+  gem 'rb-readline'
   gem 'simplecov', require: false, group: :test
   gem 'annotate'
 end
