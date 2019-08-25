@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_20_115051) do
+ActiveRecord::Schema.define(version: 2019_08_25_075021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,6 +108,21 @@ ActiveRecord::Schema.define(version: 2019_08_20_115051) do
     t.index ["user_id"], name: "index_subs_on_user_id"
   end
 
+  create_table "subscribers", force: :cascade do |t|
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.bigint "subscriber_id"
+    t.bigint "app_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["app_id"], name: "index_subscriptions_on_app_id"
+    t.index ["subscriber_id"], name: "index_subscriptions_on_subscriber_id"
+  end
+
   create_table "target_apps", force: :cascade do |t|
     t.string "application_name"
     t.datetime "created_at", null: false
@@ -136,4 +151,6 @@ ActiveRecord::Schema.define(version: 2019_08_20_115051) do
   add_foreign_key "similar_apps", "apps"
   add_foreign_key "subs", "apps"
   add_foreign_key "subs", "users"
+  add_foreign_key "subscriptions", "apps"
+  add_foreign_key "subscriptions", "subscribers"
 end
