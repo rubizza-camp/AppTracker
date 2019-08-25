@@ -1,11 +1,10 @@
 class Services::Parsers::Searches < Services::Parsers::Base
-  def parse
-    { field_name => super.dig(field_name, key) }
-  end
-  alias perform parse
+  attribute :shop_type
 
-  def key
-    { android: 'ALL', ios: '0' }[shop_type]
+  private
+
+  def parse
+    { shop_type => super&.first&.fetch('id') }
   end
   alias perform parse
 end
