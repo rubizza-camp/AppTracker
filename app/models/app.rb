@@ -26,4 +26,6 @@ class App < ApplicationRecord
   has_many :similar_apps, dependent: :destroy
   has_many :subs, dependent: :destroy
   has_many :users, through: :subs
+  has_many :subscriptions
+  has_many :subscribers, through: :subscriptions
 end
