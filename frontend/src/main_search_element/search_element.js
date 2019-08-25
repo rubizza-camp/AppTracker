@@ -41,6 +41,9 @@ function startLoadAppInfo(name)
         }
         return 0;
       });
+
+      console.log(window.dynamicInfos);
+      console.log(window.ratings);
       
       ReactDOM.render(React.createElement(MainAppField),document.getElementById("root"));
       document.getElementById("root").setAttribute("style","margin-top: 20px; display: flex; justify-content: center;");
@@ -138,7 +141,6 @@ class SearchEl extends React.Component
   render()
   {
     return (
-      // <MainAppField></MainAppField>
       <Grid container style= {{width: '98vw', maxWidth: '600px', marginTop: '32vh'}}>
         <Grid item xs={12} className='flext-center'>
           <ReactSVG style= {{minWidth: "250px", width:"50%", padding:"15px"}} src="Icons/AppTrackerTitleColored.svg" />
@@ -150,26 +152,18 @@ class SearchEl extends React.Component
                 display: 'flex',
                 alignItems: 'center',
                 }}>
-                  <IconButton style={{color:"#EB7659"}} className="material-icons-outlined">
-                    more_vert
+                  <IconButton style={{color:"#9900FF"}} className="material-icons-outlined">
+                    search
                   </IconButton>
                   <InputBase
-                  autoComplete = 'off'
-                  id = 'MainSearchInputField'
-                  onChange= {this.search_request}
-                  style={{ marginLeft: 8, flex: 1, }}
-                  placeholder="Search application"
-                  inputProps={{ 'aria-label': 'Search application' }}
-                />
-                <IconButton style={{color:"#9900FF"}} className="material-icons-outlined">
-                  search
-                </IconButton>
-                <Divider style={{ width: 1, height: 28, margin: 4, }} />
-                <IconButton style={{color:"#141414b0"}} className="material-icons-outlined">
-                  error_outline
-                </IconButton>
+                    autoComplete = 'off'
+                    id = 'MainSearchInputField'
+                    onChange= {this.search_request}
+                    style={{ marginLeft: 8, flex: 1, }}
+                    placeholder="Search application"
+                    inputProps={{ 'aria-label': 'Search application' }}
+                  />
               </Paper>
-              
               <div id="search_field" style={{maxHeight: "30vh", overflowY: "scroll", overflowX: "hidden"}}>
               </div>
             </div>

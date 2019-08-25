@@ -87,6 +87,16 @@ function loadBarChartStarsCountData(shop_type)
   }
   index++
 
+  // Average rating
+
+  yN.push([]);
+  for(var i = 0; i < window.ratings.length; i++)
+  {
+    if (window.ratings[i].ShopType == shop_type)
+    yN[index].push(window.ratings[i].AverageRating)
+  }
+  index++
+
   return {
     x: xN,
     y: yN,
@@ -223,6 +233,19 @@ const newBarChartElementWithBotAxis = (width, height, data) =>
           color: "#7E0DFF",
         },
       },
+      {
+        x: data.x,
+        y: data.y[5],
+        name: 'Average rating',
+        yaxis: 'y2',
+        mode: 'lines',
+        line: {
+          shape: 'spline',
+          width: 3,
+          color: "#B83C2F",
+        },
+        type: 'scatter'
+      },
     ]}
     layout=
     {
@@ -265,6 +288,13 @@ const newBarChartElementWithBotAxis = (width, height, data) =>
           showline: false,
           showticklabels: true
         },
+        yaxis2: {
+          showline: false,
+          showgrid: false,
+          showticklabels: true,
+          overlaying: 'y',
+          side: 'right',
+        }
       }
     }
   />

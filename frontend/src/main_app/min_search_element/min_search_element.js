@@ -31,7 +31,15 @@ function startLoadAppInfo(name)
       }
       window.applicationData = response.data.data.attributes;
       window.dynamicInfos = dynamicInfos;
-      window.ratings = ratings;
+      window.ratings = ratings.sort(function(a,b) {
+        if (a.Date > b.Date) {
+          return -1;
+        }
+        if (a.Date < b.Date) {
+          return 1;
+        }
+        return 0;
+      });
       ReactDOM.unmountComponentAtNode(document.getElementById('root'));
       ReactDOM.render(React.createElement(MainAppField),document.getElementById("root"));
       document.getElementById("root").setAttribute("style","margin-top: 20px; display: flex; justify-content: center;")

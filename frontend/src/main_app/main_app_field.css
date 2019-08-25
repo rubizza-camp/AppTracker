@@ -7,11 +7,6 @@
   box-shadow: 1px 5px 13px 1px rgba(0, 0, 0, 0.082)!important;
 }
 
-.MuiTabs-indicator
-{
-  width: 4px !important;
-}
-
 .unset-max-width
 {
   max-width: unset !important;

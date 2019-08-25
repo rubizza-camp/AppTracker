@@ -63,30 +63,43 @@ const newDownloadBarChartElement = (width, height, data) =>
       {
         x: data.x,
         y: data.y[0],
-        name: 'Russian downloads',
+        name: 'Russian',
         stackgroup: 'one',
         line: {
           shape: 'spline',
           width: 2,
-          color: "#173F5F",
+          color: "#E8C448",
         },
       },
       {
         x: data.x,
         y: data.y[1],
-        name: 'United States downloads',
+        name: 'United States',
         stackgroup: 'one',
         line: {
           shape: 'spline',
           width: 2,
-          color: "#FFB40D",
+          color: "#6561FF",
         },
       },
     ]}
     layout=
     {
       {
-        showlegend: false,
+        legend: {
+          x: 0,
+          y: 1,
+          traceorder: 'normal',
+          font: {
+            family: 'sans-serif',
+            size: 12,
+            color: '#000'
+          },
+          bgcolor: '#FFFFFF',
+          bordercolor: '#FFFFFF',
+          borderRadius: 4,
+          borderwidth: 2
+        },
         margin: {
           l: 40,
           r: 35,
@@ -127,16 +140,6 @@ const newDownloadBarChartElement = (width, height, data) =>
       }
     }
   />
-  <div className='plot-cove-downloads-countries-container'>
-    <div className='plot-cove-downloads-countries-item'>
-      <div className='circle' style={{backgroundColor : "#173F5F"}}></div>
-      <div className='text'>United States</div>
-    </div>
-    <div className='plot-cove-downloads-countries-item'>
-      <div className='circle' style={{backgroundColor : "#FFB40D"}}></div>
-      <div className='text'>Russia</div>
-    </div>
-  </div>
 </>;
 
 function add_DownloadBarChart_with_latency(id,shop_type)
