@@ -28,18 +28,4 @@ class App < ApplicationRecord
   has_many :users, through: :subs
   has_many :subscriptions
   has_many :subscribers, through: :subscriptions
-
-  def self.subscribed(email)
-    Subscriber.find_by!(email: email).apps
-  end
-
-  def subs_list
-    subscribers.map(&:email).join(', ')
-  end
-
-  def subs_list=(email)
-    self.subscribers = emails.split(',').map do |el|
-      Subscriber.where(email: el.strip).first_or_create!
-    end
-  end
 end
