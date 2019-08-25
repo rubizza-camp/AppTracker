@@ -1,14 +1,19 @@
 class Services::Parsers::Base < Services::Base
-  attribute :apptweak_response
+  attribute :response
+  attribute :country
 
   private
 
   def parse
-    { field_name => ::JSON.parse(apptweak_response).dig('content') }
+    ::JSON.parse(response).dig(*path)
   end
   alias perform parse
 
   def field_name
-    class.name.demodulize.downcase
+    @field_name ||= self.class.name.demodulize.downcase
+  end
+
+  def path
+    ['content', country].compact
   end
 end

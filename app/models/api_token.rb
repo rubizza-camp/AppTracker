@@ -8,7 +8,7 @@
 #
 
 class ApiToken < ApplicationRecord
-  def use(minimal_credits)
+  def self.use(minimal_credits)
     available_token = ApiToken.where("credits >= #{minimal_credits}").order(:credits).first
     return unless available_token
 

@@ -1,20 +1,4 @@
 class Services::Updaters::Ratings < Services::Updaters::Base
-  attr_accessor :ind
-  def self.update(name)
-    new.update(name)
-  end
-
-  def update(name)
-    response_load(name)
-  end
-
-  def self.update_all
-    new.update_all
-  end
-
-  def update_all
-    response_load_all
-  end
 
   private
 
@@ -36,6 +20,7 @@ class Services::Updaters::Ratings < Services::Updaters::Base
 
     response_android = AppRatingsLoader.call('android', cur_app.android_app_id, start_date)
     response_apple = AppRatingsLoader.call('ios', cur_app.apple_app_id, start_date)
+    parsed_response_android = 
     update_rating(response_android, cur_app, start_date, 'android')
     update_rating(response_apple, cur_app, start_date, 'ios')
   end
@@ -51,51 +36,5 @@ class Services::Updaters::Ratings < Services::Updaters::Base
     end
   end
 
-  def rating_response
-    %w(1 2 3 4 5 avg total).each do |type|
-      define_method("rating_#{type}") { response[index][type] || ''}
-    end
-  end
 
-  def rating_1_response(response)
-    return '' unless response[ind]['1']
-
-    response[ind]['1']
-  end
-
-  def rating_2_response(response)
-    return '' unless response[ind]['2']
-
-    response[ind]['2']
-  end
-
-  def rating_3_response(response)
-    return '' unless response[ind]['3']
-
-    response[ind]['3']
-  end
-
-  def rating_4_response(response)
-    return '' unless response[ind]['4']
-
-    response[ind]['4']
-  end
-
-  def rating_5_response(response)
-    return '' unless response[ind]['5']
-
-    response[ind]['5']
-  end
-
-  def rating_total_response(response)
-    return '' unless response[ind]['total']
-
-    response[ind]['total']
-  end
-
-  def rating_avg_response(response)
-    return '' unless response[ind]['avg']
-
-    response[ind]['avg']
-  end
 end

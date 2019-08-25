@@ -1,15 +1,4 @@
-class Services::Updaters::Metadata < Services::Updaters::Base  attr_reader :name
-  def initialize(name)
-    @name = name
-  end
-
-  def update_meta
-    data_load
-  end
-
-  def self.update_meta(name)
-    new(name).update_meta
-  end
+class Services::Updaters::Metadata < Services::Updaters::Base
 
   private
 

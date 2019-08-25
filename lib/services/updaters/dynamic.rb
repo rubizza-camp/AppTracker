@@ -1,21 +1,5 @@
 class Services::Updaters::Dynamic < Services::Updaters::Base
-  attr_reader :downloads_android, :downloads_apple, :dynamic_info_android, :dynamic_info_apple
-  def self.update(name)
-    new.update(name)
-  end
-
-  def update(name)
-    load_app_by_name(name)
-  end
-
-  def self.update_all
-    new.update_all
-  end
-
-  def update_all
-    load_all_app
-  end
-
+ 
   private
 
   def load_app_by_name(name)

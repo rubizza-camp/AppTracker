@@ -1,16 +1,17 @@
 class Services::ApptweakApi::Base < Services::Base
   HOST = 'https://api.apptweak.com'
-  HEADER = 'X-Apptweak-Key'
   attribute :shop_type
   attribute :id
   attribute :start_date
   attribute :end_date
+  attribute :term
+  attribute :device
 
   private
 
   def fetch
-    ::RestClient.get("#{HOST}/#{shop_type}/#{applications}#{id}/#{resource}.json?#{query}",
-                      HEADER: ::Services::ApiTokenManager.token_with_credits(cost))
+    ::RestClient.get("#{HOST}/#{shop_type}/#{applications}#{id}#{id ? '/'  : ''}#{resource}.json?#{query}",
+                     'X-Apptweak-Key': ApiToken.use(cost))
   end
   alias perform fetch
 
@@ -19,11 +20,11 @@ class Services::ApptweakApi::Base < Services::Base
   end
 
   def query
-    attributes.compact.except(:shop_type, :id).merge(end_date: end_date)
+    attributes.except(:shop_type, :id).merge(end_date: end_date).compact.to_query
   end
 
   def resource
-    class.name.demodulize.downcase
+    self.class.name.demodulize.downcase
   end
 
   def cost
