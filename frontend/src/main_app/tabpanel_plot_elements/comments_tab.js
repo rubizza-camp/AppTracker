@@ -1,3 +1,4 @@
+// jshint esversion:9
 import React from 'react';
 import ReactDOM from 'react-dom'
 import Grid from '@material-ui/core/Grid';
@@ -13,17 +14,17 @@ function loadPlotStarsCountData(shop_type,data_type)
   var yN = [];
 
   // Date
-  for (var i = 0; i < window.globalAppData.ratings.length; i++)
+  for (var i = 0; i < window.ratings.length; i++)
   {
-    if (window.globalAppData.ratings[i].shop_type == shop_type)
-    xN.push(window.globalAppData.ratings[i].date);
+    if (window.ratings[i].ShopType == shop_type)
+    xN.push(window.ratings[i].Date);
   }
 
   // Stars
-  for(var i = 0; i < window.globalAppData.ratings.length; i++)
+  for(var i = 0; i < window.ratings.length; i++)
   {
-    if (window.globalAppData.ratings[i].shop_type == shop_type)
-    yN.push(window.globalAppData.ratings[i][data_type])
+    if (window.ratings[i].ShopType == shop_type)
+    yN.push(window.ratings[i][data_type])
   }
 
   return {
@@ -38,51 +39,61 @@ function loadBarChartStarsCountData(shop_type)
   var yN = [];
 
   // Date
-  for (var i = 0; i < window.globalAppData.ratings.length; i++)
+  for (var i = 0; i < window.ratings.length; i++)
   {
-    if (window.globalAppData.ratings[i].shop_type == shop_type)
-    xN.push(window.globalAppData.ratings[i].date);
+    if (window.ratings[i].ShopType == shop_type)
+    xN.push(window.ratings[i].Date);
   }
 
   // Stars
   var index = 0;
   yN.push([]);
-  for(var i = 0; i < window.globalAppData.ratings.length; i++)
+  for(var i = 0; i < window.ratings.length; i++)
   {
-    if (window.globalAppData.ratings[i].shop_type == shop_type)
-    yN[index].push(window.globalAppData.ratings[i].rating_1)
+    if (window.ratings[i].ShopType == shop_type)
+    yN[index].push(window.ratings[i].Rating1)
   }
   index++
 
   yN.push([]);
-  for(var i = 0; i < window.globalAppData.ratings.length; i++)
+  for(var i = 0; i < window.ratings.length; i++)
   {
-    if (window.globalAppData.ratings[i].shop_type == shop_type)
-    yN[index].push(window.globalAppData.ratings[i].rating_2)
+    if (window.ratings[i].ShopType == shop_type)
+    yN[index].push(window.ratings[i].Rating2)
   }
   index++
 
   yN.push([]);
-  for(var i = 0; i < window.globalAppData.ratings.length; i++)
+  for(var i = 0; i < window.ratings.length; i++)
   {
-    if (window.globalAppData.ratings[i].shop_type == shop_type)
-    yN[index].push(window.globalAppData.ratings[i].rating_3)
+    if (window.ratings[i].ShopType == shop_type)
+    yN[index].push(window.ratings[i].Rating3)
   }
   index++
 
   yN.push([]);
-  for(var i = 0; i < window.globalAppData.ratings.length; i++)
+  for(var i = 0; i < window.ratings.length; i++)
   {
-    if (window.globalAppData.ratings[i].shop_type == shop_type)
-    yN[index].push(window.globalAppData.ratings[i].rating_4)
+    if (window.ratings[i].ShopType == shop_type)
+    yN[index].push(window.ratings[i].Rating4)
   }
   index++
 
   yN.push([]);
-  for(var i = 0; i < window.globalAppData.ratings.length; i++)
+  for(var i = 0; i < window.ratings.length; i++)
   {
-    if (window.globalAppData.ratings[i].shop_type == shop_type)
-    yN[index].push(window.globalAppData.ratings[i].rating_5)
+    if (window.ratings[i].ShopType == shop_type)
+    yN[index].push(window.ratings[i].Rating5)
+  }
+  index++
+
+  // Average rating
+
+  yN.push([]);
+  for(var i = 0; i < window.ratings.length; i++)
+  {
+    if (window.ratings[i].ShopType == shop_type)
+    yN[index].push(window.ratings[i].AverageRating)
   }
   index++
 
@@ -222,6 +233,19 @@ const newBarChartElementWithBotAxis = (width, height, data) =>
           color: "#7E0DFF",
         },
       },
+      {
+        x: data.x,
+        y: data.y[5],
+        name: 'Average rating',
+        yaxis: 'y2',
+        mode: 'lines',
+        line: {
+          shape: 'spline',
+          width: 3,
+          color: "#B83C2F",
+        },
+        type: 'scatter'
+      },
     ]}
     layout=
     {
@@ -264,6 +288,13 @@ const newBarChartElementWithBotAxis = (width, height, data) =>
           showline: false,
           showticklabels: true
         },
+        yaxis2: {
+          showline: false,
+          showgrid: false,
+          showticklabels: true,
+          overlaying: 'y',
+          side: 'right',
+        }
       }
     }
   />
@@ -304,7 +335,7 @@ export default function CommentsPlotTab() {
     <>
       <Grid container>
         <Grid item xs={12} sm={12}>
-          <div class="plot-cove-comments-title" >
+          <div className="plot-cove-comments-title" >
             <div style={{fontSize:"0.9rem", fontWeight:400, alignSelf:"self-start"}}>
                 Google Play
             </div>
@@ -314,16 +345,16 @@ export default function CommentsPlotTab() {
                   width: 30,
                   height: 30,
                   borderRadius: 25,
-                  backgroundImage:'url("'+window.globalAppData.icon_url+'") ',
+                  backgroundImage:'url("'+window.applicationData.IconUrl+'") ',
                   backgroundSize: "cover",
                 }} >
               </div>
               <div style={{fontSize:"1.5rem", fontWeight:300}}>
-                  {window.globalAppData.title}
+                  {window.applicationData.Title}
               </div>
             </div>
             
-            <IconButton className="covei-badge-button" href={window.globalAppData.android_url}>
+            <IconButton className="covei-badge-button" href={window.applicationData.AndroidUrl}>
               <Icon style={
               {
                 width: "100px",
@@ -338,34 +369,34 @@ export default function CommentsPlotTab() {
         <Grid item xs={12} sm={12} style={{margin: 10, textAlign: "center"}}>Total number of star-ratings per day</Grid>
         <Grid item xs={12} sm={6} id="CommentsAndroidBarChartId1" className="flext-center non-selectable"
           style={{minHeight:350}}
-          onLoad= {add_BarChart_with_latency("CommentsAndroidBarChartId1","andriod")}>
+          onLoad= {add_BarChart_with_latency("CommentsAndroidBarChartId1","android")}>
           <CircularProgress/>
         </Grid>
         <Grid item xs={12} sm={6}>
           {/* <Grid item xs={12} sm={12} style={{margin: 10, textAlign: "center"}}>Total number of star-ratings per day</Grid> */}
           <Grid item xs={12} sm={12} id="CommentsAndroidPlotTabId1" className="flext-center non-selectable"
             style={{minHeight:120}}
-            onLoad= {add_plot_with_latency_botAxis("CommentsAndroidPlotTabId1","andriod","rating_5","#7E0DFF",5)}>
+            onLoad= {add_plot_with_latency_botAxis("CommentsAndroidPlotTabId1","android","Rating5","#7E0DFF",5)}>
             <CircularProgress/>
           </Grid>
           <Grid item xs={12} sm={12} id="CommentsAndroidPlotTabId2" className="flext-center non-selectable"
             style={{minHeight:120}}
-            onLoad= {add_plot_with_latency_botAxis("CommentsAndroidPlotTabId2","andriod","rating_4","#A600EB",4)}>
+            onLoad= {add_plot_with_latency_botAxis("CommentsAndroidPlotTabId2","android","Rating4","#A600EB",4)}>
             <CircularProgress/>
           </Grid>
           <Grid item xs={12} sm={12} id="CommentsAndroidPlotTabId3" className="flext-center non-selectable"
             style={{minHeight:120}}
-            onLoad= {add_plot_with_latency_botAxis("CommentsAndroidPlotTabId3","andriod","rating_3","#F200FF",3)}>
+            onLoad= {add_plot_with_latency_botAxis("CommentsAndroidPlotTabId3","android","Rating3","#F200FF",3)}>
             <CircularProgress/>
           </Grid>
           <Grid item xs={12} sm={12} id="CommentsAndroidPlotTabId4" className="flext-center non-selectable"
             style={{minHeight:120}}
-            onLoad= {add_plot_with_latency_botAxis("CommentsAndroidPlotTabId4","andriod","rating_2","#EB0098",2)}>
+            onLoad= {add_plot_with_latency_botAxis("CommentsAndroidPlotTabId4","android","Rating2","#EB0098",2)}>
             <CircularProgress/>
           </Grid>
           <Grid item xs={12} sm={12} id="CommentsAndroidPlotTabId5" className="flext-center non-selectable"
             style={{minHeight:120}}
-            onLoad= {add_plot_with_latency_botAxis("CommentsAndroidPlotTabId5","andriod","rating_1","#FF0034",1)}>
+            onLoad= {add_plot_with_latency_botAxis("CommentsAndroidPlotTabId5","android","Rating1","#FF0034",1)}>
             <CircularProgress/>
           </Grid>
         </Grid>
@@ -373,12 +404,12 @@ export default function CommentsPlotTab() {
       
       <Grid container>
         <Grid item xs={12} sm={12}>
-          <div class="plot-cove-comments-title" >
+          <div className="plot-cove-comments-title" >
             <div style={{fontSize:"0.9rem", fontWeight:400, alignSelf:"self-start"}}>
                 App Store
             </div>
             
-            <IconButton className="covei-badge-button" href={window.globalAppData.apple_url}>
+            <IconButton className="covei-badge-button" href={window.applicationData.AppleUrl}>
               <Icon style={
               {
                 width: "97px",
@@ -399,27 +430,27 @@ export default function CommentsPlotTab() {
         <Grid item xs={12} sm={6}>
           <Grid item xs={12} sm={12} id="CommentsIosPlotTabId1" className="flext-center non-selectable"
             style={{minHeight:120}}
-            onLoad= {add_plot_with_latency_botAxis("CommentsIosPlotTabId1","ios","rating_5","#7E0DFF",5)}>
+            onLoad= {add_plot_with_latency_botAxis("CommentsIosPlotTabId1","ios","Rating5","#7E0DFF",5)}>
             <CircularProgress/>
           </Grid>
           <Grid item xs={12} sm={12} id="CommentsIosPlotTabId2" className="flext-center non-selectable"
             style={{minHeight:120}}
-            onLoad= {add_plot_with_latency_botAxis("CommentsIosPlotTabId2","ios","rating_4","#A600EB",4)}>
+            onLoad= {add_plot_with_latency_botAxis("CommentsIosPlotTabId2","ios","Rating4","#A600EB",4)}>
             <CircularProgress/>
           </Grid>
           <Grid item xs={12} sm={12} id="CommentsIosPlotTabId3" className="flext-center non-selectable"
             style={{minHeight:120}}
-            onLoad= {add_plot_with_latency_botAxis("CommentsIosPlotTabId3","ios","rating_3","#F200FF",3)}>
+            onLoad= {add_plot_with_latency_botAxis("CommentsIosPlotTabId3","ios","Rating3","#F200FF",3)}>
             <CircularProgress/>
           </Grid>
           <Grid item xs={12} sm={12} id="CommentsIosPlotTabId4" className="flext-center non-selectable"
             style={{minHeight:120}}
-            onLoad= {add_plot_with_latency_botAxis("CommentsIosPlotTabId4","ios","rating_2","#EB0098",2)}>
+            onLoad= {add_plot_with_latency_botAxis("CommentsIosPlotTabId4","ios","Rating2","#EB0098",2)}>
             <CircularProgress/>
           </Grid>
           <Grid item xs={12} sm={12} id="CommentsIosPlotTabId5" className="flext-center non-selectable"
             style={{minHeight:120}}
-            onLoad= {add_plot_with_latency_botAxis("CommentsIosPlotTabId5","ios","rating_1","#FF0034",1)}>
+            onLoad= {add_plot_with_latency_botAxis("CommentsIosPlotTabId5","ios","Rating1","#FF0034",1)}>
             <CircularProgress/>
           </Grid>
         </Grid>

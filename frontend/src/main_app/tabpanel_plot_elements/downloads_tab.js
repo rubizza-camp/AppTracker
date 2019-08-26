@@ -1,3 +1,4 @@
+// jshint esversion:9
 import React from 'react';
 import ReactDOM from 'react-dom'
 import Grid from '@material-ui/core/Grid';
@@ -7,38 +8,42 @@ import Rating from '@material-ui/lab/Rating';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
 
+// window.applicationData = response.data.data.attributes;
+// window.dynamicInfos = dynamicInfos;
+// window.ratings = ratings;
+
 function loadBarChartDownloadsCountData(shop_type)
 {
   var xN = [];
   var yN = [];
 
   // Date
-  for (var i = 0; i < window.globalAppData.dynamic_infos.length; i++)
+  for (var i = 0; i < window.dynamicInfos.length; i++)
   {
-    if (window.globalAppData.dynamic_infos[i].country == "ru")
-    if (window.globalAppData.dynamic_infos[i].shop_type == shop_type)
-    xN.push(window.globalAppData.dynamic_infos[i].date);
+    if (window.dynamicInfos[i].Country == "ru")
+    if (window.dynamicInfos[i].ShopType == shop_type)
+    xN.push(window.dynamicInfos[i].Date);
   }
 
   // Downloads
   // ru
   var index = 0;
   yN.push([]);
-  for(var i = 0; i < window.globalAppData.dynamic_infos.length; i++)
+  for(var i = 0; i < window.dynamicInfos.length; i++)
   {
-    if (window.globalAppData.dynamic_infos[i].country == "ru")
-    if (window.globalAppData.dynamic_infos[i].shop_type == shop_type)
-    yN[index].push(window.globalAppData.dynamic_infos[i].downloads)
+    if (window.dynamicInfos[i].Country == "ru")
+    if (window.dynamicInfos[i].ShopType == shop_type)
+    yN[index].push(window.dynamicInfos[i].Downloads)
   }
   index++
 
   // us
   yN.push([]);
-  for(var i = 0; i < window.globalAppData.dynamic_infos.length; i++)
+  for(var i = 0; i < window.dynamicInfos.length; i++)
   {
-    if (window.globalAppData.dynamic_infos[i].country == "us")
-    if (window.globalAppData.dynamic_infos[i].shop_type == shop_type)
-    yN[index].push(window.globalAppData.dynamic_infos[i].downloads)
+    if (window.dynamicInfos[i].Country == "us")
+    if (window.dynamicInfos[i].ShopType == shop_type)
+    yN[index].push(window.dynamicInfos[i].Downloads)
   }
   index++
 
@@ -58,30 +63,43 @@ const newDownloadBarChartElement = (width, height, data) =>
       {
         x: data.x,
         y: data.y[0],
-        name: 'Russian downloads',
+        name: 'Russian',
         stackgroup: 'one',
         line: {
           shape: 'spline',
           width: 2,
-          color: "#173F5F",
+          color: "#E8C448",
         },
       },
       {
         x: data.x,
         y: data.y[1],
-        name: 'United States downloads',
+        name: 'United States',
         stackgroup: 'one',
         line: {
           shape: 'spline',
           width: 2,
-          color: "#FFB40D",
+          color: "#6561FF",
         },
       },
     ]}
     layout=
     {
       {
-        showlegend: false,
+        legend: {
+          x: 0,
+          y: 1,
+          traceorder: 'normal',
+          font: {
+            family: 'sans-serif',
+            size: 12,
+            color: '#000'
+          },
+          bgcolor: '#FFFFFF',
+          bordercolor: '#FFFFFF',
+          borderRadius: 4,
+          borderwidth: 2
+        },
         margin: {
           l: 40,
           r: 35,
@@ -122,16 +140,6 @@ const newDownloadBarChartElement = (width, height, data) =>
       }
     }
   />
-  <div className='plot-cove-downloads-countries-container'>
-    <div className='plot-cove-downloads-countries-item'>
-      <div className='circle' style={{backgroundColor : "#173F5F"}}></div>
-      <div className='text'>United States</div>
-    </div>
-    <div className='plot-cove-downloads-countries-item'>
-      <div className='circle' style={{backgroundColor : "#FFB40D"}}></div>
-      <div className='text'>Russia</div>
-    </div>
-  </div>
 </>;
 
 function add_DownloadBarChart_with_latency(id,shop_type)
@@ -153,7 +161,7 @@ export default function DownloadsPlotTab() {
     <>
       <Grid container>
         <Grid item xs={12} sm={12}>
-          <div class="plot-cove-comments-title" >
+          <div className="plot-cove-comments-title" >
             <div style={{fontSize:"0.9rem", fontWeight:400, alignSelf:"self-start"}}>
                 Google Play
             </div>
@@ -163,16 +171,16 @@ export default function DownloadsPlotTab() {
                   width: 30,
                   height: 30,
                   borderRadius: 25,
-                  backgroundImage:'url("'+window.globalAppData.icon_url+'") ',
+                  backgroundImage:'url("'+window.applicationData.IconUrl+'") ',
                   backgroundSize: "cover",
                 }} >
               </div>
               <div style={{fontSize:"1.5rem", fontWeight:300}}>
-                  {window.globalAppData.title}
+                  {window.applicationData.Title}
               </div>
             </div>
             
-            <IconButton className="covei-badge-button" href={window.globalAppData.android_url}>
+            <IconButton className="covei-badge-button" href={window.applicationData.AndroidUrl}>
               <Icon style={
               {
                 width: "100px",
@@ -194,12 +202,12 @@ export default function DownloadsPlotTab() {
       
       <Grid container>
         <Grid item xs={12} sm={12}>
-          <div class="plot-cove-comments-title" >
+          <div className="plot-cove-comments-title" >
             <div style={{fontSize:"0.9rem", fontWeight:400, alignSelf:"self-start"}}>
                 App Store
             </div>
             
-            <IconButton className="covei-badge-button" href={window.globalAppData.apple_url}>
+            <IconButton className="covei-badge-button" href={window.applicationData.AppleUrl}>
               <Icon style={
               {
                 width: "97px",
