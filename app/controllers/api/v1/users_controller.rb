@@ -4,7 +4,7 @@ module Api
       def create
         app = App.find_by(title: app_params)
         user = User.find_or_create_by(user_params)
-        user.subscription.create([subscriber_id: subscriber.id, app_id: app.id])
+        user.subscription.create([user_id: user.id, app_id: app.id])
       end
 
       private
