@@ -1,6 +1,6 @@
 module Api
   module V1
-    class SubscribersController < ApplicationController
+    class UsersController < ApplicationController
       def create
         app = App.find_by(title: app_params)
         subscriber = Subscriber.find_or_create_by(sub_params)
