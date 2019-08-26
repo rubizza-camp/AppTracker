@@ -2,9 +2,8 @@ module Api
   module V1
     class UsersController < ApplicationController
       def create
-        app = App.find(app_params[:id])
         user = User.find_or_create_by(user_params)
-        user.subscription.create(app_id: app.id)
+        user.subscriptions.create(app_params)
       end
 
       private
@@ -14,7 +13,7 @@ module Api
       end
 
       def app_params
-        params.permit(:id)
+        params.permit(:app_id)
       end
     end
   end
