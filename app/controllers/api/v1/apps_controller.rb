@@ -7,7 +7,7 @@ module Api
       end
 
       def show
-        app = App.find_by title: params[:title]
+        app = App.find_by id: params[:id]
         if app.nil?
           render json: {}
         else
