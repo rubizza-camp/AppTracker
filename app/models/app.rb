@@ -25,5 +25,5 @@ class App < ApplicationRecord
   has_many :keywords, through: :apps_keywords
   has_many :similar_apps, dependent: :destroy
   has_many :subscriptions, dependent: :destroy
-  has_many :subscribers, through: :subscriptions
+  has_many :users, through: :subscriptions
 end
