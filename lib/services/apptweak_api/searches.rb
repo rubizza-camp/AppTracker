@@ -1,6 +1,6 @@
 class Services::ApptweakApi::Searches < Services::ApptweakApi::Base
-  def cost
-    5
+  def path
+    [HOST, shop_type, resource].compact.join('/')
   end
 
   def query

@@ -10,7 +10,7 @@ class Services::ApptweakApi::Base < Services::Base
   private
 
   def fetch
-    ::RestClient.get("#{HOST}/#{shop_type}/#{applications}#{id}#{id ? '/'  : ''}#{resource}.json?#{query}",
+    ::RestClient.get("#{path}.json?#{query}",
                      'X-Apptweak-Key': ApiToken.use(cost))
   end
   alias perform fetch
@@ -28,8 +28,12 @@ class Services::ApptweakApi::Base < Services::Base
   end
 
   def cost
-    raise 'set the cost'
+    5
   end
 
-  def applications; end
+  def path
+    [HOST, shop_type, 'applications', id, resource].compact.join('/')
+  end
 end
+# IOS Ratings NIL
+# IOS Rankings Bad request

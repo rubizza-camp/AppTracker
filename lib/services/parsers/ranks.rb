@@ -3,15 +3,12 @@ class Services::Parsers::Ranks < Services::Parsers::Base
 
   private
 
-  def parse
-    binding.pry
-    super&.fetch('ranks').fetch('ALL')
-    binding.pry
+  def path
+    super+['ranks', key]
   end
   alias perform parse
 
   def key
-    binding.pry
     { android: 'ALL', ios: '0' }[shop_type.to_sym]
   end
 end

@@ -1,51 +1,101 @@
-class Services::Updaters::Dynamic < Services::Updaters::Base
- 
+class Services::Updaters::Dynamic < Services::Base
+  attribute :downloads
+  attribute :power
+  attribute :ranks
+  attribute :current_app
+  attribute :country
+  attribute :start_date
+  attribute :dynamic_info
+
   private
 
-  def load_app_by_name(name)
-    cur_app = App.find_by(title: name)
-    update_call(cur_app) if cur_app
+  def take_app_by_name(name)
+    @current_app = App.find_by(title: name)
+    @start_date = Services::ApiDateManager.last_date(current_app.id)
+    return if start_date > Time.zone.today - 1
+    load_dynamic
   end
 
-  def load_all_app
+  def take_all_apps
     App.find_each do |cur_app|
-      update_call(cur_app)
+      @current_app = cur_app
+      @start_date = Services::ApiDateManager.last_date(current_app.id)
+      return if start_date > Time.zone.today - 1
+      load_dynamic
     end
   end
 
-  def update_call(cur_app)
-    return if cur_app.nil?
+  def load_downloads
+    @downloads = { android:
+                   Services::ApptweakApi::Downloads.call(id: current_app.android_app_id, start_date: start_date,
+                                                         shop_type: 'android'), 
+                   ios:
+                   Services::ApptweakApi::Downloads.call(id: current_app.apple_app_id, start_date: start_date,
+                                                         shop_type: 'ios', device: 'iphone') }
+  end
 
-    start_date = Services::ApiDateManager.last_date(cur_app.id)
-    return if start_date > (Time.zone.today - 1)
+  def load_power
+    @power = { android:
+                   Services::ApptweakApi::Power.call(id: current_app.android_app_id, start_date: start_date,
+                                                     shop_type: 'android'), 
+                   ios:
+                   Services::ApptweakApi::Power.call(id: current_app.apple_app_id, start_date: start_date,
+                                                     shop_type: 'ios', device: 'iphone') }
+  end
 
-    @downloads_android = AppDownloadsLoader.call('android', cur_app.android_app_id, start_date)
-    @downloads_apple = AppDownloadsLoader.call('ios', cur_app.apple_app_id, start_date, '&device=iphone')
+  def load_rankings
+    @rankings = { android:
+                   Services::ApptweakApi::Rankings.call(id: current_app.android_app_id, start_date: start_date,
+                                                        shop_type: 'android')
+                   ios:
+                   Services::ApptweakApi::Rankings.call(id: current_app.apple_app_id, start_date: start_date,
+                                                        shop_type: 'ios', device: 'iphone') }
+  end
+
+  def load_dynamic
+    load_power
+    load_rankings
+    load_downloads
+    parse_dynamic
+  end
+
+  def parse_dynamic
     TargetCountry.pluck(:country_name).each do |country|
-      dynamic_response(country)
+      @country = country
+      parse_downloads
+      parse_power
+      parse_ranks
+      update_app
     end
   end
 
-  def dynamic_response(country)
-    parsed_downloads_android = AppDownloadsParser.call(downloads_android, country)
-    parsed_downloads_apple = AppDownloadsParser.call(downloads_apple, country)
-    @dynamic_info_android = AppDynamicLoader.call('android', cur_app.android_app_id, start_date,
-                                                  country).merge(parsed_downloads_android)
-    @dynamic_info_apple = AppDynamicLoader.call('ios', cur_app.apple_app_id, start_date, country,
-                                                '&device=iphone').merge(parsed_downloads_apple)
+  def parse_downloads
+    @dynamic_info[:downloads] = { andriod:
+      Services::Parsers::Downloads.call(response: downloads[:andriod], shop_type: 'android', country: country),
+      ios:
+      Services::Parsers::Downloads.call(response: downloads[:ios], shop_type: 'ios', country: country) }
   end
 
-  def call_update_dynamic
-    update_dynamic(dynamic_info_android, { cur_app: cur_app, country: country, start_date: start_date }, 'android')
-    update_dynamic(dynamic_info_apple, { cur_app: cur_app, country: country, start_date: start_date },
-                   'ios', 'iphone')
+  def parse_power
+    @dynamic_info[:power] = { android:
+      Services::Parsers::Power.call(response: power[:andriod], shop_type: 'android', country: country),
+      ios:
+      Services::Parsers::Power.call(response: power[:ios], shop_type: 'ios', country: country) }
   end
 
-  def update_dynamic(dynamic_info, params, shop_type, device = '')
-    (params[:start_date]..(Time.zone.today - 1)).each_with_index do |cur_date, index|
-      DynamicInfo.create(country: params[:country], date: cur_date.to_s, rank: dynamic_info[:ranks][index],
+  def parse_ranks
+    @dynamic_info[:ranks] = { android:
+      Services::Parsers::Ranks.call(response: ranks[:andriod], shop_type: 'android', country: country),
+      ios:
+      Services::Parsers::Ranks.call(response: ranks[:ios], shop_type: 'ios', country: country) }
+  end
+
+  def update_app
+    (dynamic_info[:ranks][:start_date]..(dynamic_info[:ranks][:end_date])).each_with_index do |current_date, index|
+      DynamicInfo.create(country: country, date: current_date.to_s, rank: dynamic_info[:ranks][index],
                          power: dynamic_info[:power][index], downloads: dynamic_info[:downloads][index],
-                         shop_type: shop_type, device: device, app_id: params[:cur_app].id)
+                         shop_type: dynamic_info[:power][shop_type], device: dynamic_info[:power][:device],
+                         app_id: current_app.id)
     end
   end
 end

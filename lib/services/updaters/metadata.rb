@@ -1,4 +1,4 @@
-class Services::Updaters::Metadata < Services::Updaters::Base
+class Services::Updaters::Metadata < Services::Base
 
   private
 

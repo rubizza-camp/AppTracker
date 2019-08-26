@@ -1,4 +1,4 @@
-class Services::Updaters::Ratings < Services::Updaters::Base
+class Services::Updaters::Ratings < Services::Base
 
   private
 
@@ -35,6 +35,4 @@ class Services::Updaters::Ratings < Services::Updaters::Base
                     date: cur_date.to_s, app_id: cur_app.id)
     end
   end
-
-
 end
