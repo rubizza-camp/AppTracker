@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   namespace 'api' do
     namespace 'v1' do
       resources :apps, param: :title, only: %i[index show] do
-        resources :subscribers
+        resources :subscribers, only: [:create]
       end
     end
   end

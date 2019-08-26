@@ -3,13 +3,13 @@ module Api
     class UsersController < ApplicationController
       def create
         app = App.find_by(title: app_params)
-        subscriber = Subscriber.find_or_create_by(sub_params)
-        Subscription.create([subscriber_id: subscriber.id, app_id: app.id])
+        user = User.find_or_create_by(user_params)
+        user.subscription.create([subscriber_id: subscriber.id, app_id: app.id])
       end
 
       private
 
-      def sub_params
+      def user_params
         params.permit(:email)
       end
 
