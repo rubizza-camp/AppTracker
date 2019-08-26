@@ -35,7 +35,7 @@ class Services::Updaters::Dynamic < Services::Base
   end
 
   def load_power
-    @power = { android:
+    @power = {     android:
                    Services::ApptweakApi::Power.call(id: current_app.android_app_id, start_date: start_date,
                                                      shop_type: 'android'), 
                    ios:
@@ -44,7 +44,7 @@ class Services::Updaters::Dynamic < Services::Base
   end
 
   def load_rankings
-    @rankings = { android:
+    @rankings = {  android:
                    Services::ApptweakApi::Rankings.call(id: current_app.android_app_id, start_date: start_date,
                                                         shop_type: 'android')
                    ios:
@@ -65,36 +65,41 @@ class Services::Updaters::Dynamic < Services::Base
       parse_downloads
       parse_power
       parse_ranks
-      update_app
+      update_app(:andriod)
+      update_app(:ios)
     end
   end
 
   def parse_downloads
-    @dynamic_info[:downloads] = { andriod:
+    @dynamic_info[:downloads] = {
+      andriod:
       Services::Parsers::Downloads.call(response: downloads[:andriod], shop_type: 'android', country: country),
       ios:
       Services::Parsers::Downloads.call(response: downloads[:ios], shop_type: 'ios', country: country) }
   end
 
   def parse_power
-    @dynamic_info[:power] = { android:
+    @dynamic_info[:power] = {
+      android:
       Services::Parsers::Power.call(response: power[:andriod], shop_type: 'android', country: country),
       ios:
       Services::Parsers::Power.call(response: power[:ios], shop_type: 'ios', country: country) }
   end
 
   def parse_ranks
-    @dynamic_info[:ranks] = { android:
+    @dynamic_info[:ranks] = {
+      android:
       Services::Parsers::Ranks.call(response: ranks[:andriod], shop_type: 'android', country: country),
       ios:
       Services::Parsers::Ranks.call(response: ranks[:ios], shop_type: 'ios', country: country) }
   end
 
-  def update_app
-    (dynamic_info[:ranks][:start_date]..(dynamic_info[:ranks][:end_date])).each_with_index do |current_date, index|
-      DynamicInfo.create(country: country, date: current_date.to_s, rank: dynamic_info[:ranks][index],
-                         power: dynamic_info[:power][index], downloads: dynamic_info[:downloads][index],
-                         shop_type: dynamic_info[:power][shop_type], device: dynamic_info[:power][:device],
+  def update_app(shop_type)
+    (dynamic_info[:ranks][shop_type][:start_date]..(dynamic_info[:ranks][shop_type][:end_date])).each_with_index do |current_date, index|
+      DynamicInfo.create(country: country, date: current_date.to_s, rank: dynamic_info[:ranks][shop_type][index],
+                         power: dynamic_info[:power][shop_type][index],
+                         downloads: dynamic_info[:downloads][shop_type][index],
+                         shop_type: shop_type, device: dynamic_info[:power][shop_type][:device],
                          app_id: current_app.id)
     end
   end
