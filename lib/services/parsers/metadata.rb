@@ -8,7 +8,7 @@ class Services::Parsers::Metadata < Services::Parsers::Base
   def parse
     content = super
     return unless super
-    { android_app_id: ids[:android_app_id], apple_app_id: ids[:apple_app_id], title: content.fetch('title'),
+    { android_app_id: ids[:android_app_id], apple_app_id: ids[:apple_app_id], title: content.fetch('title').downcase,
       icon_url: content.fetch('icon'), short_description: content.fetch('short_description'),
       long_description: content.fetch('description'), 
       content_rating: content.fetch('content_rating'),

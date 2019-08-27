@@ -36,9 +36,9 @@ class Services::Updaters::Dynamic < Services::Base
   end
 
   def date
-    dynamic = current_app.dynamic_infos.where(shop_type: shop_type).order(date: :desc).limit(1).first
-    if dynamic
-      @start_date = dynamic.date
+    record = current_app.dynamic_infos.where(shop_type: shop_type).order(date: :desc).limit(1).first
+    if record
+      @start_date = record.date
     else
       @start_date = Time.zone.today - 1.month
     end 

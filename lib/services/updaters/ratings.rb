@@ -1,38 +1,68 @@
 class Services::Updaters::Ratings < Services::Base
+  attribute :current_app
+  attribute :shop_type
+  attribute :country
+  attribute :start_date
+  attribute :device
+  attribute :id
 
   private
 
-  def response_load(name)
-    update_call(App.find_by(title: name))
+  def perform
+    load_by_android
+    load_by_ios
   end
 
-  def response_load_all
-    App.find_each do |cur_app|
-      update_call(cur_app)
+  def load_by_android
+    @shop_type = 'android'
+    @device = nil
+    @id = current_app.android_app_id
+    date
+    return if @start_date > Time.zone.today - 2
+    update_app
+  end
+
+  def load_by_ios
+    @shop_type = 'ios'
+    @device = 'iphone'
+    @id = current_app.apple_app_id
+    date
+    return if @start_date > Time.zone.today - 2
+    update_app
+  end
+
+  def update_app
+    TargetCountry.pluck(:country_name).each do |country|
+      @country = country
+      update_ratings(parse_ratings(load_ratings))
     end
   end
 
-  def update_call(cur_app)
-    return if cur_app.nil?
-
-    start_date = Services::ApiDateManager.last_date(cur_app.id)
-    return if start_date > (Time.zone.today - 1)
-
-    response_android = AppRatingsLoader.call('android', cur_app.android_app_id, start_date)
-    response_apple = AppRatingsLoader.call('ios', cur_app.apple_app_id, start_date)
-    parsed_response_android = 
-    update_rating(response_android, cur_app, start_date, 'android')
-    update_rating(response_apple, cur_app, start_date, 'ios')
+  def load_ratings
+    Services::ApptweakApi::Ratings.call(id: id, start_date: start_date, country: country,
+                                        shop_type: shop_type, device: device) 
   end
 
-  def update_rating(response, cur_app, start_date, shop_type)
-    (start_date..(Time.zone.today - 1)).each_with_index do |cur_date, index|
-      @ind = index
-      Rating.create(rating_1: rating_1_response(response), rating_2: rating_2_response(response),
-                    rating_3: rating_3_response(response), rating_4: rating_4_response(response),
-                    rating_5: rating_5_response(response), total_rating: rating_total_response(response),
-                    average_rating: rating_avg_response(response), shop_type: shop_type,
-                    date: cur_date.to_s, app_id: cur_app.id)
+  def parse_ratings(response)
+    Services::Parsers::Ratings.call(response: response)
+  end
+
+  def update_ratings(response)
+    (start_date..(Time.zone.today - 1)).each_with_index do |current_date, index|
+      Rating.create(rating_1: response[index]['1'], rating_2: response[index]['2'],
+                    rating_3: response[index]['3'], rating_4: response[index]['4'],
+                    rating_5: response[index]['5'], total_rating: response[index]['total'],
+                    average_rating: response[index]['avg'], shop_type: shop_type,
+                    date: current_date.to_s, app_id: current_app.id)
     end
+  end
+
+  def date
+    record = current_app.ratings.where(shop_type: shop_type).order(date: :desc).limit(1).first
+    if record
+      @start_date = record.date
+    else
+      @start_date = Time.zone.today - 1.month
+    end 
   end
 end
