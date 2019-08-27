@@ -4,14 +4,20 @@ namespace :db do
   namespace :app do
     namespace :update do
       task all: :environment do
-        Services::ApiData.update_app_all
+        App.find_each |current_app| do
+          Services::UpdateManager.call(current_app)
+        end
       end
     end
 
     desc 'Updates specific app data (use db:app:update:all to update all apps)'
     task update: :environment do
       ARGV.each { |arg| task arg.to_sym }
-      Services::ApiData.update_app(ARGV.last)
+      unless App.find_by(title: ARGV.last)
+        Services::UpdateManager.call(Services::UpdateManager.update_meta(ARGV.last))
+      else
+        Services::UpdateManager.call(App.find_by(title: ARGV.last))
+      end
     end
   end
 end

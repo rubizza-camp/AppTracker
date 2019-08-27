@@ -6,6 +6,7 @@ class Services::ApptweakApi::Base < Services::Base
   attribute :end_date
   attribute :term
   attribute :device
+  attribute :country
 
   private
 
@@ -35,5 +36,3 @@ class Services::ApptweakApi::Base < Services::Base
     [HOST, shop_type, 'applications', id, resource].compact.join('/')
   end
 end
-# IOS Ratings NIL
-# IOS Rankings Bad request
