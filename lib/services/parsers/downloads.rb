@@ -1,6 +1,10 @@
-class Services::Parsers::Downloads < Services::Parsers::Base
-  def parse
-    super&.first&.fetch('downloads')
+class Services < Services::Parsers::Base
+  class Parsers
+    class Downloads
+      def parse
+        super&.first&.fetch('downloads')
+      end
+      alias perform parse
+    end
   end
-  alias perform parse
 end

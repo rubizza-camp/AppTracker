@@ -1,20 +1,24 @@
-class Services::Parsers::Base < Services::Base
-  attribute :response
-  attribute :country
-  attribute :field_name
+class Services < Services::Base
+  class Parsers
+    class Base
+      attribute :response
+      attribute :country
+      attribute :field_name
 
-  private
+      private
 
-  def parse
-    ::JSON.parse(response).dig(*path)
-  end
-  alias perform parse
+      def parse
+        ::JSON.parse(response).dig(*path)
+      end
+      alias perform parse
 
-  def field_name
-    @field_name ||= self.class.name.demodulize.downcase
-  end
+      def field_name
+        @field_name ||= self.class.name.demodulize.downcase
+      end
 
-  def path
-    ['content', country].compact
+      def path
+        ['content', country].compact
+      end
+    end
   end
 end

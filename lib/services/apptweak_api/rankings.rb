@@ -1,2 +1,6 @@
-class Services::ApptweakApi::Rankings < Services::ApptweakApi::Base
+class Services < Services::ApptweakApi::Base
+  class ApptweakApi
+    class Rankings
+    end
+  end
 end

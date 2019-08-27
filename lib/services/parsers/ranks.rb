@@ -1,14 +1,18 @@
-class Services::Parsers::Ranks < Services::Parsers::Base
-  attribute :shop_type
+class Services < Services::Parsers::Base
+  class Parsers
+    class Ranks
+      attribute :shop_type
 
-  private
+      private
 
-  def path
-    super+['ranks', key]
-  end
-  alias perform parse
+      def path
+        super + ['ranks', key]
+      end
+      alias perform parse
 
-  def key
-    { android: 'ALL', ios: '0' }[shop_type.to_sym]
+      def key
+        { android: 'ALL', ios: '0' }[shop_type.to_sym]
+      end
+    end
   end
 end
