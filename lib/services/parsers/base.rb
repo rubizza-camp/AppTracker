@@ -1,6 +1,7 @@
 class Services::Parsers::Base < Services::Base
   attribute :response
   attribute :country
+  attribute :field_name
 
   private
 

@@ -8,6 +8,6 @@ class Services::UpdateManager < Services::Base
 
   def perform
     Services::Updaters::Dynamic.call(current_app: current_app)
-    Services::Updaters::Ratings.call(current_app: current_app)
+    # Services::Updaters::Ratings.call(current_app: current_app)
   end
 end
