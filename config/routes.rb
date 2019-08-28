@@ -12,4 +12,6 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  get '/:token/confirm_email/', :to => "users#confirm_email", as: 'confirm_email'
 end

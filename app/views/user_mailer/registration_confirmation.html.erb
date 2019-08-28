@@ -2,4 +2,4 @@ Hi <%= @user.name %>,
 
 To confirm your registration click the URL below.
 
-<p> there should be link to confirm</p>
+<%=  link_to "confirm", confirm_email_url(@user.confirm_token, host: "http://:3000")%>

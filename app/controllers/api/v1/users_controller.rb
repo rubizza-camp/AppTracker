@@ -2,9 +2,20 @@ module Api
   module V1
     class UsersController < ApplicationController
       def create
-        user = User.find_or_create_by(user_params)
-        user.subscriptions.create(app_params)
+        @user = User.new(params[:email])
+        @user.set_confirmation_token
+        @user.save(validate: false)
+        UserMailer.registration_confirmation(@user).deliver_now
+        # @user.subscriptions.create(app_params)
       end
+
+      def confirm_email
+        user = User.find_by_confirm_token(params[:token])
+        user.validate_email
+        user.save(validate: false)
+        redirect_to user
+      end
+
 
       private
 
