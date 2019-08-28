@@ -1,5 +1,5 @@
-Hi <%= @user.name %>,
+<!--Hi <%#= @user.name %>,-->
 
 To confirm your registration click the URL below.
 
-<%=  link_to "confirm", confirm_email_url(@user.confirm_token, host: "http://:3000")%>
+<%=  link_to "confirm", confirm_email_url(@user.confirm_token, host: "localhost:3000")%>
