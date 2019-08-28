@@ -1,6 +1,6 @@
-class Services < Services::ApptweakApi::Base
-  class ApptweakApi
-    class Searches
+module Services
+  module ApptweakApi
+    class Searches < Services::ApptweakApi::Base
       def path
         [HOST, shop_type, resource].compact.join('/')
       end

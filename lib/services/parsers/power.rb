@@ -1,10 +1,9 @@
-class Services < Services::Parsers::Base
-  class Parsers
-    class Power
-      def parse
+module Services
+  module Parsers
+    class Power < Services::Parsers::Base
+      def perform
         super&.first&.fetch('power')
       end
-      alias perform parse
     end
   end
 end

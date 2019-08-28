@@ -1,5 +1,5 @@
-class Services < Services::Base
-  class UpdateManager
+module Services
+  class UpdateManager < Services::Base
     attribute :term
     attribute :current_app
 

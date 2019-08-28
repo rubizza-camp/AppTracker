@@ -1,6 +1,6 @@
-class Services < Services::ApptweakApi::Base
-  class ApptweakApi
-    class Power
+module Services
+  module ApptweakApi
+    class Power < Services::ApptweakApi::Base
     end
   end
 end

@@ -1,6 +1,6 @@
-class Services < Services::Parsers::Base
-  class Parsers
-    class Ranks
+module Services
+  module Parsers
+    class Ranks < Services::Parsers::Base
       attribute :shop_type
 
       private
@@ -8,7 +8,6 @@ class Services < Services::Parsers::Base
       def path
         super + ['ranks', key]
       end
-      alias perform parse
 
       def key
         { android: 'ALL', ios: '0' }[shop_type.to_sym]

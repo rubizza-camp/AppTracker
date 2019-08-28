@@ -1,6 +1,6 @@
-class Services < Services::ApptweakApi::Base
-  class ApptweakApi
-    class Metadata
+module Services
+  module ApptweakApi
+    class Metadata < Services::ApptweakApi::Base
     end
   end
 end

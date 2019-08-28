@@ -1,6 +1,6 @@
-class Services < Services::Base
-  class ApptweakApi
-    class Base
+module Services
+  module ApptweakApi
+    class Base < Services::Base
       HOST = 'https://api.apptweak.com'.freeze
       attribute :shop_type
       attribute :id
@@ -12,11 +12,10 @@ class Services < Services::Base
 
       private
 
-      def fetch
+      def perform
         ::RestClient.get("#{path}.json?#{query}",
                          'X-Apptweak-Key': ApiToken.use(cost))
       end
-      alias perform fetch
 
       def end_date
         Time.zone.today - 1

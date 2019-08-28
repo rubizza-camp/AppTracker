@@ -1,6 +1,6 @@
-class Services < Services::Parsers::Base
-  class Parsers
-    class Ratings
+module Services
+  module Parsers
+    class Ratings < Services::Parsers::Base
       def path
         super + ['ratings']
       end

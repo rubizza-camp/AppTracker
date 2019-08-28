@@ -1,6 +1,6 @@
-class Services < Services::Base
-  class Updaters
-    class Dynamic
+module Services
+  module Updaters
+    class Dynamic < Services::Base
       attr_reader :downloads, :power, :ranks
       attribute :current_app
       attribute :country

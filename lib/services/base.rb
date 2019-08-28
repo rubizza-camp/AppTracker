@@ -1,4 +1,4 @@
-class Services
+module Services
   class Base
     include Virtus.model
 

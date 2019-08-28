@@ -1,6 +1,6 @@
-class Services < Services::Base
-  class Updaters
-    class Ratings
+module Services
+  module Updaters
+    class Ratings < Services::Base
       attribute :current_app
       attribute :shop_type
       attribute :country

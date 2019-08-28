@@ -1,6 +1,6 @@
-class Services < Services::Base
-  class Updaters
-    class Metadata
+module Services
+  module Updaters
+    class Metadata < Services::Base
       attr_reader :ids
       attribute :term
 

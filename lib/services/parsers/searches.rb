@@ -1,12 +1,11 @@
-class Services < Services::Parsers::Base
-  class Parsers
-    class Searches
+module Services
+  module Parsers
+    class Searches < Services::Parsers::Base
       private
 
-      def parse
+      def perform
         super&.first&.fetch('id')
       end
-      alias perform parse
     end
   end
 end

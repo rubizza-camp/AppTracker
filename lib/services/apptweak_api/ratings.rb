@@ -1,6 +1,6 @@
-class Services < Services::ApptweakApi::Base
-  class ApptweakApi
-    class Ratings
+module Services
+  module ApptweakApi
+    class Ratings < Services::ApptweakApi::Base
     end
   end
 end
