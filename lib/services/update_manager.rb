@@ -1,12 +1,12 @@
 module Services
   class UpdateManager < Services::Base
     attribute :term
-    attribute :current_app
+    attribute :app
 
     def perform
-      @current_app = Services::Updaters::Metadata.call(term: term) if term
-      Services::Updaters::Dynamic.call(current_app: current_app)
-      Services::Updaters::Ratings.call(current_app: current_app)
+      @app = Services::Updaters::Metadata.call(term: term) if term
+      Services::Updaters::Dynamic.call(current_app: app)
+      Services::Updaters::Ratings.call(current_app: app)
     end
   end
 end

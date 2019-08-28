@@ -11,18 +11,18 @@ module Services
       private
 
       def perform
-        load_by_android
-        load_by_ios
+        init_params_by_android
+        init_params_by_ios
       end
 
-      def load_by_android
+      def init_params_by_android
         @shop_type = 'android'
         @device = nil
         @id = current_app.android_app_id
         update_app
       end
 
-      def load_by_ios
+      def init_params_by_ios
         @shop_type = 'ios'
         @device = 'iphone'
         @id = current_app.apple_app_id
@@ -32,8 +32,8 @@ module Services
       def update_app
         TargetCountry.pluck(:country_name).each do |country|
           @country = country
-          date
-          next if @start_date > Time.zone.today - 1
+          set_start_date
+          next if start_date > Time.zone.today - 1
 
           update_ratings(parse_ratings(load_ratings))
         end
@@ -60,13 +60,9 @@ module Services
         end
       end
 
-      def date
+      def set_start_date
         record = current_app.ratings.where(shop_type: shop_type, country: country).order(date: :desc).limit(1).first
-        @start_date = if record
-                        record.date + 1
-                      else
-                        Time.zone.today - 1.month
-                      end
+        @start_date = record ? record.date + 1 : Time.zone.today - 1.month
       end
     end
   end
