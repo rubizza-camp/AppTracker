@@ -9,7 +9,7 @@
 #  rating_4       :integer
 #  rating_5       :integer
 #  total_rating   :integer
-#  average_rating :integer
+#  average_rating :float
 #  shop_type      :string
 #  date           :date
 #  app_id         :bigint
