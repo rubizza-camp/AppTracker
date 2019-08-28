@@ -23,9 +23,6 @@ module Services
         @shop_type = 'android'
         @device = nil
         @id = current_app.android_app_id
-        date
-        return if @start_date > Time.zone.today - 1
-
         update_app
       end
 
@@ -33,14 +30,12 @@ module Services
         @shop_type = 'ios'
         @device = 'iphone'
         @id = current_app.apple_app_id
-        date
-        return if @start_date > Time.zone.today - 1
-
         update_app
       end
 
       def date
-        record = current_app.dynamic_infos.where(shop_type: shop_type).order(date: :desc).limit(1).first
+        record = current_app.dynamic_infos.where(shop_type: shop_type,
+                                                 country: country).order(date: :desc).limit(1).first
         @start_date = if record
                         record.date + 1
                       else
@@ -49,9 +44,13 @@ module Services
       end
 
       def update_app
+        @start_date = Time.zone.today - 1.month
         load_downloads
         TargetCountry.pluck(:country_name).each do |country|
           @country = country
+          date
+          next if @start_date > Time.zone.today - 1
+
           load_power
           load_rankings
           parse_dynamic
