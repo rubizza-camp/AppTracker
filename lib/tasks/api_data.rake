@@ -11,10 +11,10 @@ namespace :db do
     desc 'Updates specific app data (use db:app:update:all to update all apps)'
     task update: :environment do
       ARGV.each { |arg| task arg.to_sym }
-      unless App.find_by(title: ARGV.last.downcase)
-        Services::UpdateManager.call(term: ARGV.last)
-      else
+      if App.find_by(title: ARGV.last.downcase)
         Services::UpdateManager.call(current_app: App.find_by(title: ARGV.last))
+      else
+        Services::UpdateManager.call(term: ARGV.last)
       end
     end
   end
