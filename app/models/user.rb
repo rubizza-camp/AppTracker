@@ -14,15 +14,9 @@ class User < ApplicationRecord
   has_many :subscriptions, dependent: :destroy
   has_many :apps, through: :subscriptions
 
-  def validate_email
-    self.email_confirmed = true
-    self.confirm_token = nil
-    save!(validate: false)
-  end
-
   private
 
   def set_confirmation_token
-    self.confirm_token = SecureRandom.urlsafe_base64.to_s if confirm_token.blank?
+    self.confirmation_token = SecureRandom.urlsafe_base64.to_s if confirmation_token.blank?
   end
 end

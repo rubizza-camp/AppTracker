@@ -3,15 +3,14 @@ module Api
     class UsersController < ApplicationController
       def create
         @user = User.new(user_params)
-        @user.save(validate: false)
+        @user.save
         @user.subscriptions.create(app_params)
         UserMailer.registration_confirmation(@user).deliver_now
       end
 
       def confirm_email
-        user = User.find_by(confirm_token: params[:token])
-        user.validate_email
-        user.save(validate: false)
+        user = User.find_by(confirmation_token: params[:token])
+        user.update(confirmation_token: nil)
         redirect_to 'https://apptracker.club'
       end
 
