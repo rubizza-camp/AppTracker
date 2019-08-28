@@ -9,7 +9,7 @@ module Api
       end
 
       def confirm_email
-        user = User.find_by_confirm_token(params[:token])
+        user = User.find_by(confirm_token: params[:token])
         user.validate_email
         user.save(validate: false)
         redirect_to 'https://apptracker.club'

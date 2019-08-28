@@ -17,14 +17,12 @@ class User < ApplicationRecord
   def validate_email
     self.email_confirmed = true
     self.confirm_token = nil
-    save!(:validate => false)
+    save!(validate: false)
   end
 
   private
 
   def set_confirmation_token
-    if self.confirm_token.blank?
-      self.confirm_token = SecureRandom.urlsafe_base64.to_s
-    end
+    self.confirm_token = SecureRandom.urlsafe_base64.to_s if confirm_token.blank?
   end
 end
