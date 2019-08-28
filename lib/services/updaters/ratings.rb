@@ -20,7 +20,7 @@ module Services
         @device = nil
         @id = current_app.android_app_id
         date
-        return if @start_date > Time.zone.today - 2
+        return if @start_date > Time.zone.today - 1
 
         update_app
       end
@@ -30,7 +30,7 @@ module Services
         @device = 'iphone'
         @id = current_app.apple_app_id
         date
-        return if @start_date > Time.zone.today - 2
+        return if @start_date > Time.zone.today - 1
 
         update_app
       end
@@ -57,14 +57,14 @@ module Services
                         rating_3: response[index]['3'], rating_4: response[index]['4'],
                         rating_5: response[index]['5'], total_rating: response[index]['total'],
                         average_rating: response[index]['avg'], shop_type: shop_type,
-                        date: current_date.to_s, app_id: current_app.id)
+                        date: current_date.to_s, app_id: current_app.id, country: country)
         end
       end
 
       def date
         record = current_app.ratings.where(shop_type: shop_type).order(date: :desc).limit(1).first
         @start_date = if record
-                        record.date
+                        record.date + 1
                       else
                         Time.zone.today - 1.month
                       end

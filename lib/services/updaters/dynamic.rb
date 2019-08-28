@@ -24,7 +24,7 @@ module Services
         @device = nil
         @id = current_app.android_app_id
         date
-        return if @start_date > Time.zone.today - 2
+        return if @start_date > Time.zone.today - 1
 
         update_app
       end
@@ -34,7 +34,7 @@ module Services
         @device = 'iphone'
         @id = current_app.apple_app_id
         date
-        return if @start_date > Time.zone.today - 2
+        return if @start_date > Time.zone.today - 1
 
         update_app
       end
@@ -42,7 +42,7 @@ module Services
       def date
         record = current_app.dynamic_infos.where(shop_type: shop_type).order(date: :desc).limit(1).first
         @start_date = if record
-                        record.date
+                        record.date + 1
                       else
                         Time.zone.today - 1.month
                       end
