@@ -32,6 +32,7 @@ gem 'rubocop-rails', '>= 2.3.1'
 gem 'rubocop-rspec', '>= 1.35.0'
 gem 'virtus', '~> 1.0.5'
 gem 'fast_jsonapi', '>= 1.5'
+gem 'sidekiq', '>= 5.2.7'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
