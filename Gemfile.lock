@@ -296,8 +296,8 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   travis (>= 1.8.10)
   tzinfo-data (>= 1.2019.2)
-  whenever (>= 1.0.0)
   virtus (~> 1.0.5)
+  whenever (>= 1.0.0)
 
 RUBY VERSION
    ruby 2.6.2p47
