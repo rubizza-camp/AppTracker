@@ -13,6 +13,7 @@
 #  shop_type      :string
 #  date           :date
 #  app_id         :bigint
+#  country        :string
 #
 
 class RatingSerializer < BaseSerializer
