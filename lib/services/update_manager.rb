@@ -4,14 +4,14 @@ module Services
     attribute :app
 
     def perform
-      app_search
-      @app = Services::Updaters::Metadata.call(term: title) if app.nil?
+      fetch_app
       Services::Updaters::Dynamic.call(current_app: app)
       Services::Updaters::Ratings.call(current_app: app)
     end
 
-    def app_search
+    def fetch_app
       @app = App.find_by(term: title)
+      @app = Services::Updaters::Metadata.call(term: title) if app.nil?
     end
   end
 end
