@@ -4,7 +4,7 @@ module Services
     attribute :app
 
     def perform
-      fetch_app
+      fetch_app if title
       Services::Updaters::Dynamic.call(current_app: app)
       Services::Updaters::Ratings.call(current_app: app)
     end
