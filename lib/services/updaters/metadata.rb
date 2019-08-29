@@ -8,6 +8,7 @@ module Services
       def perform
         android_id = Services::Parsers::Searches.call(response:
           Services::ApptweakApi::Searches.call(term: term, shop_type: 'android'))
+        return if App.find_by(android_app_id: android_id)
         apple_id = Services::Parsers::Searches.call(response:
           Services::ApptweakApi::Searches.call(term: term, shop_type: 'ios'))
         ids = { android_app_id: android_id, apple_app_id: apple_id }

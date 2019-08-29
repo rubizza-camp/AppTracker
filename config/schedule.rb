@@ -1,5 +1,7 @@
-set :output, '/log/croncron_log.log'
+set :environment, 'development'
+set :output, "/log/cron_log.log"
+set :job_template, nil
 
-every 5.minutes, at: '11:53 am' do
+every 1.minute do
   rake 'db:app:update:all'
 end
