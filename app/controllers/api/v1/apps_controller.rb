@@ -14,6 +14,11 @@ module Api
           render json: AppSerializer.new(app, include: %i[ratings dynamic_infos])
         end
       end
+
+      def create
+        Services::UpdateManager.call(title: params[:title])
+        render json: :successfully_created, status: :ok
+      end
     end
   end
 end
