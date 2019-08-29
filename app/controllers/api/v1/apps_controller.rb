@@ -17,7 +17,7 @@ module Api
 
       def create
         Services::UpdateManager.call(title: params[:title])
-        render json: {'Successfully created'}
+        render json: :successfully_created, status: :ok
       end
     end
   end
