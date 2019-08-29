@@ -57,13 +57,10 @@ GEM
       msgpack (~> 1.0)
     builder (3.2.3)
     byebug (11.0.1)
-<<<<<<< HEAD
     chronic (0.10.2)
-=======
     coderay (1.1.2)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
->>>>>>> origin/master
     concurrent-ruby (1.1.5)
     connection_pool (2.2.2)
     crass (1.0.4)
@@ -298,13 +295,9 @@ DEPENDENCIES
   spring (>= 2.1.0)
   spring-watcher-listen (~> 2.0.0)
   travis (>= 1.8.10)
-<<<<<<< HEAD
-  tzinfo-data
-  whenever (>= 1.0.0)
-=======
   tzinfo-data (>= 1.2019.2)
   virtus (~> 1.0.5)
->>>>>>> origin/master
+  whenever (>= 1.0.0)
 
 RUBY VERSION
    ruby 2.6.2p47
