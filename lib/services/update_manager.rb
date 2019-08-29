@@ -10,8 +10,8 @@ module Services
     end
 
     def fetch_app
-      @app = App.find_by(term: title)
-      @app = Services::Updaters::Metadata.call(term: title) if app.nil?
+      @app = App.find_by(title: title)
+      @app = Services::Updaters::Metadata.call(term: title) unless app
     end
   end
 end
