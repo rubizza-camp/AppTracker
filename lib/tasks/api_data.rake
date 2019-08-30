@@ -3,7 +3,7 @@ namespace :db do
     namespace :update do
       task all: :environment do
         App.find_each do |current_app|
-          Services::UpdateManager.call(current_app: current_app)
+          Services::UpdateManager.call(app: current_app)
         end
       end
     end
