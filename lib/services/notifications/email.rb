@@ -2,19 +2,17 @@ module Services
   module Notifications
     class Email
       def initialize
-        @id_to_emails = {}
+        @title = title
       end
 
       private
 
-      def id_to_email_list
-        hash = Hash.new { |h, k| h[k] = [] }
-        App.find_each do |app|
-          app.users.each do |user|
-            hash[app.id] << user.email
-          end
+      def emails_list(@title)
+        arr = []
+        App.find_by(title: @title).users.each do |user|
+          arr << user.email
         end
-        @id_to_emails = hash
+        arr
       end
     end
   end
