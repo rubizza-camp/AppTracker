@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_28_073258) do
-
+ActiveRecord::Schema.define(version: 2019_08_30_120510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +47,7 @@ ActiveRecord::Schema.define(version: 2019_08_28_073258) do
     t.string "dev_name"
     t.string "dev_email"
     t.string "dev_website"
+    t.integer "rating"
   end
 
   create_table "apps_keywords", force: :cascade do |t|
@@ -134,8 +134,7 @@ ActiveRecord::Schema.define(version: 2019_08_28_073258) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "email_confirmed", default: false
-    t.string "confirm_token"
+    t.string "confirmation_token"
   end
 
   add_foreign_key "apps_keywords", "apps"
