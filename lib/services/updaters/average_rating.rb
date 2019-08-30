@@ -7,12 +7,13 @@ module Services
       private
 
       def perform
-        @average_rating = average_rating
+        calculate_average_rating
         update_average
       end
 
-      def average_rating
-        Rating.where(app_id: current_app.id, date: Time.zone.yesterday).average(:average_rating).round
+      def calculate_average_rating
+        @average_rating =
+          Rating.where(app_id: current_app.id, date: Time.zone.yesterday).average(:average_rating).round
       end
 
       def update_average
