@@ -2,7 +2,9 @@ module Api
   module V1
     class AppsController < ApplicationController
       def index
-        apps = App.where('title ilike :prefix', prefix: "#{params[:title]}%")
+        return render json: [] if title.empty?
+
+        apps = App.where('title ilike :prefix', prefix: "#{title}%").limit(3)
         render json: AppIndexSerializer.new(apps)
       end
 
@@ -18,6 +20,12 @@ module Api
       def create
         Services::UpdateManager.call(title: params[:title])
         render json: :successfully_created, status: :ok
+      end
+
+      private
+
+      def title
+        @title ||= params[:title].delete(' %#')
       end
     end
   end
