@@ -1,13 +1,13 @@
 module Services
   module Notifications
     class Email
-      def initialize
+      def initialize(title)
         @title = title
       end
 
       private
 
-      def emails_list(@title)
+      def emails_list
         arr = []
         App.find_by(title: @title).users.each do |user|
           arr << user.email
