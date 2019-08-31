@@ -1,7 +1,7 @@
-KEYWORDS_LIMIT = 20
 module Services
   module Parsers
     class Top < Services::Parsers::Base
+      KEYWORDS_LIMIT = 20
       attribute :keywords
 
       private
