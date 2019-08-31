@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_31_104220) do
+ActiveRecord::Schema.define(version: 2019_08_31_114205) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2019_08_31_104220) do
     t.string "dev_website"
     t.float "rating"
     t.index ["android_app_id"], name: "index_apps_on_android_app_id"
+    t.index ["apple_app_id"], name: "index_apps_on_apple_app_id"
   end
 
   create_table "apps_keywords", force: :cascade do |t|
