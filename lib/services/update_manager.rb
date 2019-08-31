@@ -5,9 +5,9 @@ module Services
 
     def perform
       fetch_app if title
-      # Services::Updaters::Dynamic.call(current_app: app)
-      # Services::Updaters::Ratings.call(current_app: app)
-      # Services::Updaters::AverageRating.call(current_app: app)
+      Services::Updaters::Dynamic.call(current_app: app)
+      Services::Updaters::Ratings.call(current_app: app)
+      Services::Updaters::AverageRating.call(current_app: app)
       Services::Updaters::Keywords.call(current_app: app)
     end
 

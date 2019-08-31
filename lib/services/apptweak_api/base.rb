@@ -13,7 +13,6 @@ module Services
       private
 
       def perform
-        RestClient.log = 'stdout'
         ::RestClient.get("#{path}.json?#{query}",
                          'X-Apptweak-Key': ApiToken.use(cost))
       end
