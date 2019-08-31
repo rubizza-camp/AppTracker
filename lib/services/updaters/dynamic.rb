@@ -93,12 +93,32 @@ module Services
 
       def update
         (start_date..(Time.zone.today - 1)).each_with_index do |current_date, index|
-          DynamicInfo.create(country: country, date: current_date.to_s, rank: dynamic_info[:ranks][index],
-                             power: dynamic_info[:power][index],
-                             downloads: dynamic_info[:downloads][index],
-                             shop_type: shop_type, device: device,
-                             app_id: current_app.id)
+          create_dynamic(current_date, index)
         end
+      end
+
+      def create_dynamic(current_date, index)
+        DynamicInfo.create(country: country, date: current_date.to_s, rank: dynamic_ranks(index),
+                           power: dynamic_power(index), downloads: dynamic_downloads(index),
+                           shop_type: shop_type, device: device, app_id: current_app.id)
+      end
+
+      def dynamic_power(index)
+        return unless dynamic_info[:power]
+
+        dynamic_info[:power][index]
+      end
+
+      def dynamic_ranks(index)
+        return unless dynamic_info[:ranks]
+
+        dynamic_info[:ranks][index]
+      end
+
+      def dynamic_downloads(index)
+        return unless dynamic_info[:downloads]
+
+        dynamic_info[:downloads][index]
       end
     end
   end

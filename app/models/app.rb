@@ -16,6 +16,7 @@
 #  dev_name          :string
 #  dev_email         :string
 #  dev_website       :string
+#  rating            :float
 #
 
 class App < ApplicationRecord
