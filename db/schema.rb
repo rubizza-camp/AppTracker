@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_30_182300) do
+ActiveRecord::Schema.define(version: 2019_08_31_104220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,10 +48,10 @@ ActiveRecord::Schema.define(version: 2019_08_30_182300) do
     t.string "dev_email"
     t.string "dev_website"
     t.float "rating"
+    t.index ["android_app_id"], name: "index_apps_on_android_app_id"
   end
 
   create_table "apps_keywords", force: :cascade do |t|
-    t.integer "priority"
     t.bigint "app_id"
     t.bigint "keyword_id"
     t.index ["app_id"], name: "index_apps_keywords_on_app_id"
@@ -72,7 +72,6 @@ ActiveRecord::Schema.define(version: 2019_08_30_182300) do
 
   create_table "keywords", force: :cascade do |t|
     t.string "value"
-    t.string "shop_type"
   end
 
   create_table "packages", force: :cascade do |t|
