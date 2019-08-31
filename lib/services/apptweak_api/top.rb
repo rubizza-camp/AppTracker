@@ -1,4 +1,4 @@
-COST=100
+COST = 100
 module Services
   module ApptweakApi
     class Top < Services::ApptweakApi::Base
