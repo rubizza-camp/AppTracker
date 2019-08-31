@@ -27,15 +27,14 @@ module Services
         insert_keywords
       end
 
-      def fetch_and_parse_keywords
+      def fetch_keywords
         Services::Parsers::Top.call(response: Services::ApptweakApi::Top.call(id: id, shop_type: shop_type,
                                                                               device: device, country: 'us'))
       end
 
       def insert_keywords
-        fetch_and_parse_keywords.each do |keyword|
-          keyword_record = Keyword.find_by(value: keyword)
-          keyword_record ||= Keyword.create(value: keyword)
+        fetch_keywords.each do |keyword|
+          keyword_record = Keyword.find_or_create_by(value: keyword)
           current_app.keywords << keyword_record unless current_app.apps_keywords.find_by(keyword_id: keyword_record.id)
         end
       end

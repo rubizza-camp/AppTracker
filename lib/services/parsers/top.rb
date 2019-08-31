@@ -1,3 +1,4 @@
+KEYWORDS_LIMIT=20
 module Services
   module Parsers
     class Top < Services::Parsers::Base
@@ -6,12 +7,10 @@ module Services
       private
 
       def perform
-        @keywords = []
-        super&.each_with_index do |keyword, index|
-          @keywords << keyword['keyword']
-          break if index == 20
+        super&.each_with_object([]) do |keyword, keywords|
+          return keywords if keywords[KEYWORDS_LIMIT]
+          keywords << keyword['keyword'].to_s
         end
-        keywords
       end
     end
   end

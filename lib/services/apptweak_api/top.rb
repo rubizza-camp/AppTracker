@@ -1,8 +1,9 @@
+COST=100
 module Services
   module ApptweakApi
     class Top < Services::ApptweakApi::Base
       def cost
-        100
+        COST
       end
 
       def query
