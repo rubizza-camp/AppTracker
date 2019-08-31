@@ -17,7 +17,9 @@ Rails.application.routes.draw do
 
   namespace 'api' do
     namespace 'v1' do
-      resources :users, only: [:confirm_email]
+      resources :users, only: %i[create] do
+        put  'confirmation/:token', to: 'confirmation#update', as: 'confirmation'
+      end
     end
   end
 end

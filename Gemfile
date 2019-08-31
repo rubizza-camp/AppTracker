@@ -44,6 +44,7 @@ group :development, :test do
   gem 'annotate', '>= 2.7.5'
   gem 'pry', '>= 0.12.2'
   gem 'pry-rails', '>= 0.3.9'
+  gem 'rb-readline'
 end
 
 group :development do

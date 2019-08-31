@@ -1,11 +1,177 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <style>
+      table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        padding-top: 50px;
+      }
+
+      td, th {
+        border-right: 1px solid #dddddd;
+        text-align: center;
+        padding: 8px;
+      }
+
+      image {
+        padding-top: 10px;
+      }
+
+      .ratings-up {
+        background: rgba(122,255,0,0.54);
+      }
+
+      .ratings-down {
+        background: rgb(255, 110, 100);
+      }
+
+      .head {
+        background: rgba(224, 224, 224, 0.56);
+      }
+
+      .os {
+        background: rgb(101, 177, 224);
+      }
+    </style>
   </head>
   <body>
-    <h1>Some changes have happened in apps bellow</h1>
-    <p>There should be some text about app whose data has updated.</p>
-    <p>Its title obviously, maybe its short description too.</p>
+
+    <table>
+      <tr>
+        <th>Metrics</th>
+        <th>Date: <%=DateTime.now.to_date %></th>
+        <th> </th>
+        <th>icon</th>
+        <th>twitter</th>
+      </tr>
+    </table>
+
+    <p>
+
+
+
+    </p>
+
+    <table>
+      <tr>
+        <th> </th>
+        <th colspan="2" class="os" style="border: none">IOS</th>
+        <th colspan="2" class="os">Android</th>
+      </tr>
+      <tr>
+        <th> </th>
+        <td>Current</td>
+        <td>Change</td>
+        <td>Current</td>
+        <td>Change</td>
+      </tr>
+      <tr>
+        <th colspan="5" class="head">
+            <%=image_tag(attachments['download_icon.png'].url)%> Downloads
+        </th>
+      </tr>
+      <tr>
+        <th>Russia</th>
+        <td>322</td>
+        <td class="ratings-up">15% <%=image_tag(attachments['trending_up_icon.png'].url)%></td>
+        <td>323</td>
+        <td class="ratings-up">13% <%=image_tag(attachments['trending_up_icon.png'].url)%></td>
+      </tr>
+      <tr>
+        <th>USA</th>
+        <td>322</td>
+        <td class="ratings-down">15% <%=image_tag(attachments['trending_down_icon.png'].url)%></td>
+        <td>323</td>
+        <td class="ratings-down">13% <%=image_tag(attachments['trending_down_icon.png'].url)%></td>
+      </tr>
+      <tr>
+        <td colspan="5" class="head">5 <%=image_tag(attachments['star_icon.png'].url)%></td>
+      </tr>
+      <tr>
+        <th>Russia</th>
+        <td>322</td>
+        <td>15% <%=image_tag(attachments['trending_down_icon.png'].url)%></td>
+        <td>323</td>
+        <td>13% <%=image_tag(attachments['trending_down_icon.png'].url)%></td>
+      </tr>
+      <tr>
+        <th>USA</th>
+        <td>322</td>
+        <td>15% <%=image_tag(attachments['trending_down_icon.png'].url)%></td>
+        <td>323</td>
+        <td>13% <%=image_tag(attachments['trending_down_icon.png'].url)%></td>
+      </tr>
+      <tr>
+        <td colspan="5" class="head">4 <%=image_tag(attachments['star_icon.png'].url)%></td>
+      </tr>
+      <tr>
+        <th>Russia</th>
+        <td>322</td>
+        <td>15% <%=image_tag(attachments['trending_down_icon.png'].url)%></td>
+        <td>323</td>
+        <td>13% <%=image_tag(attachments['trending_down_icon.png'].url)%></td>
+      </tr>
+      <tr>
+        <th>USA</th>
+        <td>322</td>
+        <td>15% <%=image_tag(attachments['trending_down_icon.png'].url)%></td>
+        <td>323</td>
+        <td>13% <%=image_tag(attachments['trending_down_icon.png'].url)%></td>
+      </tr>
+      <tr>
+        <td colspan="5" class="head">3 <%=image_tag(attachments['star_icon.png'].url)%></td>
+      </tr>
+      <tr>
+        <th>Russia</th>
+        <td>322</td>
+        <td>15% <%=image_tag(attachments['trending_down_icon.png'].url)%></td>
+        <td>323</td>
+        <td>13% <%=image_tag(attachments['trending_down_icon.png'].url)%></td>
+      </tr>
+      <tr>
+        <th>USA</th>
+        <td>322</td>
+        <td>15% <%=image_tag(attachments['trending_down_icon.png'].url)%></td>
+        <td>323</td>
+        <td>13% <%=image_tag(attachments['trending_down_icon.png'].url)%></td>
+      </tr>
+      <tr>
+        <td colspan="5" class="head">2 <%=image_tag(attachments['star_icon.png'].url)%></td>
+      </tr>
+      <tr>
+        <th>Russia</th>
+        <td>322</td>
+        <td>15% <%=image_tag(attachments['trending_down_icon.png'].url)%></td>
+        <td>323</td>
+        <td>13% <%=image_tag(attachments['trending_down_icon.png'].url)%></td>
+      </tr>
+      <tr>
+        <th>USA</th>
+        <td>322</td>
+        <td>15% <%=image_tag(attachments['trending_down_icon.png'].url)%></td>
+        <td>323</td>
+        <td>13% <%=image_tag(attachments['trending_down_icon.png'].url)%></td>
+      </tr>
+      <tr>
+        <td colspan="5" class="head">1 <%=image_tag(attachments['star_icon.png'].url)%></td>
+      </tr>
+      <tr>
+        <th>Russia</th>
+        <td>322</td>
+        <td>15% <%=image_tag(attachments['trending_down_icon.png'].url)%></td>
+        <td>323</td>
+        <td>13% <%=image_tag(attachments['trending_down_icon.png'].url)%></td>
+      </tr>
+      <tr>
+        <th>USA</th>
+        <td>322</td>
+        <td>15% <%=image_tag(attachments['trending_down_icon.png'].url)%></td>
+        <td>323</td>
+        <td>13% <%=image_tag(attachments['trending_down_icon.png'].url)%></td>
+      </tr>
+    </table>
+
   </body>
 </html>
