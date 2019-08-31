@@ -2,9 +2,8 @@
 #
 # Table name: keywords
 #
-#  id        :bigint           not null, primary key
-#  value     :string
-#  shop_type :string
+#  id    :bigint           not null, primary key
+#  value :string
 #
 
 class Keyword < ApplicationRecord
