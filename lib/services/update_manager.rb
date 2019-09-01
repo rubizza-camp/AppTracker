@@ -8,6 +8,7 @@ module Services
       Services::Updaters::Dynamic.call(current_app: app)
       Services::Updaters::Ratings.call(current_app: app)
       Services::Updaters::AverageRating.call(current_app: app)
+      Services::Updaters::Keywords.call(current_app: app)
     end
 
     def fetch_app

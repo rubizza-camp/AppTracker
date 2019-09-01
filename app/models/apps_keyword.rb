@@ -7,7 +7,7 @@
 #  keyword_id :bigint
 #
 
-class AppsKeywords < ApplicationRecord
+class AppsKeyword < ApplicationRecord
   belongs_to :app
   belongs_to :keyword
 end
