@@ -13,7 +13,7 @@ module Services
 
       def calculate_average_rating
         @average_rating =
-          Rating.where(app_id: current_app.id, date: Time.zone.yesterday).average(:average_rating).round
+          Rating.where(app_id: current_app.id, date: Time.zone.yesterday).average(:average_rating).round(1)
       end
 
       def update_average
