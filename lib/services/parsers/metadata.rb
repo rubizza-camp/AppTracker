@@ -4,13 +4,12 @@ module Services
       ANDROID_HOST = 'https://play.google.com/store/apps/details?id='.freeze
       APPLE_HOST = 'https://apps.apple.com/app/id'.freeze
       attribute :ids
-
+      attribute :content 
       private
 
       def perform
-        content = super
+        @content = super
         return unless content
-
         { android_app_id: android_id, apple_app_id: apple_id, title: title,
           icon_url: icon_url, short_description: short_description,
           long_description: long_description, content_rating: content_rating,
