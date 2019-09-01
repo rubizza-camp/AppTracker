@@ -6,8 +6,9 @@ class UserMailer < ApplicationMailer
     mail(to: @user.email, subject: 'Email verification at AppTracker.club')
   end
 
-  def notification_email(user)
+  def notification_email(user, app)
     @user = user
+    @app = app
     attachments.inline['download_icon.png'] = File.read(Rails.root.join('app', 'assets', 'icons', 'download_icon.png'))
     attachments.inline['star_icon.png'] = File.read(Rails.root.join('app', 'assets', 'icons', 'star_icon.png'))
     attachments.inline['trending_down_icon.png'] = File.read(Rails.root.join('app', 'assets', 'icons', 'trending_down_icon.png'))
