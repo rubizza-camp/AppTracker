@@ -30,3 +30,4 @@
 
 # keys
 *.pem
+Dockerfile.conf
