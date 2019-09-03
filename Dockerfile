@@ -5,6 +5,7 @@ COPY privkey.pem /etc/letsencrypt/live/apptracker.club/privkey.pem
 COPY / /AppTracker
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 WORKDIR /AppTracker
+RUN gem install bundler
 RUN bundle install
 
 CMD ["export", "APPTRACKER_PG_DEV_DATABASE_NAME='test_data_base'"]
