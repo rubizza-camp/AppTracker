@@ -1,0 +1,152 @@
+::-webkit-scrollbar {width: 4px; height: 4px;}
+::-webkit-scrollbar-track {background: rgba(1, 1, 1, 0);}
+::-webkit-scrollbar-thumb {background: rgba(134, 15, 15, 0.397);}
+::-webkit-scrollbar-thumb:hover {background: rgba(1, 1, 1, 0.425);}
+
+.diplayFlex
+{
+  display: flex;
+}
+
+body
+{
+  --mdc-theme-primary: rgb(73, 42, 63);
+}
+
+.mdc-elevation--z9
+{
+  box-shadow: 0 5px 6px -3px rgba(0,0,0,.2), 0 9px 12px 1px rgba(0,0,0,.14), 0 3px 16px 2px rgba(0,0,0,.12) !important;
+}
+
+.mdc-elevation--z5
+{
+  box-shadow: 1px 5px 13px 1px rgba(0, 0, 0, 0.13)!important;
+}
+
+.flext-center
+{
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+.mdc-card
+{
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.mdc-textfiled-fullwidth
+{
+  width: 100%;
+}
+.mdc-card-div-visible
+{
+  display: block !important;
+}
+.mdc-card-div-invisible
+{
+  display: none !important;
+}
+
+.ml-10
+{
+  margin-left: 10px;
+}
+
+.non-selectable
+{
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
+.unhover:hover,:active,:focus
+{
+  text-decoration: none !important;
+  outline: none !important;
+}
+
+.br-50
+{
+  border-radius: 50px !important;
+}
+
+.no-shadow
+{
+  box-shadow: none !important;
+}
+
+.covei-1
+{
+  margin-left: -2px !important;
+  margin-top: -2px !important;
+
+  padding: 2px !important;
+}
+
+#scene
+{
+  width: 100% !important;
+  height: 100% !important;
+
+  left: 0px !important;
+  top: 0px !important;
+}
+
+.mdc-select
+{
+  width: 100% !important;
+}
+
+.fit-card
+{
+  overflow-x: hidden !important;
+  border-radius: 10px !important;
+  width: fit-content !important;
+  min-width: 350px !important;
+  max-width: unset !important;
+  max-height: unset !important;
+  height: max-content !important;
+  padding: 25px !important;
+}
+
+.search-field-min
+{
+  border-radius: 13px;
+  background-color: rgba(250, 250, 250, 0.986);
+}
+
+.plot-covei
+{
+  height: 100% !important;
+  overflow: hidden;
+}
+
+.plot-covei .MuiBox-root
+{
+  padding: 0px;
+}
+
+.plot-cove-comments-rating-title
+{
+  transform: scale(0.75);
+  margin-top: 3%;
+  position: fixed;
+  right: -2%;
+}
+
+.plot-cove-comments-title
+{
+  padding: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.covei-badge-button
+{
+  border-radius: 6px !important;
+  padding: 0px !important;
+}

@@ -52,44 +52,30 @@ class AppRatingsUpdater
   end
 
   def rating_1_response(response)
-    return '' unless response[ind]['1']
-
     response[ind]['1']
   end
 
   def rating_2_response(response)
-    return '' unless response[ind]['2']
-
     response[ind]['2']
   end
 
   def rating_3_response(response)
-    return '' unless response[ind]['3']
-
     response[ind]['3']
   end
 
   def rating_4_response(response)
-    return '' unless response[ind]['4']
-
     response[ind]['4']
   end
 
   def rating_5_response(response)
-    return '' unless response[ind]['5']
-
     response[ind]['5']
   end
 
   def rating_total_response(response)
-    return '' unless response[ind]['total']
-
     response[ind]['total']
   end
 
   def rating_avg_response(response)
-    return '' unless response[ind]['avg']
-
     response[ind]['avg']
   end
 end

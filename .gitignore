@@ -26,8 +26,3 @@
 /node_modules
 /.pnp
 .pnp.js
-.env
-
-# keys
-*.pem
-Dockerfile.conf

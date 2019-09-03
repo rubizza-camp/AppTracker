@@ -16,7 +16,6 @@
 #  dev_name          :string
 #  dev_email         :string
 #  dev_website       :string
-#  rating            :float
 #
 
 class App < ApplicationRecord
@@ -25,6 +24,6 @@ class App < ApplicationRecord
   has_many :apps_keywords, dependent: :destroy
   has_many :keywords, through: :apps_keywords
   has_many :similar_apps, dependent: :destroy
-  has_many :subscriptions, dependent: :destroy
-  has_many :users, through: :subscriptions
+  has_many :subs, dependent: :destroy
+  has_many :users, through: :subs
 end
