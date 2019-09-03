@@ -81,6 +81,6 @@ production:
   <<: *default
   database: <%= ENV["APPTRACKER_PG_DEV_DATABASE_NAME"] %>
   username: <%= ENV["APPTRACKER_PG_DEV_USER_NAME"] %>
-  password: <%= ENV['APPTRACKER-API_DATABASE_PASSWORD'] %>
+  password: <%= ENV["APPTRACKER_PG_DEV_USER_PASSWORD"] %>
   host: <%= ENV["APPTRACKER_PG_DEV_DATABASE_HOST"] %>
   port: <%= ENV["APPTRACKER_PG_DEV_DATABASE_PORT"] %>
