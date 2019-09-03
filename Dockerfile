@@ -4,7 +4,6 @@ COPY cert.pem /etc/letsencrypt/live/apptracker.club/cert.pem
 COPY privkey.pem /etc/letsencrypt/live/apptracker.club/privkey.pem
 COPY / /AppTracker
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
-RUN mkdir /AppTracker
 WORKDIR /AppTracker
 RUN bundle install
 
