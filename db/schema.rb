@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_14_124129) do
+ActiveRecord::Schema.define(version: 2019_09_01_104718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "TestUser", id: :bigint, default: nil, force: :cascade do |t|
+    t.string "mail", array: true
+    t.string "login", array: true
+    t.string "password", array: true
+  end
 
   create_table "api_app_last_catch_dates", force: :cascade do |t|
     t.datetime "date"
@@ -41,10 +47,12 @@ ActiveRecord::Schema.define(version: 2019_08_14_124129) do
     t.string "dev_name"
     t.string "dev_email"
     t.string "dev_website"
+    t.float "rating"
+    t.index ["android_app_id"], name: "index_apps_on_android_app_id"
+    t.index ["apple_app_id"], name: "index_apps_on_apple_app_id"
   end
 
   create_table "apps_keywords", force: :cascade do |t|
-    t.integer "priority"
     t.bigint "app_id"
     t.bigint "keyword_id"
     t.index ["app_id"], name: "index_apps_keywords_on_app_id"
@@ -65,7 +73,6 @@ ActiveRecord::Schema.define(version: 2019_08_14_124129) do
 
   create_table "keywords", force: :cascade do |t|
     t.string "value"
-    t.string "shop_type"
   end
 
   create_table "packages", force: :cascade do |t|
@@ -82,10 +89,11 @@ ActiveRecord::Schema.define(version: 2019_08_14_124129) do
     t.integer "rating_4"
     t.integer "rating_5"
     t.integer "total_rating"
-    t.integer "average_rating"
+    t.float "average_rating"
     t.string "shop_type"
     t.date "date"
     t.bigint "app_id"
+    t.string "country"
     t.index ["app_id"], name: "index_ratings_on_app_id"
   end
 
@@ -95,11 +103,19 @@ ActiveRecord::Schema.define(version: 2019_08_14_124129) do
     t.index ["app_id"], name: "index_similar_apps_on_app_id"
   end
 
-  create_table "subs", force: :cascade do |t|
-    t.bigint "user_id"
+  create_table "subscribers", force: :cascade do |t|
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
     t.bigint "app_id"
-    t.index ["app_id"], name: "index_subs_on_app_id"
-    t.index ["user_id"], name: "index_subs_on_user_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["app_id"], name: "index_subscriptions_on_app_id"
+    t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
 
   create_table "target_apps", force: :cascade do |t|
@@ -116,11 +132,9 @@ ActiveRecord::Schema.define(version: 2019_08_14_124129) do
 
   create_table "users", force: :cascade do |t|
     t.string "email"
-    t.string "login"
-    t.string "name"
-    t.string "password"
-    t.string "role"
-    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "confirmation_token"
   end
 
   add_foreign_key "apps_keywords", "apps"
@@ -128,6 +142,6 @@ ActiveRecord::Schema.define(version: 2019_08_14_124129) do
   add_foreign_key "dynamic_infos", "apps"
   add_foreign_key "ratings", "apps"
   add_foreign_key "similar_apps", "apps"
-  add_foreign_key "subs", "apps"
-  add_foreign_key "subs", "users"
+  add_foreign_key "subscriptions", "apps"
+  add_foreign_key "subscriptions", "users"
 end

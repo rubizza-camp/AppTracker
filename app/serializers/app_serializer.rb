@@ -19,12 +19,12 @@
 #  rating            :float
 #
 
-class App < ApplicationRecord
-  has_many :ratings, dependent: :destroy
-  has_many :dynamic_infos, dependent: :destroy
-  has_many :apps_keywords, dependent: :destroy
-  has_many :keywords, through: :apps_keywords
-  has_many :similar_apps, dependent: :destroy
-  has_many :subscriptions, dependent: :destroy
-  has_many :users, through: :subscriptions
+class AppSerializer < BaseSerializer
+  attributes :apple_app_id, :android_app_id, :title,
+             :apple_url, :android_url, :short_description,
+             :long_description, :icon_url, :content_rating,
+             :price, :dev_name, :dev_email, :dev_website, :rating
+
+  has_many :ratings
+  has_many :dynamic_infos
 end
