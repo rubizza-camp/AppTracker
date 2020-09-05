@@ -10,6 +10,14 @@
 #
 
 class User < ApplicationRecord
+  before_create :set_confirmation_token
+
   has_many :subscriptions, dependent: :destroy
   has_many :apps, through: :subscriptions
+
+  private
+
+  def set_confirmation_token
+    self.confirmation_token = SecureRandom.urlsafe_base64.to_s if confirmation_token.blank?
+  end
 end

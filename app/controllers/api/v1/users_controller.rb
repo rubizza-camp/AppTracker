@@ -1,9 +1,16 @@
 module Api
   module V1
     class UsersController < ApplicationController
+      MAIN_PAGE_URL = 'https://apptracker.club'.freeze
+
       def create
-        user = User.find_or_create_by(user_params)
-        user.subscriptions.create(app_params)
+        Services::EmailNotifications::SendEmail.call(app_params: app_params, user_params: user_params)
+      end
+
+      def confirm_email
+        user = User.find_by(confirmation_token: params[:token])
+        user.update(confirmation_token: nil)
+        redirect_to MAIN_PAGE_URL
       end
 
       private
